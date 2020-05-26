@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const App = (props) => {
-  const {userName, cardTitles} = props;
+  const {userName, cardTitles, openCard} = props;
 
   return (
     <>
@@ -123,7 +123,7 @@ const App = (props) => {
                       </div>
                     </div>
                     <h2 className="place-card__name">
-                      <a href="#">{it}</a>
+                      <a className="place-card__name-link" href="#" onClick={openCard}>{it}</a>
                     </h2>
                     <p className="place-card__type">Apartment</p>
                   </div>
@@ -146,6 +146,7 @@ const App = (props) => {
 App.propTypes = {
   userName: PropTypes.string.isRequired,
   cardTitles: PropTypes.array.isRequired,
+  openCard: PropTypes.func.isRequired,
 };
 
 export default App;
