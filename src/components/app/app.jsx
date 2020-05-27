@@ -1,8 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
+import OfferCard from "../offer-card/offer-card.jsx";
 
 const App = (props) => {
-  const {userName, cardTitles, openCard} = props;
+  const {userName, offers} = props;
+
+  function openCard() {
+    // eslint-disable-next-line no-console
+    console.log(`heloo`);
+    return true;
+  }
 
   return (
     <>
@@ -94,41 +101,10 @@ const App = (props) => {
               </form>
 
               <div className="cities__places-list places__list tabs__content">
-                {cardTitles.map((it, i) => <article className="cities__place-card place-card" key={i}>
-                  <div className="place-card__mark">
-                    <span>Premium</span>
-                  </div>
-                  <div className="cities__image-wrapper place-card__image-wrapper">
-                    <a href="#">
-                      <img className="place-card__image" src="img/apartment-01.jpg" width="260" height="200" alt="Place image" />
-                    </a>
-                  </div>
-                  <div className="place-card__info">
-                    <div className="place-card__price-wrapper">
-                      <div className="place-card__price">
-                        <b className="place-card__price-value">&euro;120</b>
-                        <span className="place-card__price-text">&#47;&nbsp;night</span>
-                      </div>
-                      <button className="place-card__bookmark-button button" type="button">
-                        <svg className="place-card__bookmark-icon" width="18" height="19">
-                          <use href="#icon-bookmark"></use>
-                        </svg>
-                        <span className="visually-hidden">To bookmarks</span>
-                      </button>
-                    </div>
-                    <div className="place-card__rating rating">
-                      <div className="place-card__stars rating__stars">
-                        <span></span>
-                        <span className="visually-hidden">Rating</span>
-                      </div>
-                    </div>
-                    <h2 className="place-card__name">
-                      <a className="place-card__name-link" href="#" onClick={openCard}>{it}</a>
-                    </h2>
-                    <p className="place-card__type">Apartment</p>
-                  </div>
-                </article>
-                )}
+                <OfferCard
+                  offers={offers}
+                  openCard={openCard}
+                />
               </div>
 
             </section>
@@ -145,8 +121,7 @@ const App = (props) => {
 
 App.propTypes = {
   userName: PropTypes.string.isRequired,
-  cardTitles: PropTypes.array.isRequired,
-  openCard: PropTypes.func.isRequired,
+  offers: PropTypes.array.isRequired,
 };
 
 export default App;
