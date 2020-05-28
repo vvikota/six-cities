@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import OfferCard from "../offer-card/offer-card.jsx";
+import PlacesList from "../places-list/places-list.jsx";
 
 const App = (props) => {
   const {userName, offers} = props;
@@ -100,13 +100,10 @@ const App = (props) => {
                 </select> */}
               </form>
 
-              <div className="cities__places-list places__list tabs__content">
-                <OfferCard
-                  offers={offers}
-                  openCard={openCard}
-                />
-              </div>
-
+              <PlacesList
+                offers={offers}
+                openCard={openCard}
+              />          
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>
