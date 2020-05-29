@@ -2,16 +2,13 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const OfferCard = (props) => {
-  const {offer, openCard} = props;
+  const {offer, openCard, onMouseEnter} = props;
   const {premium, image, price, placeDiscription, placeType} = offer;
-  // console.log(props.offers);
-
-  function changeBackground(e) {
-    e.target.style.background = `red`;
-  }
+  // eslint-disable-next-line no-console
+  // console.log(props);
 
   return (
-    <article className="cities__place-card place-card" onMouseEnter={changeBackground}>
+    <article className="cities__place-card place-card" onMouseEnter={onMouseEnter}>
 
       {premium ? <div className="place-card__mark">
         <span>Premium</span>
@@ -53,6 +50,7 @@ const OfferCard = (props) => {
 OfferCard.propTypes = {
   offer: PropTypes.object.isRequired,
   openCard: PropTypes.func.isRequired,
+  onMouseEnter: PropTypes.func.isRequired,
 };
 
 export default OfferCard;

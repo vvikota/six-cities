@@ -7,7 +7,7 @@ class PlacesList extends React.PureComponent {
     super(props);
 
     this.state = {
-      activeCard: 1,
+      activeOffer: {},
     };
   }
 
@@ -19,6 +19,14 @@ class PlacesList extends React.PureComponent {
         offer={it}
         key={i}
         openCard={openCard}
+        onMouseEnter={() => {
+          this.setState({
+            activeOffer: offers[i],
+          });
+          // eslint-disable-next-line no-console
+          // console.log(this.state);
+        }}
+        showCardOffer={this.showCardOffer}
       />)}
     </div>;
   }
