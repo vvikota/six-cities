@@ -12,21 +12,22 @@ class PlacesList extends React.PureComponent {
   }
 
   render() {
-    const {offers, openCard} = this.props;
+    const {offers} = this.props;
 
     return <div className="cities__places-list places__list tabs__content">
       {offers.map((it, i) => <OfferCard
         offer={it}
         key={i}
-        openCard={openCard}
+        openCard={(offer, e) => {
+          e.preventDefault();
+          // eslint-disable-next-line no-console
+          console.log(offer);
+        }}
         onMouseEnter={() => {
           this.setState({
             activeOffer: offers[i],
           });
-          // eslint-disable-next-line no-console
-          // console.log(this.state);
         }}
-        showCardOffer={this.showCardOffer}
       />)}
     </div>;
   }
@@ -34,7 +35,6 @@ class PlacesList extends React.PureComponent {
 
 PlacesList.propTypes = {
   offers: PropTypes.array.isRequired,
-  openCard: PropTypes.func.isRequired,
 };
 
 export default PlacesList;

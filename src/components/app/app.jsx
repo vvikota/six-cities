@@ -5,12 +5,6 @@ import PlacesList from "../places-list/places-list.jsx";
 const App = (props) => {
   const {userName, offers} = props;
 
-  function openCard() {
-    // eslint-disable-next-line no-console
-    console.log(`heloo`);
-    return true;
-  }
-
   return (
     <>
 
@@ -102,8 +96,7 @@ const App = (props) => {
 
               <PlacesList
                 offers={offers}
-                openCard={openCard}
-              />          
+              />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>

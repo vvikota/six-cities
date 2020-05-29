@@ -15,7 +15,7 @@ const OfferCard = (props) => {
       </div> : null}
 
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href="#">
+        <a href="#" onClick={(e) => openCard(offer, e)} className="image-link">
           <img className="place-card__image" src={image} width="260" height="200" alt="Place image" />
         </a>
       </div>
@@ -39,7 +39,7 @@ const OfferCard = (props) => {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a className="place-card__name-link" href="#" onClick={openCard}>{placeDiscription}</a>
+          <a className="place-card__name-link" href="#">{placeDiscription}</a>
         </h2>
         <p className="place-card__type">{placeType}</p>
       </div>
