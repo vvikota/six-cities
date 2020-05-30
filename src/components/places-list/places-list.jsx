@@ -18,8 +18,7 @@ class PlacesList extends React.PureComponent {
       {offers.map((it, i) => <OfferCard
         offer={it}
         key={i}
-        openCard={(offer, e) => {
-          e.preventDefault();
+        openCard={(offer) => {
           // eslint-disable-next-line no-console
           console.log(offer);
         }}

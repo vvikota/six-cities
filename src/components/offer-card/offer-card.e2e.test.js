@@ -14,16 +14,34 @@ const mock = {
 
 Enzyme.configure({adapter: new Adapter()});
 
-it(`Click on card-image, correctly works`, () => {
-  const clickHandler = jest.fn();
-  const app = shallow(<OfferCard
-    offer={mock}
-    openCard={clickHandler}
-    onMouseEnter={jest.fn()}
-  />);
+describe(`OfferCard`, () => {
 
-  const imageLink = app.find(`.image-link`);
-  imageLink.simulate(`click`, {preventDefault() {}});
+  it(`Click on card-image, correctly works`, () => {
+    const clickHandler = jest.fn();
+    const app = shallow(<OfferCard
+      offer={mock}
+      openCard={clickHandler}
+      onMouseEnter={jest.fn()}
+    />);
 
-  expect(clickHandler).toHaveBeenCalledTimes(1);
+    const imageLink = app.find(`.image-link`);
+    imageLink.simulate(`click`, {preventDefault() {}});
+
+    expect(clickHandler).toHaveBeenCalledTimes(1);
+  });
+
+  it(`click on image card return correctly info`, () => {
+    const clickHandler = jest.fn();
+    const app = shallow(<OfferCard
+      offer={mock}
+      onMouseEnter={jest.fn()}
+      openCard={clickHandler}
+    />);
+
+    const imageLink = app.find(`.image-link`);
+    imageLink.simulate(`click`, {preventDefault: jest.fn()});
+
+    expect(clickHandler).toHaveBeenCalledWith(mock);
+  });
 });
+
