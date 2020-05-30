@@ -42,7 +42,7 @@ const OfferCard = (props) => {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a className="place-card__name-link" href="#" onClick{(e) => {
+          <a className="place-card__name-link" href="#" onClick={(e) => {
             e.preventDefault();
           }}>{placeDiscription}</a>
         </h2>

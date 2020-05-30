@@ -89,6 +89,7 @@ exports[`OfferCard is correcctly render 1`] = `
       <a
         className="place-card__name-link"
         href="#"
+        onClick={[Function]}
       >
         Wood and stone place
       </a>
