@@ -1,4 +1,8 @@
-export default [
+import React from 'react';
+import renderer from 'react-test-renderer';
+import Map from './map';
+
+const mock = [
   {
     premium: true,
     price: 120,
@@ -36,3 +40,11 @@ export default [
     coord: [52.3809553943508, 4.939309666406198]
   },
 ];
+
+it(`Map is correctly renderer`, ()=> {
+  const tree = renderer.create(<Map
+    offers={mock}
+  />).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
