@@ -8,10 +8,15 @@ const init = () => {
     userName: `vik792@gmail.com`,
   };
 
+
   ReactDOM.render(
       <App
         userName={settings.userName}
         offers={offers}
+        openCard={(offer) => {
+          // eslint-disable-next-line no-console
+          console.log(offer);
+        }}
       />,
       document.querySelector(`#root`)
   );

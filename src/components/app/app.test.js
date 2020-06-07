@@ -11,6 +11,7 @@ it(`App is correcctly render`, ()=> {
   const tree = renderer.create(<App
     userName={mock.userName}
     offers={[]}
+    openCard={jest.fn()}
   />).toJSON();
 
   expect(tree).toMatchSnapshot();

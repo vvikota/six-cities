@@ -49,6 +49,7 @@ it(`PlacesList is correcctly render`, ()=> {
 
   const tree = renderer.create(<PlacesList
     offers={mock}
+    openCard={jest.fn()}
   />).toJSON();
 
   expect(tree).toMatchSnapshot();

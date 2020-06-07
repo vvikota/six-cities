@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import PlacesList from "../places-list/places-list.jsx";
 
 const App = (props) => {
-  const {userName, offers} = props;
+  const {userName, offers, openCard} = props;
 
   return (
     <>
@@ -96,6 +96,7 @@ const App = (props) => {
 
               <PlacesList
                 offers={offers}
+                openCard={openCard}
               />
             </section>
             <div className="cities__right-section">
@@ -111,7 +112,15 @@ const App = (props) => {
 
 App.propTypes = {
   userName: PropTypes.string.isRequired,
-  offers: PropTypes.array.isRequired,
+  offers: PropTypes.arrayOf(PropTypes.shape({
+    premium: PropTypes.bool.isRequired,
+    price: PropTypes.number.isRequired,
+    image: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    placeType: PropTypes.string.isRequired,
+    placeDiscription: PropTypes.string.isRequired,
+  })),
+  openCard: PropTypes.func.isRequired,
 };
 
 export default App;

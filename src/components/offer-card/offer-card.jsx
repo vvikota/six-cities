@@ -44,6 +44,7 @@ const OfferCard = (props) => {
         <h2 className="place-card__name">
           <a className="place-card__name-link" href="#" onClick={(e) => {
             e.preventDefault();
+            openCard(offer);
           }}>{placeDiscription}</a>
         </h2>
         <p className="place-card__type">{placeType}</p>
@@ -53,7 +54,14 @@ const OfferCard = (props) => {
 };
 
 OfferCard.propTypes = {
-  offer: PropTypes.object.isRequired,
+  offer: PropTypes.shape({
+    premium: PropTypes.bool.isRequired,
+    price: PropTypes.number.isRequired,
+    image: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    placeType: PropTypes.string.isRequired,
+    placeDiscription: PropTypes.string.isRequired,
+  }),
   openCard: PropTypes.func.isRequired,
   onMouseEnter: PropTypes.func.isRequired,
 };
