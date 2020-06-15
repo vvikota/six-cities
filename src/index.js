@@ -10,6 +10,7 @@ import {reducer} from "./reducer.js";
 
 const init = (appOffers, appSettings) => {
   const store = createStore(reducer);
+  // const placeOffers = Object.values(appOffers[0])[0];
 
   ReactDOM.render(<Provider store={store}>
     <App

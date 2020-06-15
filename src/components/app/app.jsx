@@ -6,6 +6,22 @@ import Map from "../map/map.jsx";
 const App = (props) => {
   const {userName, offers, openCard} = props;
 
+  const city = `Paris`;
+
+  const getPlaceOffers = (appOffers, place) => {
+    let rezult = 10;
+    appOffers.map((placeOffer) => {
+      const placeName = Object.keys(placeOffer)[0];
+
+      if (placeName === place) {
+        rezult = Object.values(placeOffer)[0];
+      }
+    });
+    return rezult;
+  };
+
+  let placeOffers = getPlaceOffers(offers, city);
+
   return (
     <>
 
@@ -96,14 +112,14 @@ const App = (props) => {
               </form>
 
               <PlacesList
-                offers={offers}
+                offers={placeOffers}
                 openCard={openCard}
               />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
                 <Map
-                  offers={offers}
+                  offers={placeOffers}
                 />
               </section>
             </div>
@@ -125,6 +141,7 @@ App.propTypes = {
     placeType: PropTypes.string.isRequired,
     placeDiscription: PropTypes.string.isRequired,
   })),
+  // offers: PropTypes.array.isRequired,
   openCard: PropTypes.func.isRequired,
 };
 
