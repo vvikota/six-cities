@@ -1,5 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
+// import {ActionCreator} from "../../reducer.js";
 import PlacesList from "../places-list/places-list.jsx";
 import Map from "../map/map.jsx";
 
@@ -9,14 +11,14 @@ const App = (props) => {
   const city = `Paris`;
 
   const getPlaceOffers = (appOffers, place) => {
-    let rezult = 10;
-    appOffers.map((placeOffer) => {
-      const placeName = Object.keys(placeOffer)[0];
-
-      if (placeName === place) {
-        rezult = Object.values(placeOffer)[0];
+    let rezult = [];
+    appOffers.map((placeOffers) => {
+      console.log(placeOffers.city);
+      if (placeOffers.city === place) {
+        rezult = placeOffers.offers;
       }
     });
+    console.log(rezult);
     return rezult;
   };
 
@@ -133,16 +135,26 @@ const App = (props) => {
 
 App.propTypes = {
   userName: PropTypes.string.isRequired,
-  offers: PropTypes.arrayOf(PropTypes.shape({
-    premium: PropTypes.bool.isRequired,
-    price: PropTypes.number.isRequired,
-    image: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    placeType: PropTypes.string.isRequired,
-    placeDiscription: PropTypes.string.isRequired,
-  })),
+  offers: PropTypes.arrayOf(PropTypes.object.isRequired),
+
+  // offers: PropTypes.arrayOf(PropTypes.shape({
+  //   premium: PropTypes.bool.isRequired,
+  //   price: PropTypes.number.isRequired,
+  //   image: PropTypes.string.isRequired,
+  //   rating: PropTypes.number.isRequired,
+  //   placeType: PropTypes.string.isRequired,
+  //   placeDiscription: PropTypes.string.isRequired,
+  // })),
   // offers: PropTypes.array.isRequired,
   openCard: PropTypes.func.isRequired,
 };
 
-export default App;
+const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
+
+});
+
+const mapDispatchToProps = (dispatch) => ({
+
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

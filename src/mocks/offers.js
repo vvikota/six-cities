@@ -1,6 +1,7 @@
 export default [
   {
-    Paris: [
+    city: `Paris`,
+    offers: [
       {
         premium: true,
         price: 120,
@@ -39,7 +40,8 @@ export default [
       }
     ]
   }, {
-    Cologne: [
+    city: `Cologne`,
+    offers: [
       {
         premium: true,
         price: 120,
@@ -78,7 +80,8 @@ export default [
       }
     ]
   }, {
-    Brussels: [
+    city: `Brussels`,
+    offers: [
       {
         premium: true,
         price: 120,
@@ -117,7 +120,8 @@ export default [
       }
     ]
   }, {
-    Amsterdam: [
+    city: `Amsterdam`,
+    offers: [
       {
         premium: true,
         price: 120,
@@ -156,7 +160,8 @@ export default [
       }
     ]
   }, {
-    Hamburg: [
+    city: `Hamburg`,
+    offers: [
       {
         premium: true,
         price: 120,
@@ -195,7 +200,8 @@ export default [
       }
     ]
   }, {
-    Dusseldorf: [
+    city: `Dusseldorf`,
+    offers: [
       {
         premium: true,
         price: 120,
