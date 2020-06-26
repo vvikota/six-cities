@@ -2,23 +2,24 @@ import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 // import {ActionCreator} from "../../reducer.js";
+import CityList from "../city-list/city-list.jsx";
 import PlacesList from "../places-list/places-list.jsx";
 import Map from "../map/map.jsx";
 
 const App = (props) => {
-  const {userName, offers, openCard} = props;
+  const {userName, offers} = props;
 
   const city = `Paris`;
 
   const getPlaceOffers = (appOffers, place) => {
     let rezult = [];
     appOffers.map((placeOffers) => {
-      console.log(placeOffers.city);
+      // console.log(placeOffers.city);
       if (placeOffers.city === place) {
         rezult = placeOffers.offers;
       }
     });
-    console.log(rezult);
+    // console.log(rezult);
     return rezult;
   };
 
@@ -50,42 +51,9 @@ const App = (props) => {
       </header>
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
-        <div className="cities tabs">
-          <section className="locations container">
-            <ul className="locations__list tabs__list">
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Paris</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Cologne</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Brussels</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item tabs__item--active">
-                  <span>Amsterdam</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Hamburg</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Dusseldorf</span>
-                </a>
-              </li>
-            </ul>
-          </section>
-        </div>
+
+        <CityList offers={offers}/>
+
         <div className="cities__places-wrapper">
           <div className="cities__places-container container">
             <section className="cities__places places">
@@ -115,7 +83,10 @@ const App = (props) => {
 
               <PlacesList
                 offers={placeOffers}
-                openCard={openCard}
+                openCard={(offer) => {
+                  // eslint-disable-next-line no-console
+                  console.log(offer);
+                }}
               />
             </section>
             <div className="cities__right-section">
@@ -135,7 +106,18 @@ const App = (props) => {
 
 App.propTypes = {
   userName: PropTypes.string.isRequired,
-  offers: PropTypes.arrayOf(PropTypes.object.isRequired),
+  offers: PropTypes.arrayOf(PropTypes.shape({
+    city: PropTypes.string.isRequired,
+    offers: PropTypes.arrayOf(PropTypes.shape({
+      premium: PropTypes.bool.isRequired,
+      price: PropTypes.number.isRequired,
+      image: PropTypes.string.isRequired,
+      rating: PropTypes.number.isRequired,
+      placeType: PropTypes.string.isRequired,
+      placeDiscription: PropTypes.string.isRequired,
+      coord: PropTypes.array.isRequired,
+    })).isRequired,
+  })),
 
   // offers: PropTypes.arrayOf(PropTypes.shape({
   //   premium: PropTypes.bool.isRequired,
@@ -146,11 +128,11 @@ App.propTypes = {
   //   placeDiscription: PropTypes.string.isRequired,
   // })),
   // offers: PropTypes.array.isRequired,
-  openCard: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
-
+  city: state.city,
+  offersList: state.offersList,
 });
 
 const mapDispatchToProps = (dispatch) => ({

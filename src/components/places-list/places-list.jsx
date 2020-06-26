@@ -13,6 +13,7 @@ class PlacesList extends React.PureComponent {
 
   render() {
     const {offers, openCard} = this.props;
+    // console.log(offers[0]);
 
     return <div className="cities__places-list places__list tabs__content">
       {offers.map((offer, index) => <OfferCard
@@ -37,7 +38,8 @@ PlacesList.propTypes = {
     rating: PropTypes.number.isRequired,
     placeType: PropTypes.string.isRequired,
     placeDiscription: PropTypes.string.isRequired,
-  })),
+    coord: PropTypes.array.isRequired,
+  })).isRequired,
   openCard: PropTypes.func.isRequired,
 };
 

@@ -16,10 +16,6 @@ const init = (appOffers, appSettings) => {
     <App
       userName={appSettings.userName}
       offers={appOffers}
-      openCard={(offer) => {
-        // eslint-disable-next-line no-console
-        console.log(offer);
-      }}
     />
   </Provider>,
   document.querySelector(`#root`)
