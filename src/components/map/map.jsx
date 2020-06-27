@@ -8,7 +8,7 @@ class Map extends React.PureComponent {
   }
 
   componentDidMount() {
-    const {offers} = this.props;
+    const {data} = this.props;
     // eslint-disable-next-line no-console
     // console.log(offers);
     const city = [52.38333, 4.9];
@@ -31,8 +31,8 @@ class Map extends React.PureComponent {
     })
     .addTo(map);
 
-    offers.map((offer) => {
-      const offerCords = offer.coord;
+    data.map((offer) => {
+      const offerCords = [offer.location.latitude, offer.location.longitude];
       leaflet.marker(offerCords, {icon}).addTo(map);
     });
   }
@@ -43,14 +43,46 @@ class Map extends React.PureComponent {
 }
 
 Map.propTypes = {
-  offers: PropTypes.arrayOf(PropTypes.shape({
-    premium: PropTypes.bool.isRequired,
-    price: PropTypes.number.isRequired,
-    image: PropTypes.string.isRequired,
+  data: PropTypes.arrayOf(PropTypes.shape({
+    city: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      location: PropTypes.shape({
+        latitude: PropTypes.number.isRequired,
+        longitude: PropTypes.number.isRequired,
+        zoom: PropTypes.number.isRequired,
+      }).isRequired,
+    }).isRequired,
+    // eslint-disable-next-line camelcase
+    preview_image: PropTypes.string.isRequired,
+    images: PropTypes.arrayOf(PropTypes.string.isRequired),
+    title: PropTypes.string.isRequired,
+    // eslint-disable-next-line camelcase
+    is_favorite: PropTypes.bool.isRequired,
+    // eslint-disable-next-line camelcase
+    is_premium: PropTypes.bool.isRequired,
     rating: PropTypes.number.isRequired,
-    placeType: PropTypes.string.isRequired,
-    placeDiscription: PropTypes.string.isRequired,
-  })),
+    type: PropTypes.string.isRequired,
+    bedrooms: PropTypes.number.isRequired,
+    // eslint-disable-next-line camelcase
+    max_adults: PropTypes.number.isRequired,
+    price: PropTypes.number.isRequired,
+    goods: PropTypes.arrayOf(PropTypes.string.isRequired),
+    host: PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      // eslint-disable-next-line camelcase
+      is_pro: PropTypes.bool.isRequired,
+      // eslint-disable-next-line camelcase
+      avatar_url: PropTypes.string.isRequired,
+    }).isRequired,
+    description: PropTypes.string.isRequired,
+    location: PropTypes.shape({
+      latitude: PropTypes.number.isRequired,
+      longitude: PropTypes.number.isRequired,
+      zoom: PropTypes.number.isRequired,
+    }).isRequired,
+    id: PropTypes.number.isRequired,
+  }))
 };
 
 export default Map;
