@@ -4,7 +4,7 @@ import {createStore} from "redux";
 import {Provider} from "react-redux";
 
 import App from "./components/app/app.jsx";
-import offers from "./mocks/offers.js";
+import offers from "./mocks/data.js";
 import settings from "./mocks/settings.js";
 import {reducer} from "./reducer.js";
 
@@ -15,7 +15,7 @@ const init = (appOffers, appSettings) => {
   ReactDOM.render(<Provider store={store}>
     <App
       userName={appSettings.userName}
-      offers={appOffers}
+      data={appOffers}
     />
   </Provider>,
   document.querySelector(`#root`)

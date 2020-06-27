@@ -12,11 +12,12 @@ class PlacesList extends React.PureComponent {
   }
 
   render() {
-    const {offers, openCard} = this.props;
-    // console.log(offers[0]);
+    const {data, openCard} = this.props;
+    // eslint-disable-next-line no-console
+    console.log(data);
 
     return <div className="cities__places-list places__list tabs__content">
-      {offers.map((offer, index) => <OfferCard
+      {data.map((offer, index) => <OfferCard
         offer={offer}
         key={index}
         openCard={openCard}
@@ -31,15 +32,46 @@ class PlacesList extends React.PureComponent {
 }
 
 PlacesList.propTypes = {
-  offers: PropTypes.arrayOf(PropTypes.shape({
-    premium: PropTypes.bool.isRequired,
-    price: PropTypes.number.isRequired,
-    image: PropTypes.string.isRequired,
+  data: PropTypes.arrayOf(PropTypes.shape({
+    city: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      location: PropTypes.shape({
+        latitude: PropTypes.number.isRequired,
+        longitude: PropTypes.number.isRequired,
+        zoom: PropTypes.number.isRequired,
+      }).isRequired,
+    }).isRequired,
+    // eslint-disable-next-line camelcase
+    preview_image: PropTypes.string.isRequired,
+    images: PropTypes.arrayOf(PropTypes.string.isRequired),
+    title: PropTypes.string.isRequired,
+    // eslint-disable-next-line camelcase
+    is_favorite: PropTypes.bool.isRequired,
+    // eslint-disable-next-line camelcase
+    is_premium: PropTypes.bool.isRequired,
     rating: PropTypes.number.isRequired,
-    placeType: PropTypes.string.isRequired,
-    placeDiscription: PropTypes.string.isRequired,
-    coord: PropTypes.array.isRequired,
-  })).isRequired,
+    type: PropTypes.string.isRequired,
+    bedrooms: PropTypes.number.isRequired,
+    // eslint-disable-next-line camelcase
+    max_adults: PropTypes.number.isRequired,
+    price: PropTypes.number.isRequired,
+    goods: PropTypes.arrayOf(PropTypes.string.isRequired),
+    host: PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      // eslint-disable-next-line camelcase
+      is_pro: PropTypes.bool.isRequired,
+      // eslint-disable-next-line camelcase
+      avatar_url: PropTypes.string.isRequired,
+    }).isRequired,
+    description: PropTypes.string.isRequired,
+    location: PropTypes.shape({
+      latitude: PropTypes.number.isRequired,
+      longitude: PropTypes.number.isRequired,
+      zoom: PropTypes.number.isRequired,
+    }).isRequired,
+    id: PropTypes.number.isRequired,
+  })),
   openCard: PropTypes.func.isRequired,
 };
 

@@ -7,23 +7,25 @@ import PlacesList from "../places-list/places-list.jsx";
 import Map from "../map/map.jsx";
 
 const App = (props) => {
-  const {userName, offers} = props;
+  const {userName, data} = props;
+  // eslint-disable-next-line no-console
+  // console.log(data);
 
-  const city = `Paris`;
+  // const city = `Paris`;
 
-  const getPlaceOffers = (appOffers, place) => {
-    let rezult = [];
-    appOffers.map((placeOffers) => {
-      // console.log(placeOffers.city);
-      if (placeOffers.city === place) {
-        rezult = placeOffers.offers;
-      }
-    });
-    // console.log(rezult);
-    return rezult;
-  };
+  // const getPlaceOffers = (appOffers, place) => {
+  //   let rezult = [];
+  //   appOffers.map((placeOffers) => {
+  //     // console.log(placeOffers.city);
+  //     if (placeOffers.city === place) {
+  //       rezult = placeOffers.offers;
+  //     }
+  //   });
+  //   // console.log(rezult);
+  //   return rezult;
+  // };
 
-  let placeOffers = getPlaceOffers(offers, city);
+  // let placeOffers = getPlaceOffers(data, city);
 
   return (
     <>
@@ -52,7 +54,7 @@ const App = (props) => {
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
 
-        <CityList offers={offers}/>
+        <CityList data={data}/>
 
         <div className="cities__places-wrapper">
           <div className="cities__places-container container">
@@ -82,7 +84,7 @@ const App = (props) => {
               </form>
 
               <PlacesList
-                offers={placeOffers}
+                data={data}
                 openCard={(offer) => {
                   // eslint-disable-next-line no-console
                   console.log(offer);
@@ -92,7 +94,7 @@ const App = (props) => {
             <div className="cities__right-section">
               <section className="cities__map map">
                 <Map
-                  offers={placeOffers}
+                  data={data}
                 />
               </section>
             </div>
@@ -106,28 +108,46 @@ const App = (props) => {
 
 App.propTypes = {
   userName: PropTypes.string.isRequired,
-  offers: PropTypes.arrayOf(PropTypes.shape({
-    city: PropTypes.string.isRequired,
-    offers: PropTypes.arrayOf(PropTypes.shape({
-      premium: PropTypes.bool.isRequired,
-      price: PropTypes.number.isRequired,
-      image: PropTypes.string.isRequired,
-      rating: PropTypes.number.isRequired,
-      placeType: PropTypes.string.isRequired,
-      placeDiscription: PropTypes.string.isRequired,
-      coord: PropTypes.array.isRequired,
-    })).isRequired,
-  })),
-
-  // offers: PropTypes.arrayOf(PropTypes.shape({
-  //   premium: PropTypes.bool.isRequired,
-  //   price: PropTypes.number.isRequired,
-  //   image: PropTypes.string.isRequired,
-  //   rating: PropTypes.number.isRequired,
-  //   placeType: PropTypes.string.isRequired,
-  //   placeDiscription: PropTypes.string.isRequired,
-  // })),
-  // offers: PropTypes.array.isRequired,
+  data: PropTypes.arrayOf(PropTypes.shape({
+    city: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      location: PropTypes.shape({
+        latitude: PropTypes.number.isRequired,
+        longitude: PropTypes.number.isRequired,
+        zoom: PropTypes.number.isRequired,
+      }).isRequired,
+    }).isRequired,
+    // eslint-disable-next-line camelcase
+    preview_image: PropTypes.string.isRequired,
+    images: PropTypes.arrayOf(PropTypes.string.isRequired),
+    title: PropTypes.string.isRequired,
+    // eslint-disable-next-line camelcase
+    is_favorite: PropTypes.bool.isRequired,
+    // eslint-disable-next-line camelcase
+    is_premium: PropTypes.bool.isRequired,
+    rating: PropTypes.number.isRequired,
+    type: PropTypes.string.isRequired,
+    bedrooms: PropTypes.number.isRequired,
+    // eslint-disable-next-line camelcase
+    max_adults: PropTypes.number.isRequired,
+    price: PropTypes.number.isRequired,
+    goods: PropTypes.arrayOf(PropTypes.string.isRequired),
+    host: PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      // eslint-disable-next-line camelcase
+      is_pro: PropTypes.bool.isRequired,
+      // eslint-disable-next-line camelcase
+      avatar_url: PropTypes.string.isRequired,
+    }).isRequired,
+    description: PropTypes.string.isRequired,
+    location: PropTypes.shape({
+      latitude: PropTypes.number.isRequired,
+      longitude: PropTypes.number.isRequired,
+      zoom: PropTypes.number.isRequired,
+    }).isRequired,
+    id: PropTypes.number.isRequired,
+  }))
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
