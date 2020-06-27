@@ -18,6 +18,7 @@ class CityList extends React.PureComponent {
         cityArray.push(offer.city.name);
       }
     });
+    // console.log(cityArray);
 
     return <div className="cities tabs">
       <section className="locations container">

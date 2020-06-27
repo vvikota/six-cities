@@ -14,7 +14,7 @@ class PlacesList extends React.PureComponent {
   render() {
     const {data, openCard} = this.props;
     // eslint-disable-next-line no-console
-    console.log(data);
+    // console.log(data);
 
     return <div className="cities__places-list places__list tabs__content">
       {data.map((offer, index) => <OfferCard
