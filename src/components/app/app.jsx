@@ -1,31 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-// import {ActionCreator} from "../../reducer.js";
+import {ActionCreator} from "../../reducer.js";
 import CityList from "../city-list/city-list.jsx";
 import PlacesList from "../places-list/places-list.jsx";
 import Map from "../map/map.jsx";
 
 const App = (props) => {
-  const {userName, data} = props;
-  // eslint-disable-next-line no-console
-  // console.log(data);
+  const {userName, data, city, offersList, changeCity} = props;
 
-  // const city = `Paris`;
-
-  // const getPlaceOffers = (appOffers, place) => {
-  //   let rezult = [];
-  //   appOffers.map((placeOffers) => {
-  //     // console.log(placeOffers.city);
-  //     if (placeOffers.city === place) {
-  //       rezult = placeOffers.offers;
-  //     }
-  //   });
-  //   // console.log(rezult);
-  //   return rezult;
-  // };
-
-  // let placeOffers = getPlaceOffers(data, city);
+  let placeOffers = data.filter((offer) => offer.city.name === city);
 
   return (
     <>
@@ -54,7 +38,11 @@ const App = (props) => {
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
 
-        <CityList data={data}/>
+        <CityList
+          data={data}
+          currentCity={city}
+          chooseCity={(target) => changeCity(target)}
+        />
 
         <div className="cities__places-wrapper">
           <div className="cities__places-container container">
@@ -84,7 +72,7 @@ const App = (props) => {
               </form>
 
               <PlacesList
-                data={data}
+                data={placeOffers}
                 openCard={(offer) => {
                   // eslint-disable-next-line no-console
                   console.log(offer);
@@ -147,7 +135,9 @@ App.propTypes = {
       zoom: PropTypes.number.isRequired,
     }).isRequired,
     id: PropTypes.number.isRequired,
-  }))
+  })),
+  city: PropTypes.string.isRequired,
+  offersList: PropTypes.array.isRequired,
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
@@ -156,7 +146,7 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
 });
 
 const mapDispatchToProps = (dispatch) => ({
-
+  changeCity: (target) => dispatch(ActionCreator.cityChange(target)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

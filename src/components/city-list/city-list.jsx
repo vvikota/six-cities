@@ -9,7 +9,7 @@ class CityList extends React.PureComponent {
   }
 
   render() {
-    const {data} = this.props;
+    const {data, currentCity, chooseCity} = this.props;
 
     let cityArray = [];
     data.map((offer) => {
@@ -25,7 +25,16 @@ class CityList extends React.PureComponent {
         <ul className="locations__list tabs__list">
 
           {cityArray.map((city, index) => <li className="locations__item" key={index}>
-            <a className="locations__item-link tabs__item" href="#">
+            <a
+              className={city === currentCity ?
+                `locations__item-link tabs__item tabs__item--active` :
+                `locations__item-link tabs__item`}
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                chooseCity(city);
+              }}
+            >
               <span>{city}</span>
             </a>
           </li>)}
@@ -76,7 +85,9 @@ CityList.propTypes = {
       zoom: PropTypes.number.isRequired,
     }).isRequired,
     id: PropTypes.number.isRequired,
-  }))
+  })),
+  currentCity: PropTypes.string.isRequired,
+  chooseCity: PropTypes.func.isRequired,
 };
 
 export default CityList;
