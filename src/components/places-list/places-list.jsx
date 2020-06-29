@@ -41,28 +41,22 @@ PlacesList.propTypes = {
         zoom: PropTypes.number.isRequired,
       }).isRequired,
     }).isRequired,
-    // eslint-disable-next-line camelcase
-    preview_image: PropTypes.string.isRequired,
+    previewImage: PropTypes.string.isRequired,
     images: PropTypes.arrayOf(PropTypes.string.isRequired),
     title: PropTypes.string.isRequired,
-    // eslint-disable-next-line camelcase
-    is_favorite: PropTypes.bool.isRequired,
-    // eslint-disable-next-line camelcase
-    is_premium: PropTypes.bool.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+    isPremium: PropTypes.bool.isRequired,
     rating: PropTypes.number.isRequired,
     type: PropTypes.string.isRequired,
     bedrooms: PropTypes.number.isRequired,
-    // eslint-disable-next-line camelcase
-    max_adults: PropTypes.number.isRequired,
+    maxAdults: PropTypes.number.isRequired,
     price: PropTypes.number.isRequired,
     goods: PropTypes.arrayOf(PropTypes.string.isRequired),
     host: PropTypes.shape({
       id: PropTypes.number.isRequired,
       name: PropTypes.string.isRequired,
-      // eslint-disable-next-line camelcase
-      is_pro: PropTypes.bool.isRequired,
-      // eslint-disable-next-line camelcase
-      avatar_url: PropTypes.string.isRequired,
+      isPro: PropTypes.bool.isRequired,
+      avatarUrl: PropTypes.string.isRequired,
     }).isRequired,
     description: PropTypes.string.isRequired,
     location: PropTypes.shape({

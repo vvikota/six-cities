@@ -5,25 +5,85 @@ import leaflet from "leaflet";
 class Map extends React.PureComponent {
   constructor(props) {
     super(props);
+
+    this.state = {
+      map: null,
+    };
   }
 
+  // drawMap() {
+  //   let map;
+  //   console.log(map)
+  //   if (document.querySelector(`#map`).children.length > 0) {
+  //     // eslint-disable-next-line no-console
+  //     console.log(`map here`);
+  //     const {data} = this.props;
+  //     const center = [data[0].city.location.latitude, data[0].city.location.longitude];
+  //     // console.log(center)
+  //     // console.log(map)
+  //     // const city = center;
+  //     // map.setView(city, 13);
+  //   } else {
+  //     const {data} = this.props;
+  //     const center = [data[0].city.location.latitude, data[0].city.location.longitude];
+  //     // console.log(center)
+  //     const city = center;
+  //     const icon = leaflet.icon({
+  //       iconUrl: `img/pin.svg`,
+  //       iconSize: [30, 30]
+  //     });
+      
+  //     const zoom = 12;
+  //     map = leaflet.map(`map`, {
+  //       center: city,
+  //       zoom, // zoom: zoom
+  //       zoomControl: false,
+  //       marker: true
+  //     });
+  //     map.setView(city, zoom);
+
+  //     leaflet
+  //     .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
+  //     })
+  //     .addTo(map);
+
+  //     data.map((offer) => {
+  //       const offerCords = [offer.location.latitude, offer.location.longitude];
+  //       leaflet.marker(offerCords, {icon}).addTo(map);
+  //     });
+  //     // console.log(map)
+  //   }
+  // }
+
   componentDidMount() {
+    // console.log(this.state.data)
     const {data} = this.props;
-    // eslint-disable-next-line no-console
-    // console.log(offers);
-    const city = [52.38333, 4.9];
+    const center = [data[0].city.location.latitude, data[0].city.location.longitude];
+    // console.log(center)
+    const city = center;
     const icon = leaflet.icon({
       iconUrl: `img/pin.svg`,
       iconSize: [30, 30]
     });
 
     const zoom = 12;
-    const map = leaflet.map(`map`, {
-      center: city,
-      zoom, // zoom: zoom
-      zoomControl: false,
-      marker: true
+    this.setState({
+      map: leaflet.map(`map`, {
+        center: city,
+        zoom, // zoom: zoom
+        zoomControl: false,
+        marker: true
+      })
     });
+
+    // const map = leaflet.map(`map`, {
+    //   center: city,
+    //   zoom, // zoom: zoom
+    //   zoomControl: false,
+    //   marker: true
+    // });
+
+    const {map} = this.state;
     map.setView(city, zoom);
 
     leaflet
@@ -37,7 +97,17 @@ class Map extends React.PureComponent {
     });
   }
 
+  componentDidUpdate() {
+    if (document.querySelector(`#map`).children.length > 0) {
+      // eslint-disable-next-line no-console
+      console.log(`map here`)
+      // console.log(map);
+      // map.setView(city, zoom);
+    }
+  }
+
   render() {
+    // console.log(this.props.data)
     return (<div id="map"></div>);
   }
 }
