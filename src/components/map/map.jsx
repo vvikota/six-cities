@@ -5,85 +5,23 @@ import leaflet from "leaflet";
 class Map extends React.PureComponent {
   constructor(props) {
     super(props);
-
-    this.state = {
-      map: null,
-    };
   }
 
-  // drawMap() {
-  //   let map;
-  //   console.log(map)
-  //   if (document.querySelector(`#map`).children.length > 0) {
-  //     // eslint-disable-next-line no-console
-  //     console.log(`map here`);
-  //     const {data} = this.props;
-  //     const center = [data[0].city.location.latitude, data[0].city.location.longitude];
-  //     // console.log(center)
-  //     // console.log(map)
-  //     // const city = center;
-  //     // map.setView(city, 13);
-  //   } else {
-  //     const {data} = this.props;
-  //     const center = [data[0].city.location.latitude, data[0].city.location.longitude];
-  //     // console.log(center)
-  //     const city = center;
-  //     const icon = leaflet.icon({
-  //       iconUrl: `img/pin.svg`,
-  //       iconSize: [30, 30]
-  //     });
-      
-  //     const zoom = 12;
-  //     map = leaflet.map(`map`, {
-  //       center: city,
-  //       zoom, // zoom: zoom
-  //       zoomControl: false,
-  //       marker: true
-  //     });
-  //     map.setView(city, zoom);
-
-  //     leaflet
-  //     .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
-  //     })
-  //     .addTo(map);
-
-  //     data.map((offer) => {
-  //       const offerCords = [offer.location.latitude, offer.location.longitude];
-  //       leaflet.marker(offerCords, {icon}).addTo(map);
-  //     });
-  //     // console.log(map)
-  //   }
-  // }
-
-  componentDidMount() {
-    // console.log(this.state.data)
+  drawMap() {
     const {data} = this.props;
-    const center = [data[0].city.location.latitude, data[0].city.location.longitude];
-    // console.log(center)
-    const city = center;
+    let city = [this.props.data[0].city.location.latitude, this.props.data[0].city.location.longitude];
     const icon = leaflet.icon({
       iconUrl: `img/pin.svg`,
       iconSize: [30, 30]
     });
 
     const zoom = 12;
-    this.setState({
-      map: leaflet.map(`map`, {
-        center: city,
-        zoom, // zoom: zoom
-        zoomControl: false,
-        marker: true
-      })
+    const map = leaflet.map(`map`, {
+      center: city,
+      zoom, // zoom: zoom
+      zoomControl: false,
+      marker: true
     });
-
-    // const map = leaflet.map(`map`, {
-    //   center: city,
-    //   zoom, // zoom: zoom
-    //   zoomControl: false,
-    //   marker: true
-    // });
-
-    const {map} = this.state;
     map.setView(city, zoom);
 
     leaflet
@@ -95,19 +33,27 @@ class Map extends React.PureComponent {
       const offerCords = [offer.location.latitude, offer.location.longitude];
       leaflet.marker(offerCords, {icon}).addTo(map);
     });
+    // console.log(map)
   }
 
   componentDidUpdate() {
-    if (document.querySelector(`#map`).children.length > 0) {
-      // eslint-disable-next-line no-console
-      console.log(`map here`)
-      // console.log(map);
-      // map.setView(city, zoom);
-    }
+    // let cityCoord = [this.props.data[0].city.location.latitude, this.props.data[0].city.location.longitude];
+    // // console.log(city);
+    // this.setState({city: cityCoord});
+    // console.log('update')
+  }
+
+  componentDidMount() {
+    // let cityCoord = [this.props.data[0].city.location.latitude, this.props.data[0].city.location.longitude];
+    // console.log(cityCoord);
+    // this.setState({city: cityCoord});
+    // console.log(this.state.city);
+    this.drawMap();
+    // console.log('did mount')
   }
 
   render() {
-    // console.log(this.props.data)
+    // console.log('render');
     return (<div id="map"></div>);
   }
 }
@@ -122,28 +68,22 @@ Map.propTypes = {
         zoom: PropTypes.number.isRequired,
       }).isRequired,
     }).isRequired,
-    // eslint-disable-next-line camelcase
-    preview_image: PropTypes.string.isRequired,
+    previewImage: PropTypes.string.isRequired,
     images: PropTypes.arrayOf(PropTypes.string.isRequired),
     title: PropTypes.string.isRequired,
-    // eslint-disable-next-line camelcase
-    is_favorite: PropTypes.bool.isRequired,
-    // eslint-disable-next-line camelcase
-    is_premium: PropTypes.bool.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+    isPremium: PropTypes.bool.isRequired,
     rating: PropTypes.number.isRequired,
     type: PropTypes.string.isRequired,
     bedrooms: PropTypes.number.isRequired,
-    // eslint-disable-next-line camelcase
-    max_adults: PropTypes.number.isRequired,
+    maxAdults: PropTypes.number.isRequired,
     price: PropTypes.number.isRequired,
     goods: PropTypes.arrayOf(PropTypes.string.isRequired),
     host: PropTypes.shape({
       id: PropTypes.number.isRequired,
       name: PropTypes.string.isRequired,
-      // eslint-disable-next-line camelcase
-      is_pro: PropTypes.bool.isRequired,
-      // eslint-disable-next-line camelcase
-      avatar_url: PropTypes.string.isRequired,
+      isPro: PropTypes.bool.isRequired,
+      avatarUrl: PropTypes.string.isRequired,
     }).isRequired,
     description: PropTypes.string.isRequired,
     location: PropTypes.shape({
@@ -152,7 +92,7 @@ Map.propTypes = {
       zoom: PropTypes.number.isRequired,
     }).isRequired,
     id: PropTypes.number.isRequired,
-  }))
+  })),
 };
 
 export default Map;

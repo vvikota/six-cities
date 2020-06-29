@@ -18,6 +18,12 @@ class App extends React.PureComponent {
 
   render() {
     const {userName, data, city, changeCity} = this.props;
+
+    if (city === `default`) {
+      const defaultCity = data[0].city.name;
+      changeCity(defaultCity, data);
+    }
+    // console.log(city)
     let placeOffers = data.filter((offer) => offer.city.name === city).slice(0, 4);
     // console.log(data);
     // startOffersCityList(placeOffers);

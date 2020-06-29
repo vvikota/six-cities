@@ -1,5 +1,5 @@
 const initialState = {
-  city: `Amsterdam`,
+  city: `default`,
   // offersCityList: [],
 };
 
