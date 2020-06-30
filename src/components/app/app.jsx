@@ -11,13 +11,9 @@ class App extends React.PureComponent {
     super(props);
   }
 
-  // componentDidMount() {
-  //   const {startOffersCityList, city, data} = this.props;
-  //   startOffersCityList(city, data);
-  // }
-
   render() {
     const {userName, data, city, changeCity} = this.props;
+    // console.log(this.props);
 
     if (city === `default`) {
       const defaultCity = data[0].city.name;
@@ -26,7 +22,6 @@ class App extends React.PureComponent {
     // console.log(city)
     let placeOffers = data.filter((offer) => offer.city.name === city).slice(0, 4);
     // console.log(data);
-    // startOffersCityList(placeOffers);
 
     return (
       <>
@@ -86,7 +81,7 @@ class App extends React.PureComponent {
                     <option className="places__option" value="top-rated">Top rated first</option>
                   </select> */}
                 </form>
-  
+
                 <PlacesList
                   data={placeOffers}
                   openCard={(offer) => {
@@ -152,17 +147,13 @@ App.propTypes = {
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   city: state.city,
-  offersCityList: state.offersCityList,
+  data: state.data,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   changeCity: (target) => {
     dispatch(ActionCreator.cityChange(target));
-    // dispatch(ActionCreator.getOffersCityList(target, appData));
   },
-  // startOffersCityList: (placeOffers) => {
-  //   dispatch(ActionCreator.getOffersCityList(placeOffers));
-  // }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

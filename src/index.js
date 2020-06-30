@@ -6,7 +6,7 @@ import {Provider} from "react-redux";
 import App from "./components/app/app.jsx";
 import offers from "./mocks/data.js";
 import settings from "./mocks/settings.js";
-import {reducer} from "./reducer.js";
+import {reducer, ActionCreator} from "./reducer.js";
 
 const rawDataConversion = (allOffers) => {
   let rezultArray = [];
@@ -40,19 +40,21 @@ const rawDataConversion = (allOffers) => {
   return rezultArray;
 };
 
-const init = (appOffers, appSettings) => {
+const init = (appSettings) => {
   const store = createStore(reducer);
 
-  ReactDOM.render(<Provider store={store}>
-    <App
-      userName={appSettings.userName}
-      data={appOffers}
-    />
-  </Provider>,
-  document.querySelector(`#root`)
+  store.dispatch(ActionCreator.getOffersList(rawDataConversion(offers)));
+
+  ReactDOM.render(
+      <Provider store={store}>
+        <App
+          userName={appSettings.userName}
+        />
+      </Provider>,
+      document.querySelector(`#root`)
   );
 };
 
-init(rawDataConversion(offers), settings);
+init(settings);
 
 

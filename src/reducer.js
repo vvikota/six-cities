@@ -1,6 +1,6 @@
 const initialState = {
   city: `default`,
-  // offersCityList: [],
+  data: [],
 };
 
 const ActionCreator = {
@@ -9,13 +9,10 @@ const ActionCreator = {
     payload: city,
   }),
 
-  // getOffersCityList: (placeOffers) => {
-
-  //   return {
-  //     type: `GET_OFFERS_CITY_LIST`,
-  //     payload: placeOffers,
-  //   }
-  // }
+  getOffersList: (placeOffers) => ({
+    type: `GET_OFFERS_LIST`,
+    payload: placeOffers,
+  }),
 };
 
 
@@ -26,9 +23,9 @@ const reducer = (state = initialState, action) => {
       city: action.payload,
     });
 
-    // case `GET_OFFERS_CITY_LIST` : return Object.assign({}, state, {
-    //   offersCityList: action.payload,
-    // });
+    case `GET_OFFERS_LIST` : return Object.assign({}, state, {
+      data: action.payload,
+    });
   }
 
   return state;
