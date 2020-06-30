@@ -5,56 +5,54 @@ import leaflet from "leaflet";
 class Map extends React.PureComponent {
   constructor(props) {
     super(props);
+
+    this._map = null;
+    this._icon = null;
+    this._markersLayer = null;
   }
 
-  drawMap() {
-    const {data} = this.props;
-    let city = [this.props.data[0].city.location.latitude, this.props.data[0].city.location.longitude];
-    const icon = leaflet.icon({
+  componentDidMount() {
+    let city = [52.38333, 4.9];
+    this._icon = leaflet.icon({
       iconUrl: `img/pin.svg`,
       iconSize: [30, 30]
     });
 
     const zoom = 12;
-    const map = leaflet.map(`map`, {
+    this._map = leaflet.map(`map`, {
       center: city,
       zoom, // zoom: zoom
       zoomControl: false,
       marker: true
     });
-    map.setView(city, zoom);
+    this._map.setView(city, zoom);
 
     leaflet
     .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
     })
-    .addTo(map);
+    .addTo(this._map);
 
-    data.map((offer) => {
-      const offerCords = [offer.location.latitude, offer.location.longitude];
-      leaflet.marker(offerCords, {icon}).addTo(map);
-    });
-    // console.log(map)
+    this._markersLayer = new leaflet.LayerGroup();
   }
 
   componentDidUpdate() {
-    // let cityCoord = [this.props.data[0].city.location.latitude, this.props.data[0].city.location.longitude];
-    // // console.log(city);
-    // this.setState({city: cityCoord});
-    // console.log('update')
-  }
+    const {data} = this.props;
+    let city = [data[0].city.location.latitude, data[0].city.location.longitude];
 
-  componentDidMount() {
-    // let cityCoord = [this.props.data[0].city.location.latitude, this.props.data[0].city.location.longitude];
-    // console.log(cityCoord);
-    // this.setState({city: cityCoord});
-    // console.log(this.state.city);
-    this.drawMap();
-    // console.log('did mount')
+    const zoom = data[0].city.location.zoom;
+    this._map.setView(city, zoom);
+    this._markersLayer.clearLayers();
+
+    data.forEach((offer) => {
+      this._markersLayer.addLayer(
+          leaflet
+          .marker([offer.location.latitude, offer.location.longitude], {icon: this._icon})
+          .addTo(this._map));
+    });
   }
 
   render() {
-    // console.log('render');
-    return (<div id="map"></div>);
+    return (<div id="map" style={{height: `90vh`}}></div>);
   }
 }
 
