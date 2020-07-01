@@ -15,9 +15,9 @@ const App = (props) => {
     const defaultCity = data[0].city.name;
     changeCity(defaultCity, data);
   }
-  // console.log(city)
-  let placeOffers = data.filter((offer) => offer.city.name === city).slice(0, 4);
-  // console.log(placeOffers);
+
+  let placeOffers = data.filter((offer) => offer.city.name === city);
+  let numberOfOffers = placeOffers.length;
 
   return (
     <>
@@ -55,7 +55,7 @@ const App = (props) => {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">312 places to stay in Amsterdam</b>
+              <b className="places__found">{numberOfOffers} places to stay in Amsterdam</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex="0">
