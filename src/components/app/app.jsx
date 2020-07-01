@@ -17,7 +17,7 @@ const App = (props) => {
   }
   // console.log(city)
   let placeOffers = data.filter((offer) => offer.city.name === city).slice(0, 4);
-  //console.log(placeOffers);
+  // console.log(placeOffers);
 
   return (
     <>
@@ -150,5 +150,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreator.cityChange(target));
   },
 });
+
+export {App};
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

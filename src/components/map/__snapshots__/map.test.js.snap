@@ -3,5 +3,10 @@
 exports[`Map is correctly renderer 1`] = `
 <div
   id="map"
+  style={
+    Object {
+      "height": "90vh",
+    }
+  }
 />
 `;

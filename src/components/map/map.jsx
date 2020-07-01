@@ -12,6 +12,8 @@ class Map extends React.PureComponent {
   }
 
   componentDidMount() {
+    const {data} = this.props;
+
     let city = [52.38333, 4.9];
     this._icon = leaflet.icon({
       iconUrl: `img/pin.svg`,
@@ -33,10 +35,19 @@ class Map extends React.PureComponent {
     .addTo(this._map);
 
     this._markersLayer = new leaflet.LayerGroup();
+    this._markersLayer.clearLayers();
+
+    data.forEach((offer) => {
+      this._markersLayer.addLayer(
+          leaflet
+          .marker([offer.location.latitude, offer.location.longitude], {icon: this._icon})
+          .addTo(this._map));
+    });
   }
 
   componentDidUpdate() {
     const {data} = this.props;
+    // console.log(data)
     let city = [data[0].city.location.latitude, data[0].city.location.longitude];
 
     const zoom = data[0].city.location.zoom;

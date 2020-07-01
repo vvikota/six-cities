@@ -34,7 +34,7 @@ const rawDataConversion = (allOffers) => {
       description: offer[`description`],
       location: offer[`location`],
       id: offer[`id`],
-    }
+    };
     rezultArray.push(newOffer);
   });
   return rezultArray;
