@@ -7,7 +7,8 @@ import App from "./components/app/app.jsx";
 import settings from "./mocks/settings.js";
 import {reducer, ActionCreator} from "./reducer.js";
 
-const init = (appSettings) => {
+const init = () => {
+  const {userName} = settings;
   const store = createStore(reducer,
       window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
@@ -16,13 +17,13 @@ const init = (appSettings) => {
   ReactDOM.render(
       <Provider store={store}>
         <App
-          userName={appSettings.userName}
+          userName={userName}
         />
       </Provider>,
       document.querySelector(`#root`)
   );
 };
 
-init(settings);
+init();
 
 

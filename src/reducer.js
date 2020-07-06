@@ -43,11 +43,6 @@ const ActionCreator = {
     payload: city,
   }),
 
-  getOffersList: (placeOffers) => ({
-    type: `GET_OFFERS_LIST`,
-    payload: placeOffers,
-  }),
-
   loadData: () => ({
     type: `LOAD_DATA`,
     payload: rawDataConversion(offers),
@@ -60,10 +55,6 @@ const reducer = (state = initialState, action) => {
 
     case `CITY_CHANGE` : return Object.assign({}, state, {
       city: action.payload,
-    });
-
-    case `GET_OFFERS_LIST` : return Object.assign({}, state, {
-      data: action.payload,
     });
 
     case `LOAD_DATA`: return Object.assign({}, state, {
