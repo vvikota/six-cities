@@ -4,47 +4,14 @@ import {createStore} from "redux";
 import {Provider} from "react-redux";
 
 import App from "./components/app/app.jsx";
-import offers from "./mocks/data.js";
 import settings from "./mocks/settings.js";
 import {reducer, ActionCreator} from "./reducer.js";
-
-const rawDataConversion = (allOffers) => {
-  let rezultArray = [];
-
-  allOffers.map((offer) => {
-    let newOffer = {
-      city: offer[`city`],
-      previewImage: offer[`preview_image`],
-      images: offer[`images`],
-      title: offer[`title`],
-      isFavorite: offer[`is_favorite`],
-      isPremium: offer[`is_premium`],
-      rating: offer[`rating`],
-      type: offer[`type`],
-      bedrooms: offer[`bedrooms`],
-      maxAdults: offer[`max_adults`],
-      price: offer[`price`],
-      goods: offer[`goods`],
-      host: {
-        id: offer[`host`][`id`],
-        name: offer[`host`][`name`],
-        isPro: offer[`host`][`is_pro`],
-        avatarUrl: offer[`host`][`avatar_url`],
-      },
-      description: offer[`description`],
-      location: offer[`location`],
-      id: offer[`id`],
-    };
-    rezultArray.push(newOffer);
-  });
-  return rezultArray;
-};
 
 const init = (appSettings) => {
   const store = createStore(reducer,
       window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
-  store.dispatch(ActionCreator.getOffersList(rawDataConversion(offers)));
+  store.dispatch(ActionCreator.loadData());
 
   ReactDOM.render(
       <Provider store={store}>
