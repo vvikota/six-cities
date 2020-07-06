@@ -85,6 +85,7 @@ CityList.propTypes = {
   })),
   currentCity: PropTypes.string.isRequired,
   chooseCity: PropTypes.func.isRequired,
+  hoverItem: PropTypes.func.isRequired,
 };
 
 export default CityList;

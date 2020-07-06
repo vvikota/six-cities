@@ -11,7 +11,7 @@ const withActiveItem = (Component) => {
     }
 
     render() {
-      // console.log(this.state.hoverItemInfo)
+      // console.log(this.props)
       return <Component
         {...this.props}
         hoverItem={(info) => this.setState({

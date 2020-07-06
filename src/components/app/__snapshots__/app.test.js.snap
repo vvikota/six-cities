@@ -78,6 +78,7 @@ Array [
               className="locations__item-link tabs__item"
               href="#"
               onClick={[Function]}
+              onMouseEnter={[Function]}
             >
               <span>
                 Amsterdam

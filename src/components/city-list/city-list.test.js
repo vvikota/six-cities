@@ -7,6 +7,7 @@ it(`CityList is correctly renderer`, ()=> {
     data={[]}
     currentCity={`London`}
     chooseCity={jest.fn()}
+    hoverItem={jest.fn()}
   />).toJSON();
 
   expect(tree).toMatchSnapshot();

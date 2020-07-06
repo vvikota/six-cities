@@ -6,7 +6,7 @@ import CityList from "../city-list/city-list.jsx";
 import PlacesList from "../places-list/places-list.jsx";
 import Map from "../map/map.jsx";
 
-import withActiveItem from "../../hocs/withActiveItem.js";
+import withActiveItem from "../../hocs/with-active-item.js";
 
 const CityListWrapped = withActiveItem(CityList);
 
