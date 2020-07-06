@@ -2,34 +2,21 @@ import React from "react";
 import PropTypes from 'prop-types';
 import OfferCard from '../offer-card/offer-card.jsx';
 
-class PlacesList extends React.PureComponent {
-  constructor(props) {
-    super(props);
+const PlacesList = (props) => {
 
-    this.state = {
-      activeOffer: {},
-    };
-  }
+  const {data, openCard, hoverItem} = props;
 
-  render() {
-    const {data, openCard} = this.props;
-    // eslint-disable-next-line no-console
-    // console.log(data);
-
-    return <div className="cities__places-list places__list tabs__content">
-      {data.map((offer, index) => <OfferCard
-        offer={offer}
-        key={index}
-        openCard={openCard}
-        onMouseEnter={() => {
-          this.setState({
-            activeOffer: offer,
-          });
-        }}
-      />)}
-    </div>;
-  }
-}
+  return <div className="cities__places-list places__list tabs__content">
+    {data.map((offer, index) => <OfferCard
+      offer={offer}
+      key={index}
+      openCard={openCard}
+      onMouseEnter={() => {
+        hoverItem(offer);
+      }}
+    />)}
+  </div>;
+};
 
 PlacesList.propTypes = {
   data: PropTypes.arrayOf(PropTypes.shape({
@@ -67,6 +54,7 @@ PlacesList.propTypes = {
     id: PropTypes.number.isRequired,
   })),
   openCard: PropTypes.func.isRequired,
+  hoverItem: PropTypes.func.isRequired,
 };
 
 export default PlacesList;

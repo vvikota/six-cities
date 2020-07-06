@@ -110,6 +110,7 @@ it(`PlacesList is correcctly render`, ()=> {
   const tree = renderer.create(<PlacesList
     data={mock}
     openCard={jest.fn()}
+    hoverItem={jest.fn()}
   />).toJSON();
 
   expect(tree).toMatchSnapshot();

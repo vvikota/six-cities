@@ -9,6 +9,7 @@ import Map from "../map/map.jsx";
 import withActiveItem from "../../hocs/with-active-item.js";
 
 const CityListWrapped = withActiveItem(CityList);
+const PlacesListWrapped = withActiveItem(PlacesList);
 
 const App = (props) => {
 
@@ -82,7 +83,7 @@ const App = (props) => {
                 </select> */}
               </form>
 
-              <PlacesList
+              <PlacesListWrapped
                 data={placeOffers}
                 openCard={(offer) => {
                   // eslint-disable-next-line no-console

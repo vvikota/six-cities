@@ -1,52 +1,45 @@
 import React from "react";
 import PropTypes from 'prop-types';
 
-class CityList extends React.PureComponent {
-  constructor(props) {
-    super(props);
+const CityList = (props) => {
 
-    this.state = {};
-  }
+  const {data, currentCity, chooseCity, hoverItem} = props;
 
-  render() {
-    const {data, currentCity, chooseCity, hoverItem} = this.props;
+  let cityArray = [];
+  data.map((offer) => {
+    let double = cityArray.indexOf(offer.city.name);
+    if (double === -1) {
+      cityArray.push(offer.city.name);
+    }
+  });
+  // console.log(cityArray);
 
-    let cityArray = [];
-    data.map((offer) => {
-      let double = cityArray.indexOf(offer.city.name);
-      if (double === -1) {
-        cityArray.push(offer.city.name);
-      }
-    });
-    // console.log(cityArray);
+  return <div className="cities tabs">
+    <section className="locations container">
+      <ul className="locations__list tabs__list">
 
-    return <div className="cities tabs">
-      <section className="locations container">
-        <ul className="locations__list tabs__list">
+        {cityArray.map((city, index) => <li className="locations__item" key={index}>
+          <a
+            className={city === currentCity ?
+              `locations__item-link tabs__item tabs__item--active` :
+              `locations__item-link tabs__item`}
+            href="#"
+            onClick={(e) => {
+              e.preventDefault();
+              chooseCity(city);
+            }}
+            onMouseEnter={()=> {
+              hoverItem(city);
+            }}
+          >
+            <span>{city}</span>
+          </a>
+        </li>)}
 
-          {cityArray.map((city, index) => <li className="locations__item" key={index}>
-            <a
-              className={city === currentCity ?
-                `locations__item-link tabs__item tabs__item--active` :
-                `locations__item-link tabs__item`}
-              href="#"
-              onClick={(e) => {
-                e.preventDefault();
-                chooseCity(city);
-              }}
-              onMouseEnter={()=> {
-                hoverItem(city);
-              }}
-            >
-              <span>{city}</span>
-            </a>
-          </li>)}
-
-        </ul>
-      </section>
-    </div>;
-  }
-}
+      </ul>
+    </section>
+  </div>;
+};
 
 CityList.propTypes = {
   data: PropTypes.arrayOf(PropTypes.shape({
