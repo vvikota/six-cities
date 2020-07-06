@@ -6,6 +6,10 @@ import CityList from "../city-list/city-list.jsx";
 import PlacesList from "../places-list/places-list.jsx";
 import Map from "../map/map.jsx";
 
+import withActiveItem from "../../hocs/withActiveItem.js";
+
+const CityListWrapped = withActiveItem(CityList);
+
 const App = (props) => {
 
   const {userName, data, city, changeCity} = props;
@@ -45,7 +49,7 @@ const App = (props) => {
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
 
-        <CityList
+        <CityListWrapped
           data={data}
           currentCity={city}
           chooseCity={(target) => changeCity(target, data)}

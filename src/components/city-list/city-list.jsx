@@ -9,7 +9,7 @@ class CityList extends React.PureComponent {
   }
 
   render() {
-    const {data, currentCity, chooseCity} = this.props;
+    const {data, currentCity, chooseCity, hoverItem} = this.props;
 
     let cityArray = [];
     data.map((offer) => {
@@ -33,6 +33,9 @@ class CityList extends React.PureComponent {
               onClick={(e) => {
                 e.preventDefault();
                 chooseCity(city);
+              }}
+              onMouseEnter={()=> {
+                hoverItem(city);
               }}
             >
               <span>{city}</span>
