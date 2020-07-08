@@ -47,7 +47,6 @@ class Map extends React.PureComponent {
 
   componentDidUpdate() {
     const {data} = this.props;
-
     if (data.length > 1) {
       let city = [data[0].city.location.latitude, data[0].city.location.longitude];
 
@@ -61,7 +60,7 @@ class Map extends React.PureComponent {
             .marker([offer.location.latitude, offer.location.longitude], {icon: this._icon})
             .addTo(this._map));
       });
-    } 
+    }
   }
 
   render() {
