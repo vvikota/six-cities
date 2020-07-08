@@ -14,12 +14,13 @@ const PlacesListWrapped = withActiveItem(PlacesList);
 const App = (props) => {
 
   const {userName, data, city, changeCity} = props;
-  // console.log(this.props);
+  // eslint-disable-next-line no-console
+  console.log(props);
 
-  if (city === `default`) {
-    const defaultCity = data[0].city.name;
-    changeCity(defaultCity, data);
-  }
+  // if (city === `default`) {
+  //   const defaultCity = data[0].city.name;
+  //   changeCity(defaultCity, data);
+  // }
 
   let placeOffers = data.filter((offer) => offer.city.name === city);
   let numberOfOffers = placeOffers.length;

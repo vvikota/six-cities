@@ -1,4 +1,3 @@
-import offers from "./mocks/data.js";
 
 const rawDataConversion = (allOffers) => {
   let rezultArray = [];
@@ -43,12 +42,20 @@ const ActionCreator = {
     payload: city,
   }),
 
-  loadData: () => ({
+  loadData: (offers) => ({
     type: `LOAD_DATA`,
-    payload: rawDataConversion(offers),
-  })
+    payload: offers,
+  }),
 };
 
+const Operation = {
+  loadData: () => (dispatch, _getState, api) => {
+    return api.get(`/hotels`)
+      .then((response) => {
+        dispatch(ActionCreator.loadData(rawDataConversion(response.data)));
+      });
+  }
+};
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -67,5 +74,6 @@ const reducer = (state = initialState, action) => {
 
 export {
   reducer,
-  ActionCreator
+  ActionCreator,
+  Operation
 };

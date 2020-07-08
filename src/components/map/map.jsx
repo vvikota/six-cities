@@ -47,7 +47,8 @@ class Map extends React.PureComponent {
 
   componentDidUpdate() {
     const {data} = this.props;
-    // console.log(data)
+    // eslint-disable-next-line no-console
+    // console.log(data);
     let city = [data[0].city.location.latitude, data[0].city.location.longitude];
 
     const zoom = data[0].city.location.zoom;

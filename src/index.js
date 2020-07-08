@@ -1,18 +1,29 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import {createStore} from "redux";
+import {createStore, applyMiddleware} from "redux";
 import {Provider} from "react-redux";
+import thunk from "redux-thunk";
+import {compose} from "recompose";
 
 import App from "./components/app/app.jsx";
 import settings from "./mocks/settings.js";
-import {reducer, ActionCreator} from "./reducer.js";
+import {reducer, Operation, ActionCreator} from "./reducer.js";
+import {configureAPI} from "./api";
+
 
 const init = () => {
+  const api = configureAPI((...args) => store.dispatch(...args));
   const {userName} = settings;
-  const store = createStore(reducer,
-      window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
-  store.dispatch(ActionCreator.loadData());
+  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+  const enhancer = composeEnhancers(
+      applyMiddleware(thunk.withExtraArgument(api))
+  );
+
+  const store = createStore(reducer, enhancer);
+
+  store.dispatch(Operation.loadData());
+  store.dispatch(ActionCreator.cityChange());
 
   ReactDOM.render(
       <Provider store={store}>
