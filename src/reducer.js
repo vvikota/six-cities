@@ -53,6 +53,7 @@ const Operation = {
     return api.get(`/hotels`)
       .then((response) => {
         dispatch(ActionCreator.loadData(rawDataConversion(response.data)));
+        dispatch(ActionCreator.cityChange(response.data[0].city.name));
       });
   }
 };

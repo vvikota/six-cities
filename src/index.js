@@ -7,7 +7,7 @@ import {compose} from "recompose";
 
 import App from "./components/app/app.jsx";
 import settings from "./mocks/settings.js";
-import {reducer, Operation, ActionCreator} from "./reducer.js";
+import {reducer, Operation} from "./reducer.js";
 import {configureAPI} from "./api";
 
 
@@ -23,7 +23,6 @@ const init = () => {
   const store = createStore(reducer, enhancer);
 
   store.dispatch(Operation.loadData());
-  store.dispatch(ActionCreator.cityChange());
 
   ReactDOM.render(
       <Provider store={store}>

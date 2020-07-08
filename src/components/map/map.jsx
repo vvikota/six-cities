@@ -47,20 +47,21 @@ class Map extends React.PureComponent {
 
   componentDidUpdate() {
     const {data} = this.props;
-    // eslint-disable-next-line no-console
-    // console.log(data);
-    let city = [data[0].city.location.latitude, data[0].city.location.longitude];
 
-    const zoom = data[0].city.location.zoom;
-    this._map.setView(city, zoom);
-    this._markersLayer.clearLayers();
+    if (data.length > 1) {
+      let city = [data[0].city.location.latitude, data[0].city.location.longitude];
 
-    data.forEach((offer) => {
-      this._markersLayer.addLayer(
-          leaflet
-          .marker([offer.location.latitude, offer.location.longitude], {icon: this._icon})
-          .addTo(this._map));
-    });
+      const zoom = data[0].city.location.zoom;
+      this._map.setView(city, zoom);
+      this._markersLayer.clearLayers();
+
+      data.forEach((offer) => {
+        this._markersLayer.addLayer(
+            leaflet
+            .marker([offer.location.latitude, offer.location.longitude], {icon: this._icon})
+            .addTo(this._map));
+      });
+    } 
   }
 
   render() {
