@@ -1,7 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {ActionCreator} from "../../reducer.js";
+import {ActionCreator} from "../../reducer/main/main.js";
+import {getData} from "../../reducer/data/selectors.js";
+import {getCity} from "../../reducer/main/selectors.js";
 import CityList from "../city-list/city-list.jsx";
 import PlacesList from "../places-list/places-list.jsx";
 import Map from "../map/map.jsx";
@@ -14,6 +16,7 @@ const PlacesListWrapped = withActiveItem(PlacesList);
 const App = (props) => {
 
   const {userName, data, city, changeCity} = props;
+  // eslint-disable-next-line no-console
 
   let placeOffers = data.filter((offer) => offer.city.name === city);
   let numberOfOffers = placeOffers.length;
@@ -140,8 +143,10 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  city: state.city,
-  data: state.data,
+  city: (getCity(state) === `default` && getData(state)[0]) ?
+    getData(state)[0].city.name :
+    getCity(state),
+  data: getData(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

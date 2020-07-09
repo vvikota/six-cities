@@ -7,13 +7,14 @@ import {compose} from "recompose";
 
 import App from "./components/app/app.jsx";
 import settings from "./mocks/settings.js";
-import {reducer, Operation} from "./reducer.js";
+import reducer from "./reducer/index.js";
+import {Operation} from "./reducer/data/data.js";
 import {configureAPI} from "./api";
 
 
 const init = () => {
-  const api = configureAPI((...args) => store.dispatch(...args));
   const {userName} = settings;
+  const api = configureAPI((...args) => store.dispatch(...args));
 
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
   const enhancer = composeEnhancers(

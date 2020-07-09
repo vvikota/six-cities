@@ -1,15 +1,10 @@
-import rawDataConversion from "./rawDataConversion.js";
+import rawDataConversion from "../../rawDataConversion.js";
 
 const initialState = {
-  city: `default`,
   data: [],
 };
 
 const ActionCreator = {
-  cityChange: (city) => ({
-    type: `CITY_CHANGE`,
-    payload: city,
-  }),
 
   loadData: (offers) => ({
     type: `LOAD_DATA`,
@@ -28,10 +23,6 @@ const Operation = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-
-    case `CITY_CHANGE` : return Object.assign({}, state, {
-      city: action.payload,
-    });
 
     case `LOAD_DATA`: return Object.assign({}, state, {
       data: action.payload,
