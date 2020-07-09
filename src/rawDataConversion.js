@@ -7,7 +7,7 @@ const rawDataConversion = (allOffers) => {
       previewImage: offer[`preview_image`] || `string`,
       images: offer[`images`] || [],
       title: offer[`title`] || `string`,
-      isFavorite: offer[`is_favorite`] || true,
+      isFavorite: offer[`is_favorite`] || false,
       isPremium: offer[`is_premium`] || false,
       rating: offer[`rating`] || 3,
       type: offer[`type`] || `string`,
@@ -18,7 +18,7 @@ const rawDataConversion = (allOffers) => {
       host: {
         id: offer[`host`][`id`] || 10,
         name: offer[`host`][`name`] || `string`,
-        isPro: offer[`host`][`is_pro`] || true,
+        isPro: offer[`host`][`is_pro`] || false,
         avatarUrl: offer[`host`][`avatar_url`] || `string`,
       },
       description: offer[`description`] || `string`,
