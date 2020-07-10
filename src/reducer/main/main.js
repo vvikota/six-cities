@@ -4,8 +4,8 @@ const initialState = {
 };
 
 const ActionCreator = {
-  cityChange: (city) => ({
-    type: `CITY_CHANGE`,
+  changeCity: (city) => ({
+    type: `CHANGE_CITY`,
     payload: city,
   }),
 };
@@ -13,7 +13,7 @@ const ActionCreator = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
 
-    case `CITY_CHANGE` : return Object.assign({}, state, {
+    case `CHANGE_CITY` : return Object.assign({}, state, {
       city: action.payload,
     });
   }

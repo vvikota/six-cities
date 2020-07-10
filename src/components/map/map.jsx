@@ -12,9 +12,9 @@ class Map extends React.PureComponent {
   }
 
   componentDidMount() {
-    const {data} = this.props;
+    const {offers} = this.props;
 
-    let city = [52.38333, 4.9];
+    const city = [52.38333, 4.9];
     this._icon = leaflet.icon({
       iconUrl: `img/pin.svg`,
       iconSize: [30, 30]
@@ -37,7 +37,7 @@ class Map extends React.PureComponent {
     this._markersLayer = new leaflet.LayerGroup();
     this._markersLayer.clearLayers();
 
-    data.forEach((offer) => {
+    offers.forEach((offer) => {
       this._markersLayer.addLayer(
           leaflet
           .marker([offer.location.latitude, offer.location.longitude], {icon: this._icon})
@@ -46,15 +46,15 @@ class Map extends React.PureComponent {
   }
 
   componentDidUpdate() {
-    const {data} = this.props;
-    if (data.length > 1) {
-      let city = [data[0].city.location.latitude, data[0].city.location.longitude];
+    const {offers} = this.props;
+    if (offers.length > 1) {
+      const city = [offers[0].city.location.latitude, offers[0].city.location.longitude];
 
-      const zoom = data[0].city.location.zoom;
+      const zoom = offers[0].city.location.zoom;
       this._map.setView(city, zoom);
       this._markersLayer.clearLayers();
 
-      data.forEach((offer) => {
+      offers.forEach((offer) => {
         this._markersLayer.addLayer(
             leaflet
             .marker([offer.location.latitude, offer.location.longitude], {icon: this._icon})
@@ -69,7 +69,7 @@ class Map extends React.PureComponent {
 }
 
 Map.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.shape({
+  offers: PropTypes.arrayOf(PropTypes.shape({
     city: PropTypes.shape({
       name: PropTypes.string.isRequired,
       location: PropTypes.shape({

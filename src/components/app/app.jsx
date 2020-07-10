@@ -4,6 +4,8 @@ import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer/main/main.js";
 import {getData} from "../../reducer/data/selectors.js";
 import {getCity} from "../../reducer/main/selectors.js";
+import {getCities} from "../../reducer/data/selectors.js";
+import {getCityOffers} from "../../reducer/data/selectors.js";
 import CityList from "../city-list/city-list.jsx";
 import PlacesList from "../places-list/places-list.jsx";
 import Map from "../map/map.jsx";
@@ -15,11 +17,9 @@ const PlacesListWrapped = withActiveItem(PlacesList);
 
 const App = (props) => {
 
-  const {userName, data, city, changeCity} = props;
+  const {userName, city, changeCity, cityList, cityOffers} = props;
   // eslint-disable-next-line no-console
-
-  let placeOffers = data.filter((offer) => offer.city.name === city);
-  let numberOfOffers = placeOffers.length;
+  console.log(props);
 
   return (
     <>
@@ -48,16 +48,16 @@ const App = (props) => {
         <h1 className="visually-hidden">Cities</h1>
 
         <CityListWrapped
-          data={data}
+          cityList={cityList}
           currentCity={city}
-          chooseCity={(target) => changeCity(target, data)}
+          onChangeCity={changeCity}
         />
 
         <div className="cities__places-wrapper">
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{numberOfOffers} places to stay in Amsterdam</b>
+              <b className="places__found">{cityOffers.length} places to stay in Amsterdam</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex="0">
@@ -81,7 +81,7 @@ const App = (props) => {
               </form>
 
               <PlacesListWrapped
-                data={placeOffers}
+                offers={cityOffers}
                 openCard={(offer) => {
                   // eslint-disable-next-line no-console
                   console.log(offer);
@@ -91,7 +91,7 @@ const App = (props) => {
             <div className="cities__right-section">
               <section className="cities__map map">
                 <Map
-                  data={placeOffers}
+                  offers={cityOffers}
                 />
               </section>
             </div>
@@ -104,7 +104,7 @@ const App = (props) => {
 
 App.propTypes = {
   userName: PropTypes.string.isRequired,
-  data: PropTypes.arrayOf(PropTypes.shape({
+  cityOffers: PropTypes.arrayOf(PropTypes.shape({
     city: PropTypes.shape({
       name: PropTypes.string.isRequired,
       location: PropTypes.shape({
@@ -140,21 +140,26 @@ App.propTypes = {
   })),
   city: PropTypes.string.isRequired,
   changeCity: PropTypes.func.isRequired,
+  cityList: PropTypes.arrayOf(PropTypes.string.isRequired),
 };
 
-const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  city: (getCity(state) === `default` && getData(state)[0]) ?
+const mapStateToProps = (state, ownProps) => {
+  const currentCity = (getCity(state) === `default` && getData(state)[0]) ?
     getData(state)[0].city.name :
-    getCity(state),
-  data: getData(state),
-});
+    getCity(state);
+  return Object.assign({}, ownProps, {
+    city: currentCity,
+    initialOffers: getData(state),
+    cityList: getCities(state),
+    cityOffers: getCityOffers(state, currentCity),
+  });
+};
 
 const mapDispatchToProps = (dispatch) => ({
-  changeCity: (target) => {
-    dispatch(ActionCreator.cityChange(target));
+  changeCity: (city) => {
+    dispatch(ActionCreator.changeCity(city));
   },
 });
 
 export {App};
-
 export default connect(mapStateToProps, mapDispatchToProps)(App);

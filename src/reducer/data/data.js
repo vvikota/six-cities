@@ -1,7 +1,7 @@
 import rawDataConversion from "../../rawDataConversion.js";
 
 const initialState = {
-  data: [],
+  initialOffers: [],
 };
 
 const ActionCreator = {
@@ -25,7 +25,7 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
 
     case `LOAD_DATA`: return Object.assign({}, state, {
-      data: action.payload,
+      initialOffers: action.payload,
     });
   }
 

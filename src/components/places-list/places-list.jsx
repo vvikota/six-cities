@@ -4,10 +4,10 @@ import OfferCard from '../offer-card/offer-card.jsx';
 
 const PlacesList = (props) => {
 
-  const {data, openCard, hoverItem} = props;
+  const {offers, openCard, hoverItem} = props;
 
   return <div className="cities__places-list places__list tabs__content">
-    {data.map((offer, index) => <OfferCard
+    {offers.map((offer, index) => <OfferCard
       offer={offer}
       key={index}
       openCard={openCard}
@@ -19,7 +19,7 @@ const PlacesList = (props) => {
 };
 
 PlacesList.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.shape({
+  offers: PropTypes.arrayOf(PropTypes.shape({
     city: PropTypes.shape({
       name: PropTypes.string.isRequired,
       location: PropTypes.shape({

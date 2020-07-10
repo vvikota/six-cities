@@ -4,10 +4,7 @@ import PropTypes from "prop-types";
 
 const OfferCard = (props) => {
   const {offer, openCard, onMouseEnter} = props;
-  // console.log(offer);
   const {isPremium, previewImage, price, description, type} = offer;
-  // eslint-disable-next-line no-console
-  // console.log(props);
 
   return (
     <article className="cities__place-card place-card" onMouseEnter={onMouseEnter}>

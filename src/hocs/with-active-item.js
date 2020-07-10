@@ -1,4 +1,5 @@
 import React from 'react';
+// import PropTypes from "prop-types";
 
 const withActiveItem = (Component) => {
   class WithActiveItem extends React.PureComponent {
@@ -11,7 +12,6 @@ const withActiveItem = (Component) => {
     }
 
     render() {
-      // console.log(this.props)
       return <Component
         {...this.props}
         hoverItem={(info) => this.setState({
