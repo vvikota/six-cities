@@ -9,16 +9,7 @@ export const getData = (state) => {
 
 export const getCities = createSelector(
     getData,
-    (offers) => {
-      const cityArray = [];
-
-      offers.forEach((offer) => {
-        if (cityArray.indexOf(offer.city.name) < 0) {
-          cityArray.push(offer.city.name);
-        }
-      });
-      return cityArray;
-    }
+    (offers) => [...new Set(offers.map((offer) => offer.city.name))]
 );
 
 const currentCity = (state, city) => {

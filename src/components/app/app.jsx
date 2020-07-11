@@ -19,7 +19,7 @@ const App = (props) => {
 
   const {userName, city, changeCity, cityList, cityOffers} = props;
   // eslint-disable-next-line no-console
-  console.log(props);
+  // console.log(props);
 
   return (
     <>
