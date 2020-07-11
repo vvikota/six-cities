@@ -4,9 +4,9 @@ import CityList from './city-list.jsx';
 
 it(`CityList is correctly renderer`, ()=> {
   const tree = renderer.create(<CityList
-    data={[]}
+    cityList={[]}
     currentCity={`London`}
-    chooseCity={jest.fn()}
+    onChangeCity={jest.fn()}
     hoverItem={jest.fn()}
   />).toJSON();
 

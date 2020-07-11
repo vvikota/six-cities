@@ -108,7 +108,7 @@ const mock = [
 it(`PlacesList is correcctly render`, ()=> {
 
   const tree = renderer.create(<PlacesList
-    data={mock}
+    offers={mock}
     openCard={jest.fn()}
     hoverItem={jest.fn()}
   />).toJSON();

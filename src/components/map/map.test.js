@@ -4,7 +4,7 @@ import Map from './map';
 
 it(`Map is correctly renderer`, ()=> {
   const tree = renderer.create(<Map
-    data={[]}
+    offers={[]}
   />).toJSON();
 
   expect(tree).toMatchSnapshot();

@@ -113,10 +113,10 @@ it(`App is correcctly render`, ()=> {
 
   const tree = renderer.create(<App
     userName={mock.userName}
-    data={dataMock}
-    openCard={jest.fn()}
+    cityOffers={dataMock}
     city={`Amstrdam`}
     changeCity={jest.fn()}
+    cityList={[]}
   />).toJSON();
 
   expect(tree).toMatchSnapshot();

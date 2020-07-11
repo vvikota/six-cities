@@ -1,7 +1,8 @@
 import axios from "axios";
-import {ActionCreator} from "./reducer.js";
+// import {ActionCreator} from "./reducer.js";
 
-export const configureAPI = (dispatch) => {
+// export const configureAPI = (dispatch) => {
+export const configureAPI = () => {
   const api = axios.create({
     baseURL: `https://es31-server.appspot.com/six-cities`,
     timeout: 1000 * 5,
@@ -13,7 +14,7 @@ export const configureAPI = (dispatch) => {
     if (err.response.status === 403) {
       // eslint-disable-next-line no-console
       console.log(`Обработал ошибку 403`);
-      dispatch(ActionCreator.requireAuthorization(true));
+      // dispatch(ActionCreator.requireAuthorization(true));
     }
     return err;
   };
