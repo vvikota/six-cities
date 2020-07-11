@@ -1,13 +1,28 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {ActionCreator} from "../../reducer/main/main.js";
+import {getData} from "../../reducer/data/selectors.js";
+import {getCity} from "../../reducer/main/selectors.js";
+import {getCities} from "../../reducer/data/selectors.js";
+import {getCityOffers} from "../../reducer/data/selectors.js";
+import CityList from "../city-list/city-list.jsx";
 import PlacesList from "../places-list/places-list.jsx";
+import Map from "../map/map.jsx";
+
+import withActiveItem from "../../hocs/with-active-item.js";
+
+const CityListWrapped = withActiveItem(CityList);
+const PlacesListWrapped = withActiveItem(PlacesList);
 
 const App = (props) => {
-  const {userName, offers, openCard} = props;
+
+  const {userName, city, changeCity, cityList, cityOffers} = props;
+  // eslint-disable-next-line no-console
+  // console.log(props);
 
   return (
     <>
-
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
@@ -31,47 +46,18 @@ const App = (props) => {
       </header>
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
-        <div className="cities tabs">
-          <section className="locations container">
-            <ul className="locations__list tabs__list">
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Paris</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Cologne</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Brussels</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item tabs__item--active">
-                  <span>Amsterdam</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Hamburg</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Dusseldorf</span>
-                </a>
-              </li>
-            </ul>
-          </section>
-        </div>
+
+        <CityListWrapped
+          cityList={cityList}
+          currentCity={city}
+          onChangeCity={changeCity}
+        />
+
         <div className="cities__places-wrapper">
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">312 places to stay in Amsterdam</b>
+              <b className="places__found">{cityOffers.length} places to stay in Amsterdam</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex="0">
@@ -94,33 +80,86 @@ const App = (props) => {
                 </select> */}
               </form>
 
-              <PlacesList
-                offers={offers}
-                openCard={openCard}
+              <PlacesListWrapped
+                offers={cityOffers}
+                openCard={(offer) => {
+                  // eslint-disable-next-line no-console
+                  console.log(offer);
+                }}
               />
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <section className="cities__map map">
+                <Map
+                  offers={cityOffers}
+                />
+              </section>
             </div>
           </div>
         </div>
       </main>;
-
     </>
   );
 };
 
 App.propTypes = {
   userName: PropTypes.string.isRequired,
-  offers: PropTypes.arrayOf(PropTypes.shape({
-    premium: PropTypes.bool.isRequired,
-    price: PropTypes.number.isRequired,
-    image: PropTypes.string.isRequired,
+  cityOffers: PropTypes.arrayOf(PropTypes.shape({
+    city: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      location: PropTypes.shape({
+        latitude: PropTypes.number.isRequired,
+        longitude: PropTypes.number.isRequired,
+        zoom: PropTypes.number.isRequired,
+      }).isRequired,
+    }).isRequired,
+    previewImage: PropTypes.string.isRequired,
+    images: PropTypes.arrayOf(PropTypes.string.isRequired),
+    title: PropTypes.string.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+    isPremium: PropTypes.bool.isRequired,
     rating: PropTypes.number.isRequired,
-    placeType: PropTypes.string.isRequired,
-    placeDiscription: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    bedrooms: PropTypes.number.isRequired,
+    maxAdults: PropTypes.number.isRequired,
+    price: PropTypes.number.isRequired,
+    goods: PropTypes.arrayOf(PropTypes.string.isRequired),
+    host: PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      isPro: PropTypes.bool.isRequired,
+      avatarUrl: PropTypes.string.isRequired,
+    }).isRequired,
+    description: PropTypes.string.isRequired,
+    location: PropTypes.shape({
+      latitude: PropTypes.number.isRequired,
+      longitude: PropTypes.number.isRequired,
+      zoom: PropTypes.number.isRequired,
+    }).isRequired,
+    id: PropTypes.number.isRequired,
   })),
-  openCard: PropTypes.func.isRequired,
+  city: PropTypes.string.isRequired,
+  changeCity: PropTypes.func.isRequired,
+  cityList: PropTypes.arrayOf(PropTypes.string.isRequired),
 };
 
-export default App;
+const mapStateToProps = (state, ownProps) => {
+  const currentCity = (getCity(state) === `default` && getData(state)[0]) ?
+    getData(state)[0].city.name :
+    getCity(state);
+  return Object.assign({}, ownProps, {
+    city: currentCity,
+    initialOffers: getData(state),
+    cityList: getCities(state),
+    cityOffers: getCityOffers(state, currentCity),
+  });
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  changeCity: (city) => {
+    dispatch(ActionCreator.changeCity(city));
+  },
+});
+
+export {App};
+export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -4,45 +4,105 @@ import PlacesList from './places-list';
 
 const mock = [
   {
-    premium: true,
-    price: 120,
-    image: `img/apartment-01.jpg`,
-    rating: 3,
-    placeType: `Apartment`,
-    placeDiscription: `Wood and stone place`
-  },
-  {
-    premium: false,
-    price: 220,
-    image: `img/room.jpg`,
-    rating: 2,
-    placeType: `Apartment`,
-    placeDiscription: `Beautiful luxurious apartment at great location`
-  },
-  {
-    premium: false,
-    price: 250,
-    image: `img/apartment-02.jpg`,
-    rating: 5,
-    placeType: `Apartment`,
-    placeDiscription: `Canal View Prinsengracht`
-  },
-  {
-    premium: false,
-    price: 150,
-    image: `img/apartment-03.jpg`,
-    rating: 1,
-    placeType: `Apartment`,
-    placeDiscription: `Nice, cozy, warm big bed apartment`
-  },
-  {
-    premium: true,
-    price: 50,
-    image: `img/apartment-03.jpg`,
-    rating: 2,
-    placeType: `Private room`,
-    placeDiscription: `Wood and stone place`
-  },
+    "city": {
+      "name": `Amsterdam`,
+      "location": {
+        "latitude": 52.37454,
+        "longitude": 4.897976,
+        "zoom": 13
+      }
+    },
+    "previewImage": `https://es31-server.appspot.com/six-cities/static/hotel/6.jpg`,
+    "images": [`https://es31-server.appspot.com/six-cities/static/hotel/5.jpg`, `https://es31-server.appspot.com/six-cities/static/hotel/2.jpg`, `https://es31-server.appspot.com/six-cities/static/hotel/17.jpg`, `https://es31-server.appspot.com/six-cities/static/hotel/14.jpg`, `https://es31-server.appspot.com/six-cities/static/hotel/9.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/11.jpg`, `https://es31-server.appspot.com/six-cities/static/hotel/19.jpg`, `https://es31-server.appspot.com/six-cities/static/hotel/3.jpg`, `https://es31-server.appspot.com/six-cities/static/hotel/1.jpg`, `https://es31-server.appspot.com/six-cities/static/hotel/16.jpg`, `https://es31-server.appspot.com/six-cities/static/hotel/18.jpg`, `https://es31-server.appspot.com/six-cities/static/hotel/6.jpg`, `https://es31-server.appspot.com/six-cities/static/hotel/4.jpg`, `https://es31-server.appspot.com/six-cities/static/hotel/12.jpg`],
+    "title": `Amazing and Extremely Central Flat`,
+    "isFavorite": false,
+    "isPremium": false,
+    "rating": 3.2,
+    "type": `room`,
+    "bedrooms": 1,
+    "maxAdults": 2,
+    "price": 250,
+    "goods": [`Breakfast`, `Laptop friendly workspace`, `Towels`, `Fridge`, `Air conditioning`, `Washer`, `Dishwasher`, `Baby seat`],
+    "host": {
+      "id": 25,
+      "name": `Angelina`,
+      "isPro": true,
+      "avatarUrl": `img/avatar-angelina.jpg`
+    },
+    "description": `Peaceful studio in the most wanted area in town. Quiet house Near of everything. Completely renovated. Lovely neighbourhood, lot of trendy shops, restaurants and bars in a walking distance.`,
+    "location": {
+      "latitude": 52.37154,
+      "longitude": 4.889976,
+      "zoom": 16
+    },
+    "id": 1
+  }, {
+    "city": {
+      "name": `Amsterdam`,
+      "location": {
+        "latitude": 52.37454,
+        "longitude": 4.897976,
+        "zoom": 13
+      }
+    },
+    "previewImage": `https://es31-server.appspot.com/six-cities/static/hotel/6.jpg`,
+    "images": [`https://es31-server.appspot.com/six-cities/static/hotel/5.jpg`, `https://es31-server.appspot.com/six-cities/static/hotel/2.jpg`, `https://es31-server.appspot.com/six-cities/static/hotel/17.jpg`, `https://es31-server.appspot.com/six-cities/static/hotel/14.jpg`, `https://es31-server.appspot.com/six-cities/static/hotel/9.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/11.jpg`, `https://es31-server.appspot.com/six-cities/static/hotel/19.jpg`, `https://es31-server.appspot.com/six-cities/static/hotel/3.jpg`, `https://es31-server.appspot.com/six-cities/static/hotel/1.jpg`, `https://es31-server.appspot.com/six-cities/static/hotel/16.jpg`, `https://es31-server.appspot.com/six-cities/static/hotel/18.jpg`, `https://es31-server.appspot.com/six-cities/static/hotel/6.jpg`, `https://es31-server.appspot.com/six-cities/static/hotel/4.jpg`, `https://es31-server.appspot.com/six-cities/static/hotel/12.jpg`],
+    "title": `Amazing and Extremely Central Flat`,
+    "isFavorite": false,
+    "isPremium": false,
+    "rating": 3.2,
+    "type": `room`,
+    "bedrooms": 1,
+    "maxAdults": 2,
+    "price": 250,
+    "goods": [`Breakfast`, `Laptop friendly workspace`, `Towels`, `Fridge`, `Air conditioning`, `Washer`, `Dishwasher`, `Baby seat`],
+    "host": {
+      "id": 25,
+      "name": `Angelina`,
+      "isPro": true,
+      "avatarUrl": `img/avatar-angelina.jpg`
+    },
+    "description": `Peaceful studio in the most wanted area in town. Quiet house Near of everything. Completely renovated. Lovely neighbourhood, lot of trendy shops, restaurants and bars in a walking distance.`,
+    "location": {
+      "latitude": 52.37154,
+      "longitude": 4.889976,
+      "zoom": 16
+    },
+    "id": 1
+  }, {
+    "city": {
+      "name": `Amsterdam`,
+      "location": {
+        "latitude": 52.37454,
+        "longitude": 4.897976,
+        "zoom": 13
+      }
+    },
+    "previewImage": `https://es31-server.appspot.com/six-cities/static/hotel/6.jpg`,
+    "images": [`https://es31-server.appspot.com/six-cities/static/hotel/5.jpg`, `https://es31-server.appspot.com/six-cities/static/hotel/2.jpg`, `https://es31-server.appspot.com/six-cities/static/hotel/17.jpg`, `https://es31-server.appspot.com/six-cities/static/hotel/14.jpg`, `https://es31-server.appspot.com/six-cities/static/hotel/9.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/11.jpg`, `https://es31-server.appspot.com/six-cities/static/hotel/19.jpg`, `https://es31-server.appspot.com/six-cities/static/hotel/3.jpg`, `https://es31-server.appspot.com/six-cities/static/hotel/1.jpg`, `https://es31-server.appspot.com/six-cities/static/hotel/16.jpg`, `https://es31-server.appspot.com/six-cities/static/hotel/18.jpg`, `https://es31-server.appspot.com/six-cities/static/hotel/6.jpg`, `https://es31-server.appspot.com/six-cities/static/hotel/4.jpg`, `https://es31-server.appspot.com/six-cities/static/hotel/12.jpg`],
+    "title": `Amazing and Extremely Central Flat`,
+    "isFavorite": false,
+    "isPremium": false,
+    "rating": 3.2,
+    "type": `room`,
+    "bedrooms": 1,
+    "maxAdults": 2,
+    "price": 250,
+    "goods": [`Breakfast`, `Laptop friendly workspace`, `Towels`, `Fridge`, `Air conditioning`, `Washer`, `Dishwasher`, `Baby seat`],
+    "host": {
+      "id": 25,
+      "name": `Angelina`,
+      "isPro": true,
+      "avatarUrl": `img/avatar-angelina.jpg`
+    },
+    "description": `Peaceful studio in the most wanted area in town. Quiet house Near of everything. Completely renovated. Lovely neighbourhood, lot of trendy shops, restaurants and bars in a walking distance.`,
+    "location": {
+      "latitude": 52.37154,
+      "longitude": 4.889976,
+      "zoom": 16
+    },
+    "id": 1
+  }
 ];
 
 it(`PlacesList is correcctly render`, ()=> {
@@ -50,6 +110,7 @@ it(`PlacesList is correcctly render`, ()=> {
   const tree = renderer.create(<PlacesList
     offers={mock}
     openCard={jest.fn()}
+    hoverItem={jest.fn()}
   />).toJSON();
 
   expect(tree).toMatchSnapshot();

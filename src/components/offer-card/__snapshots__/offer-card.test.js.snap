@@ -6,13 +6,6 @@ exports[`OfferCard is correcctly render 1`] = `
   onMouseEnter={[MockFunction]}
 >
   <div
-    className="place-card__mark"
-  >
-    <span>
-      Premium
-    </span>
-  </div>
-  <div
     className="cities__image-wrapper place-card__image-wrapper"
   >
     <a
@@ -24,7 +17,7 @@ exports[`OfferCard is correcctly render 1`] = `
         alt="Place image"
         className="place-card__image"
         height="200"
-        src="img/apartment-01.jpg"
+        src="https://es31-server.appspot.com/six-cities/static/hotel/6.jpg"
         width="260"
       />
     </a>
@@ -41,7 +34,7 @@ exports[`OfferCard is correcctly render 1`] = `
         <b
           className="place-card__price-value"
         >
-          120
+          250
         </b>
         <span
           className="place-card__price-text"
@@ -91,13 +84,13 @@ exports[`OfferCard is correcctly render 1`] = `
         href="#"
         onClick={[Function]}
       >
-        Wood and stone place
+        Peaceful studio in the most wanted area in town. Quiet house Near of everything. Completely renovated. Lovely neighbourhood, lot of trendy shops, restaurants and bars in a walking distance.
       </a>
     </h2>
     <p
       className="place-card__type"
     >
-      Apartment
+      room
     </p>
   </div>
 </article>

@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CityList is correctly renderer 1`] = `
+<div
+  className="cities tabs"
+>
+  <section
+    className="locations container"
+  >
+    <ul
+      className="locations__list tabs__list"
+    />
+  </section>
+</div>
+`;

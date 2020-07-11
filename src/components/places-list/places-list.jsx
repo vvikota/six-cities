@@ -2,43 +2,59 @@ import React from "react";
 import PropTypes from 'prop-types';
 import OfferCard from '../offer-card/offer-card.jsx';
 
-class PlacesList extends React.PureComponent {
-  constructor(props) {
-    super(props);
+const PlacesList = (props) => {
 
-    this.state = {
-      activeOffer: {},
-    };
-  }
+  const {offers, openCard, hoverItem} = props;
 
-  render() {
-    const {offers, openCard} = this.props;
-
-    return <div className="cities__places-list places__list tabs__content">
-      {offers.map((offer, index) => <OfferCard
-        offer={offer}
-        key={index}
-        openCard={openCard}
-        onMouseEnter={() => {
-          this.setState({
-            activeOffer: offer,
-          });
-        }}
-      />)}
-    </div>;
-  }
-}
+  return <div className="cities__places-list places__list tabs__content">
+    {offers.map((offer, index) => <OfferCard
+      offer={offer}
+      key={index}
+      openCard={openCard}
+      onMouseEnter={() => {
+        hoverItem(offer);
+      }}
+    />)}
+  </div>;
+};
 
 PlacesList.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.shape({
-    premium: PropTypes.bool.isRequired,
-    price: PropTypes.number.isRequired,
-    image: PropTypes.string.isRequired,
+    city: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      location: PropTypes.shape({
+        latitude: PropTypes.number.isRequired,
+        longitude: PropTypes.number.isRequired,
+        zoom: PropTypes.number.isRequired,
+      }).isRequired,
+    }).isRequired,
+    previewImage: PropTypes.string.isRequired,
+    images: PropTypes.arrayOf(PropTypes.string.isRequired),
+    title: PropTypes.string.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+    isPremium: PropTypes.bool.isRequired,
     rating: PropTypes.number.isRequired,
-    placeType: PropTypes.string.isRequired,
-    placeDiscription: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    bedrooms: PropTypes.number.isRequired,
+    maxAdults: PropTypes.number.isRequired,
+    price: PropTypes.number.isRequired,
+    goods: PropTypes.arrayOf(PropTypes.string.isRequired),
+    host: PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      isPro: PropTypes.bool.isRequired,
+      avatarUrl: PropTypes.string.isRequired,
+    }).isRequired,
+    description: PropTypes.string.isRequired,
+    location: PropTypes.shape({
+      latitude: PropTypes.number.isRequired,
+      longitude: PropTypes.number.isRequired,
+      zoom: PropTypes.number.isRequired,
+    }).isRequired,
+    id: PropTypes.number.isRequired,
   })),
   openCard: PropTypes.func.isRequired,
+  hoverItem: PropTypes.func.isRequired,
 };
 
 export default PlacesList;
