@@ -1,4 +1,4 @@
-/* eslint-disable camelcase */
+
 import React from "react";
 import PropTypes from "prop-types";
 
@@ -9,7 +9,6 @@ const OfferCard = (props) => {
   return (
     <article className="cities__place-card place-card" onMouseEnter={onMouseEnter}>
 
-      {/* eslint-disable-next-line camelcase */}
       {isPremium ? <div className="place-card__mark">
         <span>Premium</span>
       </div> : null}

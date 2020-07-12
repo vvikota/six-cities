@@ -16,7 +16,7 @@ const init = () => {
   const {userName} = settings;
   const api = configureAPI((...args) => store.dispatch(...args));
 
-  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+  const composeEnhancers = (typeof window !== `undefined` && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
   const enhancer = composeEnhancers(
       applyMiddleware(thunk.withExtraArgument(api))
   );
