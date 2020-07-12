@@ -11,9 +11,14 @@ const PlacesListWrapped = withActiveItem(PlacesList);
 
 const MainPage = (props) => {
 
-  const {userName, city, changeCity, cityList, cityOffers} = props;
+  const {city, changeCity, cityList, cityOffers, userInformation, changeAuthorizationStatus} = props;
+  const {email, avatarUrl} = userInformation;
   // eslint-disable-next-line no-console
-  // console.log(props);
+  // console.log(userInformation.avatarUrl);
+  const goToAuthorization = (e) => {
+    e.preventDefault();
+    changeAuthorizationStatus(true);
+  };
 
   return (
     <>
@@ -28,10 +33,22 @@ const MainPage = (props) => {
             <nav className="header__nav">
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
-                  <a className="header__nav-link header__nav-link--profile" href="#">
-                    <div className="header__avatar-wrapper user__avatar-wrapper"></div>
-                    <span className="header__user-name user__name">{userName}</span>
-                  </a>
+
+                  {userInformation === `noAuthorized` ?
+                    <a className="header__nav-link header__nav-link--profile" href="" onClick={goToAuthorization}>
+                      <div className="header__avatar-wrapper user__avatar-wrapper">
+                      </div>
+                      <span className="header__login">Sign in</span>
+                    </a> :
+                    <a className="header__nav-link header__nav-link--profile" href="#">
+                      <div
+                        className="header__avatar-wrapper user__avatar-wrapper"
+                        style={{backgroundImage: `url('` + avatarUrl + `')`}}
+                      ></div>
+                      <span className="header__user-name user__name">{email}</span>
+                    </a>
+                  }
+
                 </li>
               </ul>
             </nav>
@@ -135,6 +152,17 @@ MainPage.propTypes = {
   city: PropTypes.string.isRequired,
   changeCity: PropTypes.func.isRequired,
   cityList: PropTypes.arrayOf(PropTypes.string.isRequired),
+  userInformation: PropTypes.oneOfType([
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      email: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      avatarUrl: PropTypes.string.isRequired,
+      isPro: PropTypes.bool.isRequired,
+    }),
+    PropTypes.string.isRequired,
+  ]),
+  changeAuthorizationStatus: PropTypes.func.isRequired,
 };
 
 export default MainPage;

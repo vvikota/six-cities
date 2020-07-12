@@ -107,6 +107,7 @@ class SignIn extends React.PureComponent {
 
 SignIn.propTypes = {
   onSignInButtonClick: PropTypes.func.isRequired,
+  changeAuthorizationStatus: PropTypes.func.isRequired,
 };
 
 export default SignIn;

@@ -7,9 +7,10 @@ import {getCity} from "../../reducer/main/selectors.js";
 import {getCities} from "../../reducer/data/selectors.js";
 import {getCityOffers} from "../../reducer/data/selectors.js";
 import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
+import {getServerResponse} from "../../reducer/user/selectors.js";
 import MainPage from "../main-page/main-page.jsx";
 import SignIn from "../sign-in/sign-in.jsx";
-import {Operation} from "../../reducer/user/user.js";
+import {Operation, ActionCreator as UserActionCreator} from "../../reducer/user/user.js";
 
 const App = (props) => {
 
@@ -19,15 +20,18 @@ const App = (props) => {
     cityList,
     cityOffers,
     isAuthorizationRequired,
-    sendAuthorizationRequest} = props;
-  // eslint-disable-next-line no-console
-  // console.log(props);
+    sendAuthorizationRequest,
+    userInformation,
+    changeAuthorizationStatus} = props;
 
   return (
     <>
       {isAuthorizationRequired ?
         <SignIn
           onSignInButtonClick = {sendAuthorizationRequest}
+          userInformation={userInformation}
+          isAuthorizationRequired={isAuthorizationRequired}
+          changeAuthorizationStatus={changeAuthorizationStatus}
         /> :
         <MainPage
           userName={userName}
@@ -35,6 +39,8 @@ const App = (props) => {
           city={city}
           changeCity={changeCity}
           cityList={cityList}
+          userInformation={userInformation}
+          changeAuthorizationStatus={changeAuthorizationStatus}
         />
       }
     </>
@@ -82,6 +88,17 @@ App.propTypes = {
   cityList: PropTypes.arrayOf(PropTypes.string.isRequired),
   isAuthorizationRequired: PropTypes.bool.isRequired,
   sendAuthorizationRequest: PropTypes.func.isRequired,
+  userInformation: PropTypes.oneOfType([
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      email: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      avatarUrl: PropTypes.string.isRequired,
+      isPro: PropTypes.bool.isRequired,
+    }),
+    PropTypes.string.isRequired,
+  ]),
+  changeAuthorizationStatus: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state, ownProps) => {
@@ -94,6 +111,7 @@ const mapStateToProps = (state, ownProps) => {
     cityList: getCities(state),
     cityOffers: getCityOffers(state, currentCity),
     isAuthorizationRequired: getAuthorizationStatus(state),
+    userInformation: getServerResponse(state),
   });
 };
 
@@ -104,6 +122,9 @@ const mapDispatchToProps = (dispatch) => ({
   sendAuthorizationRequest: (data) => {
     dispatch(Operation.requiredAuthorization(data));
   },
+  changeAuthorizationStatus: (status) => {
+    dispatch(UserActionCreator.changeAuthorizationStatus(status));
+  }
 });
 
 export {App};
