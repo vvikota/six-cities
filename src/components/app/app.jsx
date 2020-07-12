@@ -14,7 +14,7 @@ import {Operation, ActionCreator as UserActionCreator} from "../../reducer/user/
 
 const App = (props) => {
 
-  const {userName,
+  const {
     city,
     changeCity,
     cityList,
@@ -34,7 +34,6 @@ const App = (props) => {
           changeAuthorizationStatus={changeAuthorizationStatus}
         /> :
         <MainPage
-          userName={userName}
           cityOffers={cityOffers}
           city={city}
           changeCity={changeCity}
@@ -48,7 +47,6 @@ const App = (props) => {
 };
 
 App.propTypes = {
-  userName: PropTypes.string.isRequired,
   cityOffers: PropTypes.arrayOf(PropTypes.shape({
     city: PropTypes.shape({
       name: PropTypes.string.isRequired,

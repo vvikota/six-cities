@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import {App} from './app.jsx';
+import MainPage from './main-page.jsx';
 
 const dataMock = [
   {
@@ -105,9 +105,8 @@ const dataMock = [
   }
 ];
 
-it(`App is correcctly render`, ()=> {
-
-  const tree = renderer.create(<App
+it(`MainPage is correctly renderer`, ()=> {
+  const tree = renderer.create(<MainPage
     cityOffers={dataMock}
     city={`Amstrdam`}
     changeCity={jest.fn()}

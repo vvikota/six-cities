@@ -114,7 +114,6 @@ const MainPage = (props) => {
 };
 
 MainPage.propTypes = {
-  userName: PropTypes.string.isRequired,
   cityOffers: PropTypes.arrayOf(PropTypes.shape({
     city: PropTypes.shape({
       name: PropTypes.string.isRequired,
