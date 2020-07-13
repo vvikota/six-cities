@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {Switch, Route} from "react-router-dom";
+import {Switch, Route, Router} from "react-router-dom";
 
 import {ActionCreator as MainActionCreator} from "../../reducer/main/main.js";
 import {getData} from "../../reducer/data/selectors.js";
@@ -15,6 +15,8 @@ import SignIn from "../sign-in/sign-in.jsx";
 import {Operation as UserOperation, ActionCreator as UserActionCreator} from "../../reducer/user/user.js";
 import Favorites from "../favorites/favorites.jsx";
 import PrivateRoute from "../../hocs/private-route/private-route.js";
+import {createBrowserHistory} from 'history';
+const newHistory = createBrowserHistory();
 
 const App = (props) => {
 
@@ -28,29 +30,31 @@ const App = (props) => {
     userInformation,
     changeAuthorizationStatus} = props;
 
-  return (<Switch>
+  return (<Router history={newHistory}>
+    <Switch>
 
-    <Route path="/" exact render={() => <MainPage
-      cityOffers={cityOffers}
-      city={city}
-      changeCity={changeCity}
-      cityList={cityList}
-      userInformation={userInformation}
-      changeAuthorizationStatus={changeAuthorizationStatus}
-    />}
-    />
+      <Route path="/" exact render={() => <MainPage
+        cityOffers={cityOffers}
+        city={city}
+        changeCity={changeCity}
+        cityList={cityList}
+        userInformation={userInformation}
+        changeAuthorizationStatus={changeAuthorizationStatus}
+      />}
+      />
 
-    <Route path="/login" exact render={() => <SignIn
-      onSignInButtonClick = {sendAuthorizationRequest}
-      userInformation={userInformation}
-      isAuthorizationRequired={isAuthorizationRequired}
-      changeAuthorizationStatus={changeAuthorizationStatus}
-    />}
-    />
+      <Route path="/login" exact render={() => <SignIn
+        onSignInButtonClick = {sendAuthorizationRequest}
+        userInformation={userInformation}
+        isAuthorizationRequired={isAuthorizationRequired}
+        changeAuthorizationStatus={changeAuthorizationStatus}
+      />}
+      />
 
-    <PrivateRoute auth={isAuthorizationRequired} component={Favorites} optional={{path: `/favorite`}} params={{city}} />
+      <PrivateRoute auth={isAuthorizationRequired} component={Favorites} optional={{path: `/favorite`}} params={{city}} />
 
-  </Switch>
+    </Switch>
+  </Router>
   );
 };
 

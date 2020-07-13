@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {Link} from "react-router-dom";
+import {Link, Router} from "react-router-dom";
+import {createBrowserHistory} from 'history';
+const newHistory = createBrowserHistory();
 
 class SignIn extends React.PureComponent {
   constructor(props) {
@@ -90,7 +92,9 @@ class SignIn extends React.PureComponent {
                   className="login__submit form__submit button"
                   type="submit"
                   onClick={this._logIn}
-                ><Link to="/">Sign in </Link></button>
+                >
+                  <Router history={newHistory}><Link to="/">Sign in </Link></Router>
+                </button>
               </form>
             </section>
             <section className="locations locations--login locations--current">

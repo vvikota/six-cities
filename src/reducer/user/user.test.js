@@ -5,7 +5,7 @@ import {configureAPI} from "../../api";
 describe(`Reducer work correctly`, () => {
   it(`Reducer without parameters should return state without changes`, () => {
     expect(reducer(undefined, {})).toEqual({
-      isAuthorizationRequired: false,
+      isAuthorizationRequired: true,
       email: undefined,
       password: undefined,
       serverResponse: `noAuthorized`,
@@ -14,7 +14,7 @@ describe(`Reducer work correctly`, () => {
 
   it(`Should save server response`, () => {
     expect(reducer({
-      isAuthorizationRequired: false,
+      isAuthorizationRequired: true,
       email: undefined,
       password: undefined,
       serverResponse: `noAuthorized`,
@@ -22,7 +22,7 @@ describe(`Reducer work correctly`, () => {
       type: `SAVE_SERVER_RESPONSE`,
       payload: {id: 1, name: `Vi`, avatar: `url`},
     })).toEqual({
-      isAuthorizationRequired: false,
+      isAuthorizationRequired: true,
       email: undefined,
       password: undefined,
       serverResponse: {id: 1, name: `Vi`, avatar: `url`},
