@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {Link} from "react-router-dom";
 
 class SignIn extends React.PureComponent {
   constructor(props) {
@@ -40,7 +41,7 @@ class SignIn extends React.PureComponent {
                    <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41" />
                  </a>
                </div>
-               <nav className="header__nav">
+               {/* <nav className="header__nav">
                  <ul className="header__nav-list">
                    <li className="header__nav-item user">
                      <a className="header__nav-link header__nav-link--profile" href="#">
@@ -50,7 +51,7 @@ class SignIn extends React.PureComponent {
                      </a>
                    </li>
                  </ul>
-               </nav>
+               </nav> */}
              </div>
            </div>
          </header>
@@ -88,7 +89,7 @@ class SignIn extends React.PureComponent {
                   className="login__submit form__submit button"
                   type="submit"
                   onClick={this._logIn}
-                >Sign in</button>
+                ><Link to="/">Sign in </Link></button>
               </form>
             </section>
             <section className="locations locations--login locations--current">

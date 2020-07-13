@@ -1,5 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {Link} from "react-router-dom";
+
 import CityList from "../city-list/city-list.jsx";
 import PlacesList from "../places-list/places-list.jsx";
 import Map from "../map/map.jsx";
@@ -11,14 +13,14 @@ const PlacesListWrapped = withActiveItem(PlacesList);
 
 const MainPage = (props) => {
 
-  const {city, changeCity, cityList, cityOffers, userInformation, changeAuthorizationStatus} = props;
+  const {city, changeCity, cityList, cityOffers, userInformation} = props;
   const {email, avatarUrl} = userInformation;
   // eslint-disable-next-line no-console
   // console.log(userInformation.avatarUrl);
-  const goToAuthorization = (e) => {
-    e.preventDefault();
-    changeAuthorizationStatus(true);
-  };
+  // const goToAuthorization = (e) => {
+  //   e.preventDefault();
+  //   changeAuthorizationStatus(true);
+  // };
 
   return (
     <>
@@ -35,11 +37,11 @@ const MainPage = (props) => {
                 <li className="header__nav-item user">
 
                   {userInformation === `noAuthorized` ?
-                    <a className="header__nav-link header__nav-link--profile" href="" onClick={goToAuthorization}>
+                    <Link className="header__nav-link header__nav-link--profile" to="/login">
                       <div className="header__avatar-wrapper user__avatar-wrapper">
                       </div>
                       <span className="header__login">Sign in</span>
-                    </a> :
+                    </Link> :
                     <a className="header__nav-link header__nav-link--profile" href="#">
                       <div
                         className="header__avatar-wrapper user__avatar-wrapper"
@@ -161,7 +163,6 @@ MainPage.propTypes = {
     }),
     PropTypes.string.isRequired,
   ]),
-  changeAuthorizationStatus: PropTypes.func.isRequired,
 };
 
 export default MainPage;

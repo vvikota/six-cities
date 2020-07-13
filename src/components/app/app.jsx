@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
+import {Switch, Route} from "react-router-dom";
+
 import {ActionCreator} from "../../reducer/main/main.js";
 import {getData} from "../../reducer/data/selectors.js";
 import {getCity} from "../../reducer/main/selectors.js";
@@ -24,26 +26,27 @@ const App = (props) => {
     userInformation,
     changeAuthorizationStatus} = props;
 
-  return (
-    <>
-      {isAuthorizationRequired ?
-        <SignIn
-          onSignInButtonClick = {sendAuthorizationRequest}
-          userInformation={userInformation}
-          isAuthorizationRequired={isAuthorizationRequired}
-          changeAuthorizationStatus={changeAuthorizationStatus}
-        /> :
-        <MainPage
-          cityOffers={cityOffers}
-          city={city}
-          changeCity={changeCity}
-          cityList={cityList}
-          userInformation={userInformation}
-          changeAuthorizationStatus={changeAuthorizationStatus}
-        />
-      }
-    </>
-  );
+  return <Switch>
+
+    <Route path="/" exact render={() => <MainPage
+      cityOffers={cityOffers}
+      city={city}
+      changeCity={changeCity}
+      cityList={cityList}
+      userInformation={userInformation}
+      changeAuthorizationStatus={changeAuthorizationStatus}
+    />}
+    />
+
+    <Route path="/login" render={() => <SignIn
+      onSignInButtonClick = {sendAuthorizationRequest}
+      userInformation={userInformation}
+      isAuthorizationRequired={isAuthorizationRequired}
+      changeAuthorizationStatus={changeAuthorizationStatus}
+    />}
+    />
+
+  </Switch>;
 };
 
 App.propTypes = {

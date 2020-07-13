@@ -35,9 +35,9 @@ const Operation = {
     return api.post(`/login`, data)
     .then((response) => {
       dispatch(ActionCreator.requiredAuthorization(response.data));
-      dispatch(ActionCreator.changeAuthorizationStatus(false));
+      // dispatch(ActionCreator.changeAuthorizationStatus(false));
       dispatch(ActionCreator.saveServerResponse(rawDataConversion(response.data)));
-      // history.pushState(null, null, `/win`);
+      // history.pushState(null, null, `/`);
     })
     .catch((err) => {
       // eslint-disable-next-line no-console
