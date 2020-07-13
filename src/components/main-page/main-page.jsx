@@ -6,7 +6,7 @@ import CityList from "../city-list/city-list.jsx";
 import PlacesList from "../places-list/places-list.jsx";
 import Map from "../map/map.jsx";
 
-import withActiveItem from "../../hocs/with-active-item.js";
+import withActiveItem from "../../hocs/with-active-item/with-active-item.js";
 
 const CityListWrapped = withActiveItem(CityList);
 const PlacesListWrapped = withActiveItem(PlacesList);
@@ -50,6 +50,11 @@ const MainPage = (props) => {
                       <span className="header__user-name user__name">{email}</span>
                     </a>
                   }
+                  <Link className="header__nav-link header__nav-link--profile" to="/favorite">
+                    <div className="header__avatar-wrapper user__avatar-wrapper">
+                    </div>
+                    <span className="header__login">Private</span>
+                  </Link>
 
                 </li>
               </ul>

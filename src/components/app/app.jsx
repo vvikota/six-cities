@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {Switch, Route} from "react-router-dom";
 
-import {ActionCreator} from "../../reducer/main/main.js";
+import {ActionCreator as MainActionCreator} from "../../reducer/main/main.js";
 import {getData} from "../../reducer/data/selectors.js";
 import {getCity} from "../../reducer/main/selectors.js";
 import {getCities} from "../../reducer/data/selectors.js";
@@ -12,7 +12,9 @@ import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
 import {getServerResponse} from "../../reducer/user/selectors.js";
 import MainPage from "../main-page/main-page.jsx";
 import SignIn from "../sign-in/sign-in.jsx";
-import {Operation, ActionCreator as UserActionCreator} from "../../reducer/user/user.js";
+import {Operation as UserOperation, ActionCreator as UserActionCreator} from "../../reducer/user/user.js";
+import Favorites from "../favorites/favorites.jsx";
+import PrivateRoute from "../../hocs/private-route/private-route.js";
 
 const App = (props) => {
 
@@ -26,7 +28,7 @@ const App = (props) => {
     userInformation,
     changeAuthorizationStatus} = props;
 
-  return <Switch>
+  return (<Switch>
 
     <Route path="/" exact render={() => <MainPage
       cityOffers={cityOffers}
@@ -38,7 +40,7 @@ const App = (props) => {
     />}
     />
 
-    <Route path="/login" render={() => <SignIn
+    <Route path="/login" exact render={() => <SignIn
       onSignInButtonClick = {sendAuthorizationRequest}
       userInformation={userInformation}
       isAuthorizationRequired={isAuthorizationRequired}
@@ -46,7 +48,10 @@ const App = (props) => {
     />}
     />
 
-  </Switch>;
+    <PrivateRoute auth={isAuthorizationRequired} component={Favorites} optional={{path: `/favorite`}} params={{city}} />
+
+  </Switch>
+  );
 };
 
 App.propTypes = {
@@ -118,10 +123,10 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => ({
   changeCity: (city) => {
-    dispatch(ActionCreator.changeCity(city));
+    dispatch(MainActionCreator.changeCity(city));
   },
   sendAuthorizationRequest: (data) => {
-    dispatch(Operation.requiredAuthorization(data));
+    dispatch(UserOperation.requiredAuthorization(data));
   },
   changeAuthorizationStatus: (status) => {
     dispatch(UserActionCreator.changeAuthorizationStatus(status));

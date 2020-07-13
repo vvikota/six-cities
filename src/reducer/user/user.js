@@ -1,7 +1,7 @@
 import rawDataConversion from "./rawDataConversion.js";
 
 const initialState = {
-  isAuthorizationRequired: false,
+  isAuthorizationRequired: true,
   email: undefined,
   password: undefined,
   serverResponse: `noAuthorized`,
@@ -35,7 +35,7 @@ const Operation = {
     return api.post(`/login`, data)
     .then((response) => {
       dispatch(ActionCreator.requiredAuthorization(response.data));
-      // dispatch(ActionCreator.changeAuthorizationStatus(false));
+      dispatch(ActionCreator.changeAuthorizationStatus(false));
       dispatch(ActionCreator.saveServerResponse(rawDataConversion(response.data)));
       // history.pushState(null, null, `/`);
     })
