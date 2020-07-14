@@ -1,14 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {Link, Router} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 import CityList from "../city-list/city-list.jsx";
 import PlacesList from "../places-list/places-list.jsx";
 import Map from "../map/map.jsx";
 
 import withActiveItem from "../../hocs/with-active-item/with-active-item.js";
-import {createBrowserHistory} from 'history';
-const newHistory = createBrowserHistory();
 
 const CityListWrapped = withActiveItem(CityList);
 const PlacesListWrapped = withActiveItem(PlacesList);
@@ -37,28 +35,26 @@ const MainPage = (props) => {
             <nav className="header__nav">
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
-                  <Router history={newHistory}>
 
-                    {userInformation === `noAuthorized` ?
-                      <Link className="header__nav-link header__nav-link--profile" to="/login">
-                        <div className="header__avatar-wrapper user__avatar-wrapper">
-                        </div>
-                        <span className="header__login">Sign in</span>
-                      </Link> :
-                      <a className="header__nav-link header__nav-link--profile" href="#">
-                        <div
-                          className="header__avatar-wrapper user__avatar-wrapper"
-                          style={{backgroundImage: `url('` + avatarUrl + `')`}}
-                        ></div>
-                        <span className="header__user-name user__name">{email}</span>
-                      </a>
-                    }
-                    <Link className="header__nav-link header__nav-link--profile" to="/favorite">
+                  {userInformation === `noAuthorized` ?
+                    <Link className="header__nav-link header__nav-link--profile" to="/login">
                       <div className="header__avatar-wrapper user__avatar-wrapper">
                       </div>
-                      <span className="header__login">Private</span>
-                    </Link>
-                  </Router>
+                      <span className="header__login">Sign in</span>
+                    </Link> :
+                    <a className="header__nav-link header__nav-link--profile" href="#">
+                      <div
+                        className="header__avatar-wrapper user__avatar-wrapper"
+                        style={{backgroundImage: `url('` + avatarUrl + `')`}}
+                      ></div>
+                      <span className="header__user-name user__name">{email}</span>
+                    </a>
+                  }
+                  <Link className="header__nav-link header__nav-link--profile" to="/favorite">
+                    <div className="header__avatar-wrapper user__avatar-wrapper">
+                    </div>
+                    <span className="header__login">Private</span>
+                  </Link>
 
                 </li>
               </ul>
