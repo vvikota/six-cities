@@ -60,7 +60,7 @@ Array [
             <input
               className="login__input form__input"
               name="email"
-              onChange={[Function]}
+              onChange={[MockFunction]}
               placeholder="Email"
               required=""
               type="email"
@@ -78,16 +78,16 @@ Array [
             <input
               className="login__input form__input"
               name="password"
-              onChange={[Function]}
+              onChange={[MockFunction]}
               placeholder="Password"
               required=""
               type="password"
-              value="pass"
+              value="test"
             />
           </div>
           <button
             className="login__submit form__submit button"
-            onClick={[Function]}
+            onClick={[MockFunction]}
             type="submit"
           >
             <a

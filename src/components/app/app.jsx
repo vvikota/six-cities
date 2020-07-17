@@ -15,6 +15,9 @@ import SignIn from "../sign-in/sign-in.jsx";
 import {Operation as UserOperation, ActionCreator as UserActionCreator} from "../../reducer/user/user.js";
 import Favorites from "../favorites/favorites.jsx";
 import PrivateRoute from "../../hocs/private-route/private-route.js";
+import withAuthorization from "../../hocs/with-authorization/with-authorization.js";
+
+const SignInWrapped = withAuthorization(SignIn);
 
 
 const App = (props) => {
@@ -41,7 +44,7 @@ const App = (props) => {
     />}
     />
 
-    <Route path="/login" exact render={() => <SignIn
+    <Route path="/login" exact render={() => <SignInWrapped
       onSignInButtonClick = {sendAuthorizationRequest}
       userInformation={userInformation}
       isAuthorizationRequired={isAuthorizationRequired}

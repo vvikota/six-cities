@@ -8,8 +8,10 @@ Enzyme.configure({adapter: new Adapter()});
 it(`Click on loginIn button, correctly works`, () => {
   const clickHandler = jest.fn();
   const logInScreen = shallow(<SignIn
-    onSignInButtonClick={clickHandler}
-    changeAuthorizationStatus={jest.fn()}
+    logIn={clickHandler}
+    onChange={jest.fn()}
+    password={`test`}
+    email={`test@test.ru`}
   />);
 
   const logInButton = logInScreen.find(`button`);

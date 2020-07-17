@@ -5,8 +5,10 @@ import {MemoryRouter} from "react-router-dom";
 
 it(`SignIn is correctly renderer`, ()=> {
   const tree = renderer.create(<MemoryRouter><SignIn
-    onSignInButtonClick={jest.fn()}
-    changeAuthorizationStatus={jest.fn()}
+    logIn={jest.fn()}
+    onChange={jest.fn()}
+    password={`test`}
+    email={`test@test.ru`}
   /></MemoryRouter>).toJSON();
 
   expect(tree).toMatchSnapshot();
