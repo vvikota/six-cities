@@ -12,9 +12,9 @@ const CityListWrapped = withActiveItem(CityList);
 const PlacesListWrapped = withActiveItem(PlacesList);
 
 const MainPage = (props) => {
-
-  const {city, changeCity, cityList, cityOffers, userInformation} = props;
-  const {email, avatarUrl} = userInformation;
+  // console.log(props)
+  const {city, changeCity, cityList, cityOffers, userInformation, isAuthorizationRequired} = props;
+  const {email} = userInformation;
   // eslint-disable-next-line no-console
   // console.log(userInformation.avatarUrl);
   // const goToAuthorization = (e) => {
@@ -36,7 +36,7 @@ const MainPage = (props) => {
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
 
-                  {userInformation === `noAuthorized` ?
+                  {isAuthorizationRequired ?
                     <Link className="header__nav-link header__nav-link--profile" to="/login">
                       <div className="header__avatar-wrapper user__avatar-wrapper">
                       </div>
@@ -45,7 +45,7 @@ const MainPage = (props) => {
                     <a className="header__nav-link header__nav-link--profile" href="#">
                       <div
                         className="header__avatar-wrapper user__avatar-wrapper"
-                        style={{backgroundImage: `url('` + avatarUrl + `')`}}
+                        // style={{backgroundImage: `url('` + avatarUrl + `')`}}
                       ></div>
                       <span className="header__user-name user__name">{email}</span>
                     </a>
@@ -168,6 +168,7 @@ MainPage.propTypes = {
     }),
     PropTypes.string.isRequired,
   ]),
+  isAuthorizationRequired: PropTypes.bool.isRequired,
 };
 
 export default MainPage;

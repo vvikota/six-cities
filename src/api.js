@@ -1,7 +1,5 @@
 import axios from "axios";
-// import {ActionCreator} from "./reducer.js";
 
-// export const configureAPI = (dispatch) => {
 export const configureAPI = () => {
   const api = axios.create({
     baseURL: `https://es31-server.appspot.com/six-cities`,
@@ -12,7 +10,9 @@ export const configureAPI = () => {
   const onSuccess = (response) => response;
   const onFail = (err) => {
     if (err.response.status === 403) {
-      history.pushState(null, null, `/login`);
+      // history.pushState(null, null, `/login`);
+      // eslint-disable-next-line no-console
+      console.log(`error 403: required registartion`);
     }
     return err;
   };

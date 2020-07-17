@@ -7,7 +7,7 @@ import {getCities} from "../../reducer/data/selectors.js";
 import {getCityOffers} from "../../reducer/data/selectors.js";
 import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
 import {getServerResponse} from "../../reducer/user/selectors.js";
-import {Operation as UserOperation, ActionCreator as UserActionCreator} from "../../reducer/user/user.js";
+import {Operation as UserOperation} from "../../reducer/user/user.js";
 import {ActionCreator as MainActionCreator} from "../../reducer/main/main.js";
 import {connect} from "react-redux";
 import {compose} from "recompose";
@@ -26,8 +26,9 @@ const withRedux = (Component) => {
         cityOffers,
         isAuthorizationRequired,
         sendAuthorizationRequest,
-        userInformation,
-        changeAuthorizationStatus} = this.props;
+        userInformation
+      } = this.props;
+      // console.log(this.props)
 
       return <Component
         {...this.props}
@@ -38,7 +39,6 @@ const withRedux = (Component) => {
         isAuthorizationRequired={isAuthorizationRequired}
         sendAuthorizationRequest={sendAuthorizationRequest}
         userInformation={userInformation}
-        changeAuthorizationStatus={changeAuthorizationStatus}
       />;
     }
   }
@@ -93,7 +93,6 @@ const withRedux = (Component) => {
       }),
       PropTypes.string.isRequired,
     ]),
-    changeAuthorizationStatus: PropTypes.func.isRequired,
   };
 
   return WithRedux;
@@ -120,9 +119,6 @@ const mapDispatchToProps = (dispatch) => ({
   sendAuthorizationRequest: (data) => {
     dispatch(UserOperation.requiredAuthorization(data));
   },
-  changeAuthorizationStatus: (status) => {
-    dispatch(UserActionCreator.changeAuthorizationStatus(status));
-  }
 });
 
 export {withRedux};

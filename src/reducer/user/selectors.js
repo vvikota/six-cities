@@ -7,5 +7,5 @@ export const getAuthorizationStatus = (state) => {
 };
 
 export const getServerResponse = (state) => {
-  return state[NAME_SPACE].serverResponse;
+  return state[NAME_SPACE].authorizationData;
 };

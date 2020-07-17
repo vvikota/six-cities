@@ -6,26 +6,20 @@ describe(`Reducer work correctly`, () => {
   it(`Reducer without parameters should return state without changes`, () => {
     expect(reducer(undefined, {})).toEqual({
       isAuthorizationRequired: true,
-      email: undefined,
-      password: undefined,
-      serverResponse: `noAuthorized`,
+      authorizationData: `noAuthorized`,
     });
   });
 
   it(`Should save server response`, () => {
     expect(reducer({
       isAuthorizationRequired: true,
-      email: undefined,
-      password: undefined,
-      serverResponse: `noAuthorized`,
+      authorizationData: `noAuthorized`,
     }, {
       type: `SAVE_SERVER_RESPONSE`,
       payload: {id: 1, name: `Vi`, avatar: `url`},
     })).toEqual({
-      isAuthorizationRequired: true,
-      email: undefined,
-      password: undefined,
-      serverResponse: {id: 1, name: `Vi`, avatar: `url`},
+      isAuthorizationRequired: false,
+      authorizationData: {id: 1, name: `Vi`, avatar: `url`},
     });
   });
 
@@ -62,16 +56,8 @@ describe(`Reducer work correctly`, () => {
 
     return authorizationRequest(dispatch, jest.fn(), api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(3);
-        expect(dispatch).toHaveBeenNthCalledWith(1, {
-          type: `REQUIRED_AUTHORIZATION`,
-          payload: rawServerData,
-        });
-        expect(dispatch).toHaveBeenNthCalledWith(2, {
-          type: `CHANGE_AUTHORIZATION_STATUS`,
-          payload: false,
-        });
-        expect(dispatch).toHaveBeenNthCalledWith(3, {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenCalledWith({
           type: `SAVE_SERVER_RESPONSE`,
           payload: goodData,
         });

@@ -20,8 +20,7 @@ const App = (props) => {
     cityOffers,
     isAuthorizationRequired,
     sendAuthorizationRequest,
-    userInformation,
-    changeAuthorizationStatus} = props;
+    userInformation} = props;
 
   return (<Switch>
 
@@ -31,7 +30,7 @@ const App = (props) => {
       changeCity={changeCity}
       cityList={cityList}
       userInformation={userInformation}
-      changeAuthorizationStatus={changeAuthorizationStatus}
+      isAuthorizationRequired={isAuthorizationRequired}
     />}
     />
 
@@ -39,14 +38,13 @@ const App = (props) => {
       onSignInButtonClick = {sendAuthorizationRequest}
       userInformation={userInformation}
       isAuthorizationRequired={isAuthorizationRequired}
-      changeAuthorizationStatus={changeAuthorizationStatus}
     />}
     />
 
     <PrivateRouteForFavorite
       isAuthorizationRequired={isAuthorizationRequired}
       optional={{path: `/favorite`}}
-      params={{city}}
+      params={{city, userInformation}}
     />
 
   </Switch>
@@ -103,7 +101,6 @@ App.propTypes = {
     }),
     PropTypes.string.isRequired,
   ]),
-  changeAuthorizationStatus: PropTypes.func.isRequired,
 };
 
 export default App;
