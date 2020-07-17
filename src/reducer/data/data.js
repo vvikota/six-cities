@@ -4,10 +4,13 @@ const initialState = {
   initialOffers: [],
 };
 
-const ActionCreator = {
+const ActionType = {
+  LOAD_DATA: `LOAD_DATA`,
+};
 
+const ActionCreator = {
   loadData: (offers) => ({
-    type: `LOAD_DATA`,
+    type: ActionType.LOAD_DATA,
     payload: offers,
   }),
 };
@@ -24,7 +27,7 @@ const Operation = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
 
-    case `LOAD_DATA`: return Object.assign({}, state, {
+    case ActionType.LOAD_DATA: return Object.assign({}, state, {
       initialOffers: action.payload,
     });
   }

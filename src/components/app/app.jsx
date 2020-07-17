@@ -5,11 +5,11 @@ import {Switch, Route} from "react-router-dom";
 import MainPage from "../main-page/main-page.jsx";
 import SignIn from "../sign-in/sign-in.jsx";
 import Favorites from "../favorites/favorites.jsx";
-import PrivateRoute from "../../hocs/private-route/private-route.js";
 import withAuthorization from "../../hocs/with-authorization/with-authorization";
+import privateRoute from "../../hocs/private-route/private-route.js";
 
 const SignInWrapped = withAuthorization(SignIn);
-
+const PrivateRouteForFavorite = privateRoute(Favorites);
 
 const App = (props) => {
 
@@ -43,7 +43,11 @@ const App = (props) => {
     />}
     />
 
-    <PrivateRoute auth={isAuthorizationRequired} component={Favorites} optional={{path: `/favorite`}} params={{city}} />
+    <PrivateRouteForFavorite
+      isAuthorizationRequired={isAuthorizationRequired}
+      optional={{path: `/favorite`}}
+      params={{city}}
+    />
 
   </Switch>
   );

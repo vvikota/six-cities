@@ -2,7 +2,7 @@ import React from "react";
 
 const Favorites = (props) => {
   // eslint-disable-next-line no-console
-  console.log(props);
+  // console.log(props);
   return (
     <>
       <header className="header">

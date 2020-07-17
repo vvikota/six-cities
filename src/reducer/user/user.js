@@ -7,24 +7,30 @@ const initialState = {
   serverResponse: `noAuthorized`,
 };
 
+const ActionType = {
+  REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
+  CHANGE_AUTHORIZATION_STATUS: `CHANGE_AUTHORIZATION_STATUS`,
+  SAVE_SERVER_RESPONSE: `SAVE_SERVER_RESPONSE`,
+};
+
 const ActionCreator = {
   requiredAuthorization: (authorizationData) => {
     return {
-      type: `REQUIRED_AUTHORIZATION`,
+      type: ActionType.REQUIRED_AUTHORIZATION,
       payload: authorizationData,
     };
   },
 
   changeAuthorizationStatus: (status) => {
     return {
-      type: `CHANGE_AUTHORIZATION_STATUS`,
+      type: ActionType.CHANGE_AUTHORIZATION_STATUS,
       payload: status,
     };
   },
 
   saveServerResponse: (serverResponse) => {
     return {
-      type: `SAVE_SERVER_RESPONSE`,
+      type: ActionType.SAVE_SERVER_RESPONSE,
       payload: serverResponse,
     };
   }
@@ -49,16 +55,16 @@ const Operation = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
 
-    case `REQUIRED_AUTHORIZATION` : return Object.assign({}, state, {
+    case ActionType.REQUIRED_AUTHORIZATION : return Object.assign({}, state, {
       email: action.payload.email,
       password: action.payload.password,
     });
 
-    case `SAVE_SERVER_RESPONSE` : return Object.assign({}, state, {
+    case ActionType.SAVE_SERVER_RESPONSE : return Object.assign({}, state, {
       serverResponse: action.payload,
     });
 
-    case `CHANGE_AUTHORIZATION_STATUS` : return Object.assign({}, state, {
+    case ActionType.CHANGE_AUTHORIZATION_STATUS : return Object.assign({}, state, {
       isAuthorizationRequired: action.payload,
     });
   }
