@@ -1,21 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {connect} from "react-redux";
 import {Switch, Route} from "react-router-dom";
 
-import {ActionCreator as MainActionCreator} from "../../reducer/main/main.js";
-import {getData} from "../../reducer/data/selectors.js";
-import {getCity} from "../../reducer/main/selectors.js";
-import {getCities} from "../../reducer/data/selectors.js";
-import {getCityOffers} from "../../reducer/data/selectors.js";
-import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
-import {getServerResponse} from "../../reducer/user/selectors.js";
 import MainPage from "../main-page/main-page.jsx";
 import SignIn from "../sign-in/sign-in.jsx";
-import {Operation as UserOperation, ActionCreator as UserActionCreator} from "../../reducer/user/user.js";
 import Favorites from "../favorites/favorites.jsx";
 import PrivateRoute from "../../hocs/private-route/private-route.js";
-import withAuthorization from "../../hocs/with-authorization/with-authorization.js";
+import withAuthorization from "../../hocs/with-authorization/with-authorization";
 
 const SignInWrapped = withAuthorization(SignIn);
 
@@ -111,31 +102,5 @@ App.propTypes = {
   changeAuthorizationStatus: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state, ownProps) => {
-  const currentCity = (getCity(state) === `default` && getData(state)[0]) ?
-    getData(state)[0].city.name :
-    getCity(state);
-  return Object.assign({}, ownProps, {
-    city: currentCity,
-    initialOffers: getData(state),
-    cityList: getCities(state),
-    cityOffers: getCityOffers(state, currentCity),
-    isAuthorizationRequired: getAuthorizationStatus(state),
-    userInformation: getServerResponse(state),
-  });
-};
+export default App;
 
-const mapDispatchToProps = (dispatch) => ({
-  changeCity: (city) => {
-    dispatch(MainActionCreator.changeCity(city));
-  },
-  sendAuthorizationRequest: (data) => {
-    dispatch(UserOperation.requiredAuthorization(data));
-  },
-  changeAuthorizationStatus: (status) => {
-    dispatch(UserActionCreator.changeAuthorizationStatus(status));
-  }
-});
-
-export {App};
-export default connect(mapStateToProps, mapDispatchToProps)(App);

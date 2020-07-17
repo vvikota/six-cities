@@ -7,10 +7,12 @@ import {compose} from "recompose";
 import {BrowserRouter} from "react-router-dom";
 
 import App from "./components/app/app.jsx";
+import withRedux from "./hocs/with-redux/with-redux.js";
 import reducer from "./reducer/index.js";
 import {Operation} from "./reducer/data/data.js";
 import {configureAPI} from "./api";
 
+const ReduxWrapper = withRedux(App);
 
 const init = () => {
   const api = configureAPI();
@@ -27,7 +29,7 @@ const init = () => {
   ReactDOM.render(
       <Provider store={store}>
         <BrowserRouter>
-          <App/>
+          <ReduxWrapper/>
         </BrowserRouter>
       </Provider>,
       document.querySelector(`#root`)
