@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`App is correcctly render 1`] = `
+exports[`MainPage is correctly renderer 1`] = `
 Array [
   <header
     className="header"

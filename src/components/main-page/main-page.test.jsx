@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import App from './app.jsx';
+import MainPage from './main-page.jsx';
 import {MemoryRouter} from "react-router-dom";
 
 const dataMock = [
@@ -106,9 +106,8 @@ const dataMock = [
   }
 ];
 
-it(`App is correcctly render`, ()=> {
-
-  const tree = renderer.create(<MemoryRouter><App
+it(`MainPage is correctly renderer`, ()=> {
+  const tree = renderer.create(<MemoryRouter><MainPage
     cityOffers={dataMock}
     city={`Amstrdam`}
     changeCity={jest.fn()}
@@ -116,6 +115,7 @@ it(`App is correcctly render`, ()=> {
     isAuthorizationRequired={true}
     sendAuthorizationRequest={jest.fn()}
     userInformation={`noAuthorized`}
+    changeAuthorizationStatus={jest.fn()}
   /></MemoryRouter>).toJSON();
 
   expect(tree).toMatchSnapshot();
