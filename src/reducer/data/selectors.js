@@ -23,3 +23,16 @@ export const getCityOffers = createSelector(
       return rezultOne.filter((offer) => offer.city.name === rezultTwo);
     }
 );
+
+export const getCurrentId = (state) => {
+  return state[NAME_SPACE].currentOfferId;
+};
+
+export const getCurrentOffer = createSelector(
+  getData,
+  getCurrentId,
+  (rezultOne, rezultTwo) => {
+    // const preRezult = 
+    return rezultOne.filter((offer) => offer.id === rezultTwo)[0];
+  }
+);

@@ -5,10 +5,13 @@ import {getData} from "../../reducer/data/selectors.js";
 import {getCity} from "../../reducer/main/selectors.js";
 import {getCities} from "../../reducer/data/selectors.js";
 import {getCityOffers} from "../../reducer/data/selectors.js";
+import {getCurrentOffer} from "../../reducer/data/selectors.js";
 import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
 import {getServerResponse} from "../../reducer/user/selectors.js";
+import {getCurrentId} from "../../reducer/data/selectors.js";
 import {Operation as UserOperation} from "../../reducer/user/user.js";
 import {ActionCreator as MainActionCreator} from "../../reducer/main/main.js";
+import {ActionCreator as DataActionCreator} from "../../reducer/data/data.js";
 import {connect} from "react-redux";
 import {compose} from "recompose";
 
@@ -26,7 +29,10 @@ const withRedux = (Component) => {
         cityOffers,
         isAuthorizationRequired,
         sendAuthorizationRequest,
-        userInformation
+        userInformation,
+        setId,
+        currentOfferId,
+        currentOffer
       } = this.props;
       // console.log(this.props)
 
@@ -39,6 +45,9 @@ const withRedux = (Component) => {
         isAuthorizationRequired={isAuthorizationRequired}
         sendAuthorizationRequest={sendAuthorizationRequest}
         userInformation={userInformation}
+        setId={setId}
+        currentOfferId={currentOfferId}
+        currentOffer={currentOffer}
       />;
     }
   }
@@ -109,6 +118,8 @@ const mapStateToProps = (state, ownProps) => {
     cityOffers: getCityOffers(state, currentCity),
     isAuthorizationRequired: getAuthorizationStatus(state),
     userInformation: getServerResponse(state),
+    currentOfferId: getCurrentId(state),
+    currentOffer: getCurrentOffer(state),
   });
 };
 
@@ -118,6 +129,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   sendAuthorizationRequest: (data) => {
     dispatch(UserOperation.requiredAuthorization(data));
+  },
+  setId: (id) => {
+    dispatch(DataActionCreator.changeCurrentId(id));
   },
 });
 

@@ -13,7 +13,15 @@ const PlacesListWrapped = withActiveItem(PlacesList);
 
 const MainPage = (props) => {
   
-  const {city, changeCity, cityList, cityOffers, userInformation, isAuthorizationRequired} = props;
+  const {
+    city,
+    changeCity,
+    cityList,
+    cityOffers,
+    userInformation,
+    isAuthorizationRequired,
+    setId
+  } = props;
   const {email} = userInformation;
   // console.log(cityOffers);
   // eslint-disable-next-line no-console
@@ -25,7 +33,7 @@ const MainPage = (props) => {
 
   return (
     <>
-      <header className="header">
+      {/* <header className="header">
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
@@ -62,7 +70,7 @@ const MainPage = (props) => {
             </nav>
           </div>
         </div>
-      </header>
+      </header> */}
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
 
@@ -101,10 +109,11 @@ const MainPage = (props) => {
 
               <PlacesListWrapped
                 offers={cityOffers}
-                openCard={(offer) => {
-                  // eslint-disable-next-line no-console
-                  console.log(offer);
-                }}
+                // openCard={(offer) => {
+                //   // eslint-disable-next-line no-console
+                //   console.log(offer);
+                // }}
+                setId={setId}
               />
             </section>
             <div className="cities__right-section">

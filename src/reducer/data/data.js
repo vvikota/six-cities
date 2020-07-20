@@ -2,10 +2,12 @@ import rawDataConversion from "../../rawDataConversion.js";
 
 const initialState = {
   initialOffers: [],
+  currentOfferId: ``,
 };
 
 const ActionType = {
   LOAD_DATA: `LOAD_DATA`,
+  CHANGE_ID: `CHANGE_ID`,
 };
 
 const ActionCreator = {
@@ -13,6 +15,11 @@ const ActionCreator = {
     type: ActionType.LOAD_DATA,
     payload: offers,
   }),
+
+  changeCurrentId: (currentId) => ({
+    type: ActionType.CHANGE_ID,
+    payload: currentId,
+  })
 };
 
 const Operation = {
@@ -30,6 +37,10 @@ const reducer = (state = initialState, action) => {
     case ActionType.LOAD_DATA: return Object.assign({}, state, {
       initialOffers: action.payload,
     });
+
+    case ActionType.CHANGE_ID: return Object.assign({}, state, {
+      currentOfferId: action.payload,
+    })
   }
 
   return state;

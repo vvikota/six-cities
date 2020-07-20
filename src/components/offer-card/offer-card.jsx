@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 
 const OfferCard = (props) => {
-  const {offer, openCard, onMouseEnter} = props;
+  const {offer, openCard, onMouseEnter, setId} = props;
   const {isPremium, previewImage, price, description, type, id} = offer;
 
   return (
@@ -43,9 +43,13 @@ const OfferCard = (props) => {
         </div>
         <h2 className="place-card__name">
 
-          <Link className="place-card__name-link" to="/offer/:id" to={`/offer/` + id} onClick={() => {
-            // e.preventDefault();
-              openCard(offer);
+          <Link 
+            className="place-card__name-link"
+            to={`/offer/` + id} 
+            onClick={() => {
+              // e.preventDefault();
+              // console.log(setId(id))
+              setId(id);
             }}>
               {description}
           </Link>
@@ -91,8 +95,24 @@ OfferCard.propTypes = {
     }).isRequired,
     id: PropTypes.number.isRequired,
   }),
-  openCard: PropTypes.func.isRequired,
+  setId: PropTypes.func.isRequired,
   onMouseEnter: PropTypes.func.isRequired,
 };
+
+// const mapStateToProps = (state, ownProps) => {
+//   return Object.assign({}, ownProps, {
+//     id: getCurrentId(state),
+//   })
+// }
+
+// const mapDispatchToProps = (dispatch) => ({
+//   
+// });
+
+// export {OfferCard};
+// export default compose(
+//   connect(mapStateToProps, mapDispatchToProps),
+//   OfferCard
+// );
 
 export default OfferCard;
