@@ -2,7 +2,8 @@ import rawDataConversion from "../../rawDataConversion.js";
 
 const initialState = {
   initialOffers: [],
-  currentOfferId: ``,
+  currentOfferId: `noCurrentOffer`,
+  hotelComments: [],
 };
 
 const ActionType = {
@@ -19,6 +20,11 @@ const ActionCreator = {
   changeCurrentId: (currentId) => ({
     type: ActionType.CHANGE_ID,
     payload: currentId,
+  }),
+
+  loadCommentsData: (serverResponse) => ({
+    type: ActionType.LOAD_COMMENTS_DATA,
+    payload: serverResponse,
   })
 };
 
@@ -28,7 +34,15 @@ const Operation = {
       .then((response) => {
         dispatch(ActionCreator.loadData(rawDataConversion(response.data)));
       });
+  },
+
+  loadCommentsData: (hotelId) => (dispatch, _getState, api) => {
+    return api.get(`/` + hotelId)
+      .then((response) => {
+        dispatch(ActionCreator.loadCommentsData(commentsDataConversion(response.data)));
+      });
   }
+
 };
 
 const reducer = (state = initialState, action) => {

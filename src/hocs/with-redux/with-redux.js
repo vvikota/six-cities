@@ -103,7 +103,9 @@ const withRedux = (Component) => {
       PropTypes.string.isRequired,
     ]),
     setId: PropTypes.func.isRequired,
-    currentOfferId: PropTypes.number.isRequired,
+    currentOfferId: PropTypes.oneOfType([
+      PropTypes.number.isRequired,
+      PropTypes.string.isRequired]),
     currentOffer: PropTypes.shape({
       city: PropTypes.shape({
         name: PropTypes.string.isRequired,
@@ -137,7 +139,7 @@ const withRedux = (Component) => {
         zoom: PropTypes.number.isRequired,
       }).isRequired,
       id: PropTypes.number.isRequired,
-    })
+    }),
   };
 
   return WithRedux;
