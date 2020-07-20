@@ -12,9 +12,10 @@ const CityListWrapped = withActiveItem(CityList);
 const PlacesListWrapped = withActiveItem(PlacesList);
 
 const MainPage = (props) => {
-  // console.log(props)
+  
   const {city, changeCity, cityList, cityOffers, userInformation, isAuthorizationRequired} = props;
   const {email} = userInformation;
+  // console.log(cityOffers);
   // eslint-disable-next-line no-console
   // console.log(userInformation.avatarUrl);
   // const goToAuthorization = (e) => {

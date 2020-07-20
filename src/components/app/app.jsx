@@ -5,6 +5,7 @@ import {Switch, Route} from "react-router-dom";
 import MainPage from "../main-page/main-page.jsx";
 import SignIn from "../sign-in/sign-in.jsx";
 import Favorites from "../favorites/favorites.jsx";
+import DetailedOffer from "../detailed-offer/detailed-offer.jsx"
 import withAuthorization from "../../hocs/with-authorization/with-authorization";
 import privateRoute from "../../hocs/private-route/private-route.js";
 
@@ -38,6 +39,14 @@ const App = (props) => {
       onSignInButtonClick = {sendAuthorizationRequest}
       userInformation={userInformation}
       isAuthorizationRequired={isAuthorizationRequired}
+    />}
+    />
+
+    <Route path="/offer/:id" render={() => <DetailedOffer
+      cityOffers={cityOffers}
+      // onSignInButtonClick = {sendAuthorizationRequest}
+      // userInformation={userInformation}
+      // isAuthorizationRequired={isAuthorizationRequired}
     />}
     />
 
