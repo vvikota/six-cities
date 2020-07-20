@@ -1,4 +1,4 @@
-import rawDataConversion from "../../rawDataConversion.js";
+import rawDataConversion from "./rawDataConversion.js";
 
 const initialState = {
   initialOffers: [],

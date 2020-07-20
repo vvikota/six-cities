@@ -15,44 +15,22 @@ import {ActionCreator as DataActionCreator} from "../../reducer/data/data.js";
 import {connect} from "react-redux";
 import {compose} from "recompose";
 
-const withRedux = (Component) => {
-  class WithRedux extends React.PureComponent {
+const withStart = (Component) => {
+  class WithStart extends React.PureComponent {
     constructor(props) {
       super(props);
     }
 
     render() {
-      const {
-        city,
-        changeCity,
-        cityList,
-        cityOffers,
-        isAuthorizationRequired,
-        sendAuthorizationRequest,
-        userInformation,
-        setId,
-        currentOfferId,
-        currentOffer
-      } = this.props;
-      // console.log(this.props)
-
       return <Component
         {...this.props}
-        city={city}
-        changeCity={changeCity}
-        cityList={cityList}
-        cityOffers={cityOffers}
-        isAuthorizationRequired={isAuthorizationRequired}
-        sendAuthorizationRequest={sendAuthorizationRequest}
-        userInformation={userInformation}
-        setId={setId}
-        currentOfferId={currentOfferId}
-        currentOffer={currentOffer}
       />;
     }
   }
 
-  WithRedux.propTypes = {
+  WithStart.propTypes = {
+    city: PropTypes.string.isRequired,
+    cityList: PropTypes.arrayOf(PropTypes.string.isRequired),
     cityOffers: PropTypes.arrayOf(PropTypes.shape({
       city: PropTypes.shape({
         name: PropTypes.string.isRequired,
@@ -87,22 +65,14 @@ const withRedux = (Component) => {
       }).isRequired,
       id: PropTypes.number.isRequired,
     })),
-    city: PropTypes.string.isRequired,
-    changeCity: PropTypes.func.isRequired,
-    cityList: PropTypes.arrayOf(PropTypes.string.isRequired),
     isAuthorizationRequired: PropTypes.bool.isRequired,
-    sendAuthorizationRequest: PropTypes.func.isRequired,
-    userInformation: PropTypes.oneOfType([
-      PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        email: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        avatarUrl: PropTypes.string.isRequired,
-        isPro: PropTypes.bool.isRequired,
-      }),
-      PropTypes.string.isRequired,
-    ]),
-    setId: PropTypes.func.isRequired,
+    userInformation: PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      email: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      avatarUrl: PropTypes.string.isRequired,
+      isPro: PropTypes.bool.isRequired,
+    }),
     currentOfferId: PropTypes.oneOfType([
       PropTypes.number.isRequired,
       PropTypes.string.isRequired]),
@@ -140,9 +110,13 @@ const withRedux = (Component) => {
       }).isRequired,
       id: PropTypes.number.isRequired,
     }),
+
+    // changeCity: PropTypes.func.isRequired,
+    // sendAuthorizationRequest: PropTypes.func.isRequired,
+    // setId: PropTypes.func.isRequired,
   };
 
-  return WithRedux;
+  return WithStart;
 };
 
 const mapStateToProps = (state, ownProps) => {
@@ -151,7 +125,7 @@ const mapStateToProps = (state, ownProps) => {
     getCity(state);
   return Object.assign({}, ownProps, {
     city: currentCity,
-    initialOffers: getData(state),
+    // initialOffers: getData(state),
     cityList: getCities(state),
     cityOffers: getCityOffers(state, currentCity),
     isAuthorizationRequired: getAuthorizationStatus(state),
@@ -173,10 +147,10 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export {withRedux};
+export {withStart};
 export default compose(
     connect(mapStateToProps, mapDispatchToProps),
-    withRedux
+    withStart
 );
 
 

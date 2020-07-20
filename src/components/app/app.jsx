@@ -108,16 +108,13 @@ App.propTypes = {
   cityList: PropTypes.arrayOf(PropTypes.string.isRequired),
   isAuthorizationRequired: PropTypes.bool.isRequired,
   sendAuthorizationRequest: PropTypes.func.isRequired,
-  userInformation: PropTypes.oneOfType([
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      email: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      avatarUrl: PropTypes.string.isRequired,
-      isPro: PropTypes.bool.isRequired,
-    }),
-    PropTypes.string.isRequired,
-  ]),
+  userInformation: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    email: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    avatarUrl: PropTypes.string.isRequired,
+    isPro: PropTypes.bool.isRequired,
+  }),
   setId: PropTypes.func.isRequired,
   currentOffer: PropTypes.shape({
     city: PropTypes.shape({

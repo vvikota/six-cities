@@ -2,7 +2,13 @@ import rawDataConversion from "./rawDataConversion.js";
 
 const initialState = {
   isAuthorizationRequired: true,
-  authorizationData: `noAuthorized`,
+  authorizationData: {
+    id: 0,
+    email: ``,
+    name: ``,
+    avatarUrl: ``,
+    isPro: false,
+  },
 };
 
 const ActionType = {
@@ -16,15 +22,17 @@ const ActionCreator = {
       type: ActionType.SAVE_SERVER_RESPONSE,
       payload: serverResponse,
     };
-  }
+  },
 };
 
 const Operation = {
   checkAuthorization: () => (dispatch, _getState, api) => {
     return api.get(`/login`)
     .then((response) => {
-      if (response.object.status !== 403) {
-        dispatch(ActionCreator.saveServerResponse(response.data));
+      // eslint-disable-next-line no-console
+      // console.log(response.data);
+      if (response.status !== 403) {
+        dispatch(ActionCreator.saveServerResponse(rawDataConversion(response.data)));
       }
     })
     .catch(() => {
@@ -36,7 +44,11 @@ const Operation = {
   requiredAuthorization: (data) => (dispatch, _getState, api) => {
     return api.post(`/login`, data)
     .then((response) => {
-      dispatch(ActionCreator.saveServerResponse(rawDataConversion(response.data)));
+      // eslint-disable-next-line no-console
+      // console.log(response.status);
+      if (response.status !== 400) {
+        dispatch(ActionCreator.saveServerResponse(rawDataConversion(response.data)));
+      }
     })
     .catch(() => {
       // eslint-disable-next-line no-console

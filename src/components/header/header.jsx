@@ -48,16 +48,13 @@ const Header = (props) => {
   );
 };
 Header.propTypes = {
-  userInformation: PropTypes.oneOfType([
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      email: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      avatarUrl: PropTypes.string.isRequired,
-      isPro: PropTypes.bool.isRequired,
-    }),
-    PropTypes.string.isRequired,
-  ]),
+  userInformation: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    email: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    avatarUrl: PropTypes.string.isRequired,
+    isPro: PropTypes.bool.isRequired,
+  }),
   isAuthorizationRequired: PropTypes.bool.isRequired,
 };
 
