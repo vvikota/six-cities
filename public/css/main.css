@@ -1799,9 +1799,10 @@ img {
 .login::after {
   content: "";
   position: absolute;
+  top: 0;
   width: 12.03vh;
   min-width: 195px;
-  height: 100vh;
+  height: 50vh;
   min-height: 450px;
   bottom: 0;
   right: -2px;

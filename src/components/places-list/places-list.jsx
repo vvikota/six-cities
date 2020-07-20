@@ -4,13 +4,12 @@ import OfferCard from '../offer-card/offer-card.jsx';
 
 const PlacesList = (props) => {
 
-  const {offers, openCard, hoverItem, setId} = props;
+  const {offers, hoverItem, setId} = props;
 
   return <div className="cities__places-list places__list tabs__content">
     {offers.map((offer, index) => <OfferCard
       offer={offer}
       key={index}
-      openCard={openCard}
       onMouseEnter={() => {
         hoverItem(offer);
       }}
@@ -54,8 +53,8 @@ PlacesList.propTypes = {
     }).isRequired,
     id: PropTypes.number.isRequired,
   })),
-  // openCard: PropTypes.func.isRequired,
   hoverItem: PropTypes.func.isRequired,
+  setId: PropTypes.func.isRequired,
 };
 
 export default PlacesList;

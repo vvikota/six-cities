@@ -29,10 +29,9 @@ export const getCurrentId = (state) => {
 };
 
 export const getCurrentOffer = createSelector(
-  getData,
-  getCurrentId,
-  (rezultOne, rezultTwo) => {
-    // const preRezult = 
-    return rezultOne.filter((offer) => offer.id === rezultTwo)[0];
-  }
+    getData,
+    getCurrentId,
+    (rezultOne, rezultTwo) => {
+      return rezultOne.filter((offer) => offer.id === rezultTwo)[0];
+    }
 );

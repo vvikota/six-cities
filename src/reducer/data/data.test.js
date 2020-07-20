@@ -6,17 +6,20 @@ describe(`Reducer work correctly`, () => {
   it(`Reducer without parameters should return state without changes`, () => {
     expect(reducer(undefined, {})).toEqual({
       initialOffers: [],
+      currentOfferId: ``,
     });
   });
 
   it(`Should get data`, () => {
     expect(reducer({
       initialOffers: [],
+      currentOfferId: ``,
     }, {
       type: `LOAD_DATA`,
       payload: [`offer`, `offer`, `offer`],
     })).toEqual({
       initialOffers: [`offer`, `offer`, `offer`],
+      currentOfferId: ``,
     });
   });
 

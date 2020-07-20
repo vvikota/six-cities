@@ -1,6 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import PlacesList from './places-list';
+import {MemoryRouter} from "react-router-dom";
 
 const mock = [
   {
@@ -107,11 +108,12 @@ const mock = [
 
 it(`PlacesList is correcctly render`, ()=> {
 
-  const tree = renderer.create(<PlacesList
-    offers={mock}
-    openCard={jest.fn()}
-    hoverItem={jest.fn()}
-  />).toJSON();
+  const tree = renderer.create(<MemoryRouter>
+    <PlacesList
+      offers={mock}
+      hoverItem={jest.fn()}
+      setId={jest.fn()}
+    /></MemoryRouter>).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

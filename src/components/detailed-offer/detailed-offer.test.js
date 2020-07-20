@@ -1,9 +1,8 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import OfferCard from './offer-card.jsx';
-import {MemoryRouter} from "react-router-dom";
+import DetailedOffer from './detailed-offer.jsx';
 
-const mock = {
+const dataMock = {
   "city": {
     "name": `Amsterdam`,
     "location": {
@@ -38,15 +37,10 @@ const mock = {
   "id": 1
 };
 
-it(`OfferCard is correcctly render`, ()=> {
-
-  const tree = renderer.create(<MemoryRouter>
-    <OfferCard
-      offer={mock}
-      openCard={jest.fn()}
-      onMouseEnter={jest.fn()}
-      setId={jest.fn()}
-    /></MemoryRouter>).toJSON();
+it(`DetailedOffer is correctly renderer`, ()=> {
+  const tree = renderer.create(<DetailedOffer
+    currentOffer={dataMock}
+  />).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

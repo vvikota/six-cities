@@ -116,6 +116,7 @@ it(`MainPage is correctly renderer`, ()=> {
     sendAuthorizationRequest={jest.fn()}
     userInformation={`noAuthorized`}
     changeAuthorizationStatus={jest.fn()}
+    setId={jest.fn()}
   /></MemoryRouter>).toJSON();
 
   expect(tree).toMatchSnapshot();

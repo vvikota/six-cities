@@ -40,7 +40,7 @@ const reducer = (state = initialState, action) => {
 
     case ActionType.CHANGE_ID: return Object.assign({}, state, {
       currentOfferId: action.payload,
-    })
+    });
   }
 
   return state;

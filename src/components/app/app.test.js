@@ -116,6 +116,7 @@ it(`App is correcctly render`, ()=> {
     isAuthorizationRequired={true}
     sendAuthorizationRequest={jest.fn()}
     userInformation={`noAuthorized`}
+    setId={jest.fn()}
   /></MemoryRouter>).toJSON();
 
   expect(tree).toMatchSnapshot();

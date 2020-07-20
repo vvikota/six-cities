@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 
 const OfferCard = (props) => {
-  const {offer, openCard, onMouseEnter, setId} = props;
+  const {offer, onMouseEnter, setId} = props;
   const {isPremium, previewImage, price, description, type, id} = offer;
 
   return (
@@ -15,10 +15,11 @@ const OfferCard = (props) => {
       </div> : null}
 
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href="#" className="image-link" onClick={(e) => {
-          e.preventDefault();
-          openCard(offer);
-        }}>
+        <a href="#"
+          className="image-link"
+          onClick={() => {
+            setId(id);
+          }}>
           <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image" />
         </a>
       </div>
@@ -43,15 +44,13 @@ const OfferCard = (props) => {
         </div>
         <h2 className="place-card__name">
 
-          <Link 
+          <Link
             className="place-card__name-link"
-            to={`/offer/` + id} 
+            to={`/offer/` + id}
             onClick={() => {
-              // e.preventDefault();
-              // console.log(setId(id))
               setId(id);
             }}>
-              {description}
+            {description}
           </Link>
         </h2>
         <p className="place-card__type">{type}</p>
@@ -98,21 +97,5 @@ OfferCard.propTypes = {
   setId: PropTypes.func.isRequired,
   onMouseEnter: PropTypes.func.isRequired,
 };
-
-// const mapStateToProps = (state, ownProps) => {
-//   return Object.assign({}, ownProps, {
-//     id: getCurrentId(state),
-//   })
-// }
-
-// const mapDispatchToProps = (dispatch) => ({
-//   
-// });
-
-// export {OfferCard};
-// export default compose(
-//   connect(mapStateToProps, mapDispatchToProps),
-//   OfferCard
-// );
 
 export default OfferCard;

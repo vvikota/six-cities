@@ -18,44 +18,20 @@ const DetailedOffer = (props) => {
     images,
     rating
   } = currentOffer;
-  console.log(currentOffer);
+  // console.log(currentOffer);
 
   return (
     <>
-     <header className="header">
-      <div className="container">
-        <div className="header__wrapper">
-          <div className="header__left">
-            <a className="header__logo-link" href="main.html">
-              <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
-            </a>
-          </div>
-          <nav className="header__nav">
-            <ul className="header__nav-list">
-              <li className="header__nav-item user">
-                <a className="header__nav-link header__nav-link--profile" href="#">
-                  <div className="header__avatar-wrapper user__avatar-wrapper">
-                  </div>
-                  <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                </a>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </div>
-    </header>
-
     <main className="page__main page__main--property">
       <section className="property">
         <div className="property__gallery-container container">
           <div className="property__gallery">
 
-            {images.map((image, index) => 
+            {images.map((image, index) =>
               <div className="property__image-wrapper" key={index} >
                 <img className="property__image" src={image} alt="Photo studio"/>
               </div>
-            )}  
-
+            )}
 
           </div>
         </div>
@@ -82,7 +58,7 @@ const DetailedOffer = (props) => {
                 <span style={{width: (rating * 20) + `%`}}></span>
                 <span className="visually-hidden">Rating</span>
               </div>
-            <span className="property__rating-value rating__value">{rating}</span>
+              <span className="property__rating-value rating__value">{rating}</span>
             </div>
             <ul className="property__features">
               <li className="property__feature property__feature--entire">
@@ -102,7 +78,7 @@ const DetailedOffer = (props) => {
             <div className="property__inside">
               <h2 className="property__inside-title">What&apos;s inside</h2>
               <ul className="property__inside-list">
-                {goods.map((good, index) => 
+                {goods.map((good, index) =>
                   <li className="property__inside-item" key={index}>
                     {good}
                   </li>
@@ -313,7 +289,40 @@ const DetailedOffer = (props) => {
 };
 
 DetailedOffer.propTypes = {
-  
+  currentOffer: PropTypes.shape({
+    city: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      location: PropTypes.shape({
+        latitude: PropTypes.number.isRequired,
+        longitude: PropTypes.number.isRequired,
+        zoom: PropTypes.number.isRequired,
+      }).isRequired,
+    }).isRequired,
+    previewImage: PropTypes.string.isRequired,
+    images: PropTypes.arrayOf(PropTypes.string.isRequired),
+    title: PropTypes.string.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+    isPremium: PropTypes.bool.isRequired,
+    rating: PropTypes.number.isRequired,
+    type: PropTypes.string.isRequired,
+    bedrooms: PropTypes.number.isRequired,
+    maxAdults: PropTypes.number.isRequired,
+    price: PropTypes.number.isRequired,
+    goods: PropTypes.arrayOf(PropTypes.string.isRequired),
+    host: PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      isPro: PropTypes.bool.isRequired,
+      avatarUrl: PropTypes.string.isRequired,
+    }).isRequired,
+    description: PropTypes.string.isRequired,
+    location: PropTypes.shape({
+      latitude: PropTypes.number.isRequired,
+      longitude: PropTypes.number.isRequired,
+      zoom: PropTypes.number.isRequired,
+    }).isRequired,
+    id: PropTypes.number.isRequired,
+  })
 };
 
 export default DetailedOffer;
