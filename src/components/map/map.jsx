@@ -64,7 +64,7 @@ class Map extends React.PureComponent {
   }
 
   render() {
-    return (<div id="map" style={{height: `90vh`}}></div>);
+    return (<div id="map" style={{height: `50vh`}}></div>);
   }
 }
 

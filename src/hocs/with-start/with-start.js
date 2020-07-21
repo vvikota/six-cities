@@ -6,12 +6,14 @@ import {getCity} from "../../reducer/main/selectors.js";
 import {getCities} from "../../reducer/data/selectors.js";
 import {getCityOffers} from "../../reducer/data/selectors.js";
 import {getCurrentOffer} from "../../reducer/data/selectors.js";
+import {getNearOffers} from "../../reducer/data/selectors.js";
+import {getComments} from "../../reducer/data/selectors.js";
 import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
 import {getServerResponse} from "../../reducer/user/selectors.js";
 import {getCurrentId} from "../../reducer/data/selectors.js";
-import {Operation as UserOperation} from "../../reducer/user/user.js";
 import {ActionCreator as MainActionCreator} from "../../reducer/main/main.js";
-import {ActionCreator as DataActionCreator} from "../../reducer/data/data.js";
+import {Operation as UserOperation} from "../../reducer/user/user.js";
+import {Operation as DataOperation} from "../../reducer/data/data.js";
 import {connect} from "react-redux";
 import {compose} from "recompose";
 
@@ -125,13 +127,14 @@ const mapStateToProps = (state, ownProps) => {
     getCity(state);
   return Object.assign({}, ownProps, {
     city: currentCity,
-    // initialOffers: getData(state),
     cityList: getCities(state),
     cityOffers: getCityOffers(state, currentCity),
     isAuthorizationRequired: getAuthorizationStatus(state),
     userInformation: getServerResponse(state),
     currentOfferId: getCurrentId(state),
     currentOffer: getCurrentOffer(state),
+    hotelComments: getComments(state),
+    nearOffers: getNearOffers(state),
   });
 };
 
@@ -142,8 +145,8 @@ const mapDispatchToProps = (dispatch) => ({
   sendAuthorizationRequest: (data) => {
     dispatch(UserOperation.requiredAuthorization(data));
   },
-  setId: (id) => {
-    dispatch(DataActionCreator.changeCurrentId(id));
+  openDetailOffer: (id) => {
+    dispatch(DataOperation.openDetailOffer(id));
   },
 });
 

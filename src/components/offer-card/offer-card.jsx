@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 
 const OfferCard = (props) => {
-  const {offer, onMouseEnter, setId} = props;
+  const {offer, onMouseEnter, openDetailOffer} = props;
   const {isPremium, previewImage, price, description, type, id} = offer;
 
   return (
@@ -18,7 +18,7 @@ const OfferCard = (props) => {
         <a href="#"
           className="image-link"
           onClick={() => {
-            setId(id);
+            openDetailOffer(id);
           }}>
           <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image" />
         </a>
@@ -48,7 +48,9 @@ const OfferCard = (props) => {
             className="place-card__name-link"
             to={`/offer/` + id}
             onClick={() => {
-              setId(id);
+              // eslint-disable-next-line no-console
+              // console.log(id);
+              openDetailOffer(id);
             }}>
             {description}
           </Link>
@@ -94,7 +96,7 @@ OfferCard.propTypes = {
     }).isRequired,
     id: PropTypes.number.isRequired,
   }),
-  setId: PropTypes.func.isRequired,
+  openDetailOffer: PropTypes.func.isRequired,
   onMouseEnter: PropTypes.func.isRequired,
 };
 

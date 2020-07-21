@@ -17,7 +17,7 @@ const MainPage = (props) => {
     changeCity,
     cityList,
     cityOffers,
-    setId,
+    openDetailOffer,
   } = props;
   // console.log(props);
 
@@ -65,7 +65,7 @@ const MainPage = (props) => {
                 //   // eslint-disable-next-line no-console
                 //   console.log(offer);
                 // }}
-                setId={setId}
+                openDetailOffer={openDetailOffer}
               />
             </section>
             <div className="cities__right-section">
@@ -131,7 +131,7 @@ MainPage.propTypes = {
     PropTypes.string.isRequired,
   ]),
   isAuthorizationRequired: PropTypes.bool.isRequired,
-  setId: PropTypes.func.isRequired,
+  openDetailOffer: PropTypes.func.isRequired,
 };
 
 export default MainPage;

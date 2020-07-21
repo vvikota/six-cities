@@ -23,9 +23,11 @@ const App = (props) => {
     isAuthorizationRequired,
     sendAuthorizationRequest,
     userInformation,
-    setId,
-    currentOffer
+    openDetailOffer,
+    currentOffer,
+    hotelComments
   } = props;
+  console.log(props.nearOffers)
 
   return (
     <>
@@ -42,7 +44,7 @@ const App = (props) => {
           cityList={cityList}
           userInformation={userInformation}
           isAuthorizationRequired={isAuthorizationRequired}
-          setId={setId}
+          openDetailOffer={openDetailOffer}
         />}
         />
 
@@ -55,6 +57,8 @@ const App = (props) => {
 
         <Route path="/offer/:id" render={() => <DetailedOffer
           currentOffer={currentOffer}
+          hotelComments={hotelComments}
+          cityOffers={cityOffers}
         />}
         />
 
@@ -115,7 +119,7 @@ App.propTypes = {
     avatarUrl: PropTypes.string.isRequired,
     isPro: PropTypes.bool.isRequired,
   }),
-  setId: PropTypes.func.isRequired,
+  openDetailOffer: PropTypes.func.isRequired,
   currentOffer: PropTypes.shape({
     city: PropTypes.shape({
       name: PropTypes.string.isRequired,
@@ -149,7 +153,19 @@ App.propTypes = {
       zoom: PropTypes.number.isRequired,
     }).isRequired,
     id: PropTypes.number.isRequired,
-  })
+  }),
+  hotelComments: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    user: PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      isPro: PropTypes.bool.isRequired,
+      name: PropTypes.string.isRequired,
+      avatarUrl: PropTypes.string.isRequired,
+    }),
+    rating: PropTypes.number.isRequired,
+    comment: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+  }))
 };
 
 export default App;

@@ -2,11 +2,15 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import ListOfReviews from "../list-of-reviews/list-of-reviews.jsx";
+import Map from "../map/map.jsx";
 
 const DetailedOffer = (props) => {
   // eslint-disable-next-line no-console
   // console.log(props);
-  const {currentOffer} = props;
+  const {
+    currentOffer,
+    hotelComments,
+    cityOffers} = props;
   const {
     isPremium,
     title,
@@ -18,9 +22,9 @@ const DetailedOffer = (props) => {
     host,
     description,
     images,
-    rating
+    rating,
   } = currentOffer;
-  // console.log(currentOffer);
+  // console.log(cityOffers);
 
   return (
     <>
@@ -91,7 +95,14 @@ const DetailedOffer = (props) => {
               <h2 className="property__host-title">Meet the host</h2>
               <div className="property__host-user user">
                 <div className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">
-                  <img className="property__avatar user__avatar" src="img/avatar-angelina.jpg" width="74" height="74" alt="Host avatar"/>
+                  <img
+                    className="property__avatar user__avatar"
+                    src="img/avatar-angelina.jpg"
+                    // src={host.avatarUrl}
+                    // style={{backgroundImage: `url('` + avatarUrl + `')`}}
+                    width="74" height="74"
+                    alt="Host avatar"
+                  />
                 </div>
                 <span className="property__user-name">
                   {host.name}
@@ -110,6 +121,7 @@ const DetailedOffer = (props) => {
            
               <ListOfReviews
                 currentOffer={currentOffer}
+                hotelComments={hotelComments}
               />
 
               <form className="reviews__form form" action="#" method="post">
@@ -161,7 +173,10 @@ const DetailedOffer = (props) => {
             </section>
           </div>
         </div>
-        <section className="property__map map"></section>
+        {/* <section className="property__map map"></section> */}
+        <Map
+          offers={cityOffers}
+        />
       </section>
       <div className="container">
         <section className="near-places places">
@@ -304,7 +319,19 @@ DetailedOffer.propTypes = {
       zoom: PropTypes.number.isRequired,
     }).isRequired,
     id: PropTypes.number.isRequired,
-  })
+  }),
+  hotelComments: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    user: PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      isPro: PropTypes.bool.isRequired,
+      name: PropTypes.string.isRequired,
+      avatarUrl: PropTypes.string.isRequired,
+    }),
+    rating: PropTypes.number.isRequired,
+    comment: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+  }))
 };
 
 export default DetailedOffer;
