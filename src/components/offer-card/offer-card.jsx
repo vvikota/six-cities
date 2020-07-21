@@ -1,10 +1,10 @@
-
 import React from "react";
 import PropTypes from "prop-types";
+import {Link} from "react-router-dom";
 
 const OfferCard = (props) => {
   const {offer, openCard, onMouseEnter} = props;
-  const {isPremium, previewImage, price, description, type} = offer;
+  const {isPremium, previewImage, price, description, type, id} = offer;
 
   return (
     <article className="cities__place-card place-card" onMouseEnter={onMouseEnter}>
@@ -41,10 +41,14 @@ const OfferCard = (props) => {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a className="place-card__name-link" href="#" onClick={(e) => {
-            e.preventDefault();
-            openCard(offer);
-          }}>{description}</a>
+          <Link className="place-card__name-link"
+            to={`offer/` + id }
+            href="#" onClick={() => {
+              // e.preventDefault();
+              openCard(offer);
+            }}>
+            {description}
+          </Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>

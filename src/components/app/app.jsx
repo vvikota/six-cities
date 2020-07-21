@@ -7,6 +7,7 @@ import SignIn from "../sign-in/sign-in.jsx";
 import Favorites from "../favorites/favorites.jsx";
 import withAuthorization from "../../hocs/with-authorization/with-authorization";
 import privateRoute from "../../hocs/private-route/private-route.js";
+import DetailedOffer from "../detailed-offer/detailed-offer.jsx"
 
 const SignInWrapped = withAuthorization(SignIn);
 const PrivateRouteForFavorite = privateRoute(Favorites);
@@ -40,6 +41,8 @@ const App = (props) => {
       isAuthorizationRequired={isAuthorizationRequired}
     />}
     />
+
+    <Route path="/offer/:id" render={() => <DetailedOffer/>}/>
 
     <PrivateRouteForFavorite
       isAuthorizationRequired={isAuthorizationRequired}
