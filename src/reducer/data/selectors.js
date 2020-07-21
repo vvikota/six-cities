@@ -41,26 +41,25 @@ export const getCurrentOffer = createSelector(
 );
 
 export const getNearOffers = createSelector(
-    getData,
-    currentCity,
+    getCityOffers,
     getCurrentOffer,
-    // eslint-disable-next-line consistent-return
-    (rezultOne, rezultTwo, rezultThree) => {
+    (rezultOne, rezultTwo) => {
       if (rezultTwo !== undefined) {
-        const currentLatitude = rezultTwo.location.latitude;
-        const currentLongitude = rezultTwo.location.longitude;
-        // eslint-disable-next-line no-console
-        // rezultOne.forEach((offer) => {
-        //   return offer;
-        //   // Math.sqrt(Math.pow((currentLatitude - offer.location.latitude), 2) + Math.pow((currentLongitude - offer.location.longitude), 2));
-        //   // eslint-disable-next-line no-console
-        //   // console.log(distance);
-        // });
-        // return currentLatitude;
-        return rezultOne;
+        return rezultOne.sort((a, b) => {
+          return distanceBettweenPoints(a, rezultTwo)
+                - distanceBettweenPoints(b, rezultTwo);
+        }).slice(1, 4);
+      } else {
+        return false;
       }
     }
 );
+
+function distanceBettweenPoints(point1, point2) {
+  return Math.sqrt(
+      Math.pow((point1.location.latitude - point2.location.latitude), 2)
+    + Math.pow((point1.location.latitude - point2.location.longitude), 2));
+}
 
 // d = Math.sqrt(Math.pow((x2 - x1), 2) + Math.pow((y2 - y1), 2))
 // const distance = Math.sqrt(Math.pow((50.945361 - 52.36854), 2) + Math.pow((6.935974 - 4.887976), 2));

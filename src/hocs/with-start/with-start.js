@@ -134,7 +134,7 @@ const mapStateToProps = (state, ownProps) => {
     currentOfferId: getCurrentId(state),
     currentOffer: getCurrentOffer(state),
     hotelComments: getComments(state),
-    nearOffers: getNearOffers(state),
+    nearOffers: getNearOffers(state, currentCity),
   });
 };
 
