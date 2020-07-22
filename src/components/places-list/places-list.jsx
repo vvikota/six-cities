@@ -4,18 +4,32 @@ import OfferCard from '../offer-card/offer-card.jsx';
 
 const PlacesList = (props) => {
 
-  const {offers, hoverItem, openDetailOffer} = props;
+  const {
+    offers,
+    hoverItem,
+    openDetailOffer,
+    detailedOffer,
+  } = props;
+  // console.log(props);
 
-  return <div className="cities__places-list places__list tabs__content">
-    {offers.map((offer, index) => <OfferCard
-      offer={offer}
-      key={index}
-      onMouseEnter={() => {
-        hoverItem(offer);
-      }}
-      openDetailOffer={openDetailOffer}
-    />)}
-  </div>;
+  return (
+    <>
+    <div className={detailedOffer ?
+      `near-places__list places__list` :
+      `cities__places-list places__list tabs__content`
+    }>
+      {offers.map((offer, index) => <OfferCard
+        offer={offer}
+        key={index}
+        onMouseEnter={() => {
+          hoverItem(offer);
+        }}
+        openDetailOffer={openDetailOffer}
+        detailedOffer={detailedOffer}
+      />)}
+    </div>
+  </>
+  );
 };
 
 PlacesList.propTypes = {
@@ -53,8 +67,12 @@ PlacesList.propTypes = {
     }).isRequired,
     id: PropTypes.number.isRequired,
   })),
-  hoverItem: PropTypes.func.isRequired,
+  hoverItem: PropTypes.oneOfType([
+    PropTypes.func.isRequired,
+    PropTypes.bool.isRequired,
+  ]),
   openDetailOffer: PropTypes.func.isRequired,
+  detailedOffer: PropTypes.bool.isRequired,
 };
 
 export default PlacesList;

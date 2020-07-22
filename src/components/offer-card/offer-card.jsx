@@ -4,17 +4,41 @@ import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 
 const OfferCard = (props) => {
-  const {offer, onMouseEnter, openDetailOffer} = props;
-  const {isPremium, previewImage, price, description, type, id} = offer;
+  const {
+    offer,
+    onMouseEnter,
+    openDetailOffer,
+    detailedOffer
+  } = props;
+
+  const {
+    isPremium,
+    previewImage,
+    price,
+    description,
+    type,
+    id,
+    title,
+    rating,
+  } = offer;
 
   return (
-    <article className="cities__place-card place-card" onMouseEnter={onMouseEnter}>
+    <article
+      className={detailedOffer ?
+        `near-places__card place-card` :
+        `cities__place-card place-card`
+      }
+      onMouseEnter={onMouseEnter}>
 
       {isPremium ? <div className="place-card__mark">
         <span>Premium</span>
       </div> : null}
 
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div
+        className={detailedOffer ?
+          `near-places__image-wrapper place-card__image-wrapper` :
+          `cities__image-wrapper place-card__image-wrapper`
+        }>
         <a href="#"
           className="image-link"
           onClick={() => {
@@ -38,7 +62,7 @@ const OfferCard = (props) => {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span></span>
+            <span style={{width: (rating * 20) + `%`}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
@@ -52,7 +76,7 @@ const OfferCard = (props) => {
               // console.log(id);
               openDetailOffer(id);
             }}>
-            {description}
+            {detailedOffer ? title : description}
           </Link>
         </h2>
         <p className="place-card__type">{type}</p>
@@ -98,6 +122,7 @@ OfferCard.propTypes = {
   }),
   openDetailOffer: PropTypes.func.isRequired,
   onMouseEnter: PropTypes.func.isRequired,
+  detailedOffer: PropTypes.bool.isRequired,
 };
 
 export default OfferCard;

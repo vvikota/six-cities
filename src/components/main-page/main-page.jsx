@@ -65,6 +65,7 @@ const MainPage = (props) => {
                 //   // eslint-disable-next-line no-console
                 //   console.log(offer);
                 // }}
+                detailedOffer={false}
                 openDetailOffer={openDetailOffer}
               />
             </section>

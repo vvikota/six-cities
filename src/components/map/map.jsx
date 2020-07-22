@@ -64,6 +64,7 @@ class Map extends React.PureComponent {
   }
 
   render() {
+    // console.log(this.props.offers);
     return (<div id="map" style={{height: `50vh`}}></div>);
   }
 }

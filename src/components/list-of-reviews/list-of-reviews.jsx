@@ -7,7 +7,9 @@ const ListOfReviews = (props) => {
   // eslint-disable-next-line no-console
   // console.log(props);
 
-  const {hotelComments} = props;
+  const {
+    hotelComments,
+  } = props;
   // console.log(hotelComments);
 
   return (
