@@ -49,20 +49,6 @@ Array [
                   Sign in
                 </span>
               </a>
-              <a
-                className="header__nav-link header__nav-link--profile"
-                href="/favorite"
-                onClick={[Function]}
-              >
-                <div
-                  className="header__avatar-wrapper user__avatar-wrapper"
-                />
-                <span
-                  className="header__login"
-                >
-                  Private
-                </span>
-              </a>
             </li>
           </ul>
         </nav>
@@ -232,7 +218,13 @@ Array [
                   <div
                     className="place-card__stars rating__stars"
                   >
-                    <span />
+                    <span
+                      style={
+                        Object {
+                          "width": "64%",
+                        }
+                      }
+                    />
                     <span
                       className="visually-hidden"
                     >
@@ -325,7 +317,13 @@ Array [
                   <div
                     className="place-card__stars rating__stars"
                   >
-                    <span />
+                    <span
+                      style={
+                        Object {
+                          "width": "64%",
+                        }
+                      }
+                    />
                     <span
                       className="visually-hidden"
                     >
@@ -418,7 +416,13 @@ Array [
                   <div
                     className="place-card__stars rating__stars"
                   >
-                    <span />
+                    <span
+                      style={
+                        Object {
+                          "width": "64%",
+                        }
+                      }
+                    />
                     <span
                       className="visually-hidden"
                     >
@@ -454,11 +458,6 @@ Array [
           >
             <div
               id="map"
-              style={
-                Object {
-                  "height": "90vh",
-                }
-              }
             />
           </section>
         </div>

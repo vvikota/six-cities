@@ -48,20 +48,6 @@ exports[`Header is correctly renderer 1`] = `
                 Sign in
               </span>
             </a>
-            <a
-              className="header__nav-link header__nav-link--profile"
-              href="/favorite"
-              onClick={[Function]}
-            >
-              <div
-                className="header__avatar-wrapper user__avatar-wrapper"
-              />
-              <span
-                className="header__login"
-              >
-                Private
-              </span>
-            </a>
           </li>
         </ul>
       </nav>

@@ -112,11 +112,9 @@ it(`MainPage is correctly renderer`, ()=> {
     city={`Amstrdam`}
     changeCity={jest.fn()}
     cityList={[]}
-    isAuthorizationRequired={true}
-    sendAuthorizationRequest={jest.fn()}
     userInformation={`noAuthorized`}
-    changeAuthorizationStatus={jest.fn()}
-    setId={jest.fn()}
+    isAuthorizationRequired={true}
+    openDetailOffer={jest.fn()}
   /></MemoryRouter>).toJSON();
 
   expect(tree).toMatchSnapshot();

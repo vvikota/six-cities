@@ -43,9 +43,9 @@ it(`OfferCard is correcctly render`, ()=> {
   const tree = renderer.create(<MemoryRouter>
     <OfferCard
       offer={mock}
-      openCard={jest.fn()}
       onMouseEnter={jest.fn()}
-      setId={jest.fn()}
+      openDetailOffer={jest.fn()}
+      detailedOffer={true}
     /></MemoryRouter>).toJSON();
 
   expect(tree).toMatchSnapshot();

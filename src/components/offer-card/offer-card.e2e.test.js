@@ -47,7 +47,8 @@ describe(`OfferCard`, () => {
     const app = shallow(<OfferCard
       offer={mock}
       onMouseEnter={jest.fn()}
-      setId={clickHandler}
+      openDetailOffer={clickHandler}
+      detailedOffer={true}
     />);
 
     const imageLink = app.find(`.image-link`);
@@ -61,7 +62,8 @@ describe(`OfferCard`, () => {
     const app = shallow(<OfferCard
       offer={mock}
       onMouseEnter={jest.fn()}
-      setId={clickHandler}
+      openDetailOffer={clickHandler}
+      detailedOffer={true}
     />);
 
     const titleLink = app.find(`.place-card__name-link`);

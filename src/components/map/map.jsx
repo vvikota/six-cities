@@ -13,11 +13,13 @@ class Map extends React.PureComponent {
 
   componentDidMount() {
     const {offers, currentOffer} = this.props;
+    // console.log(`did mount`)
+    // console.log(offers)
 
     let city = [52.38333, 4.9];
 
     if (currentOffer) {
-      city = [currentOffer.location.latitude, currentOffer.location.longitude]
+      city = [currentOffer.location.latitude, currentOffer.location.longitude];
     }
 
     this._icon = leaflet.icon({

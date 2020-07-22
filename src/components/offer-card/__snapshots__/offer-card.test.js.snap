@@ -2,11 +2,11 @@
 
 exports[`OfferCard is correcctly render 1`] = `
 <article
-  className="cities__place-card place-card"
+  className="near-places__card place-card"
   onMouseEnter={[MockFunction]}
 >
   <div
-    className="cities__image-wrapper place-card__image-wrapper"
+    className="near-places__image-wrapper place-card__image-wrapper"
   >
     <a
       className="image-link"
@@ -68,7 +68,13 @@ exports[`OfferCard is correcctly render 1`] = `
       <div
         className="place-card__stars rating__stars"
       >
-        <span />
+        <span
+          style={
+            Object {
+              "width": "64%",
+            }
+          }
+        />
         <span
           className="visually-hidden"
         >
@@ -84,7 +90,7 @@ exports[`OfferCard is correcctly render 1`] = `
         href="/offer/1"
         onClick={[Function]}
       >
-        Peaceful studio in the most wanted area in town. Quiet house Near of everything. Completely renovated. Lovely neighbourhood, lot of trendy shops, restaurants and bars in a walking distance.
+        Amazing and Extremely Central Flat
       </a>
     </h2>
     <p

@@ -6,7 +6,13 @@ describe(`Reducer work correctly`, () => {
   it(`Reducer without parameters should return state without changes`, () => {
     expect(reducer(undefined, {})).toEqual({
       isAuthorizationRequired: true,
-      authorizationData: `noAuthorized`,
+      authorizationData: {
+        id: 0,
+        email: ``,
+        name: ``,
+        avatarUrl: ``,
+        isPro: false,
+      },
     });
   });
 
@@ -16,10 +22,22 @@ describe(`Reducer work correctly`, () => {
       authorizationData: `noAuthorized`,
     }, {
       type: `SAVE_SERVER_RESPONSE`,
-      payload: {id: 1, name: `Vi`, avatar: `url`},
+      payload: {
+        id: 10,
+        email: `email`,
+        name: `Alena`,
+        avatarUrl: `url`,
+        isPro: true,
+      },
     })).toEqual({
       isAuthorizationRequired: false,
-      authorizationData: {id: 1, name: `Vi`, avatar: `url`},
+      authorizationData: {
+        id: 10,
+        email: `email`,
+        name: `Alena`,
+        avatarUrl: `url`,
+        isPro: true,
+      },
     });
   });
 

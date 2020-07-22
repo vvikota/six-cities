@@ -6,20 +6,56 @@ describe(`Reducer work correctly`, () => {
   it(`Reducer without parameters should return state without changes`, () => {
     expect(reducer(undefined, {})).toEqual({
       initialOffers: [],
-      currentOfferId: ``,
+      currentOfferId: `noCurrentOffer`,
+      hotelComments: [{
+        id: 0,
+        user: {
+          id: 0,
+          isPro: false,
+          name: `string`,
+          avatarUrl: `string`,
+        },
+        rating: 0,
+        comment: `string`,
+        date: `string`,
+      }],
     });
   });
 
   it(`Should get data`, () => {
     expect(reducer({
       initialOffers: [],
-      currentOfferId: ``,
+      currentOfferId: `noCurrentOffer`,
+      hotelComments: [{
+        id: 0,
+        user: {
+          id: 0,
+          isPro: false,
+          name: `string`,
+          avatarUrl: `string`,
+        },
+        rating: 0,
+        comment: `string`,
+        date: `string`,
+      }],
     }, {
       type: `LOAD_DATA`,
       payload: [`offer`, `offer`, `offer`],
     })).toEqual({
       initialOffers: [`offer`, `offer`, `offer`],
-      currentOfferId: ``,
+      currentOfferId: `noCurrentOffer`,
+      hotelComments: [{
+        id: 0,
+        user: {
+          id: 0,
+          isPro: false,
+          name: `string`,
+          avatarUrl: `string`,
+        },
+        rating: 0,
+        comment: `string`,
+        date: `string`,
+      }],
     });
   });
 
