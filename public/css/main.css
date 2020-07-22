@@ -655,9 +655,17 @@ img {
   background-position: -170px center
 }
 
-#map{
-  height: 100%;
+.page__main .cities__places-container .cities__map #map{
+  height: 80vh;
 }
+
+.page__main .property #map{
+  height: 40vh;
+}
+
+/* #map{
+  height: 100%;
+} */
 
 @media (-webkit-min-device-pixel-ratio:1.5),
 (min-resolution:144dpi),

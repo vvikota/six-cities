@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 const Header = (props) => {
 
   const {userInformation, isAuthorizationRequired} = props;
+  // console.log(userInformation)
 
   return (
     <header className="header">
@@ -25,19 +26,12 @@ const Header = (props) => {
                     </div>
                     <span className="header__login">Sign in</span>
                   </Link> :
-                  <a className="header__nav-link header__nav-link--profile" href="#">
-                    <div
-                      className="header__avatar-wrapper user__avatar-wrapper"
-                      // style={{backgroundImage: `url('` + avatarUrl + `')`}}
-                    ></div>
-                    <span className="header__user-name user__name">{userInformation.email}</span>
-                  </a>
+
+                  <Link className="header__nav-link header__nav-link--profile" to="/favorite">
+                    <div className="header__avatar-wrapper user__avatar-wrapper"></div>
+                    <span className="header__login">{userInformation.email}</span>
+                  </Link>
                 }
-                <Link className="header__nav-link header__nav-link--profile" to="/favorite">
-                  <div className="header__avatar-wrapper user__avatar-wrapper">
-                  </div>
-                  <span className="header__login">Private</span>
-                </Link>
 
               </li>
             </ul>

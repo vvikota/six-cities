@@ -12,11 +12,16 @@ class Map extends React.PureComponent {
   }
 
   componentDidMount() {
-    const {offers} = this.props;
+    const {offers, currentOffer} = this.props;
 
-    const city = [52.38333, 4.9];
+    let city = [52.38333, 4.9];
+
+    if (currentOffer) {
+      city = [currentOffer.location.latitude, currentOffer.location.longitude]
+    }
+
     this._icon = leaflet.icon({
-      iconUrl: `img/pin.svg`,
+      iconUrl: `../img/pin.svg`,
       iconSize: [30, 30]
     });
 
@@ -46,7 +51,9 @@ class Map extends React.PureComponent {
   }
 
   componentDidUpdate() {
+    // console.log(`did update`);
     const {offers} = this.props;
+    // console.log(currentOffer)
     if (offers.length > 1) {
       const city = [offers[0].city.location.latitude, offers[0].city.location.longitude];
 
@@ -65,7 +72,7 @@ class Map extends React.PureComponent {
 
   render() {
     // console.log(this.props.offers);
-    return (<div id="map" style={{height: `50vh`}}></div>);
+    return (<div id="map"></div>);
   }
 }
 
@@ -104,6 +111,40 @@ Map.propTypes = {
     }).isRequired,
     id: PropTypes.number.isRequired,
   })),
+  currentOffer: PropTypes.shape({
+    city: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      location: PropTypes.shape({
+        latitude: PropTypes.number.isRequired,
+        longitude: PropTypes.number.isRequired,
+        zoom: PropTypes.number.isRequired,
+      }).isRequired,
+    }).isRequired,
+    previewImage: PropTypes.string.isRequired,
+    images: PropTypes.arrayOf(PropTypes.string.isRequired),
+    title: PropTypes.string.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+    isPremium: PropTypes.bool.isRequired,
+    rating: PropTypes.number.isRequired,
+    type: PropTypes.string.isRequired,
+    bedrooms: PropTypes.number.isRequired,
+    maxAdults: PropTypes.number.isRequired,
+    price: PropTypes.number.isRequired,
+    goods: PropTypes.arrayOf(PropTypes.string.isRequired),
+    host: PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      isPro: PropTypes.bool.isRequired,
+      avatarUrl: PropTypes.string.isRequired,
+    }).isRequired,
+    description: PropTypes.string.isRequired,
+    location: PropTypes.shape({
+      latitude: PropTypes.number.isRequired,
+      longitude: PropTypes.number.isRequired,
+      zoom: PropTypes.number.isRequired,
+    }).isRequired,
+    id: PropTypes.number.isRequired,
+  })
 };
 
 export default Map;
