@@ -36,7 +36,9 @@ export const getCurrentOffer = createSelector(
     getData,
     getCurrentId,
     (rezultOne, rezultTwo) => {
-      return rezultOne.filter((offer) => offer.id === rezultTwo)[0];
+      return rezultTwo === `noCurrentOffer` ?
+        `noCurrentOffer` :
+        rezultOne.filter((offer) => offer.id === rezultTwo)[0];
     }
 );
 
@@ -44,13 +46,13 @@ export const getNearOffers = createSelector(
     getCityOffers,
     getCurrentOffer,
     (rezultOne, rezultTwo) => {
-      if (rezultTwo !== undefined) {
+      if (rezultTwo !== `noCurrentOffer`) {
         return rezultOne.sort((a, b) => {
           return distanceBettweenPoints(a, rezultTwo)
                 - distanceBettweenPoints(b, rezultTwo);
         }).slice(1, 4);
       } else {
-        return false;
+        return `noNearOffers`;
       }
     }
 );
@@ -61,6 +63,3 @@ function distanceBettweenPoints(point1, point2) {
     + Math.pow((point1.location.latitude - point2.location.longitude), 2));
 }
 
-// d = Math.sqrt(Math.pow((x2 - x1), 2) + Math.pow((y2 - y1), 2))
-// const distance = Math.sqrt(Math.pow((50.945361 - 52.36854), 2) + Math.pow((6.935974 - 4.887976), 2));
-// console.log(distance);

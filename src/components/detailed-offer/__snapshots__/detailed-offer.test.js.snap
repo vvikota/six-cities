@@ -575,14 +575,14 @@ Array [
           Other places in the neighbourhood
         </h2>
         <div
-          className="near-places__list places__list"
+          className="places__list near-places__list"
         >
           <article
             className="near-places__card place-card"
             onMouseEnter={[Function]}
           >
             <div
-              className="near-places__image-wrapper place-card__image-wrapper"
+              className="place-card__image-wrapper near-places__image-wrapper"
             >
               <a
                 className="image-link"
@@ -681,7 +681,7 @@ Array [
             onMouseEnter={[Function]}
           >
             <div
-              className="near-places__image-wrapper place-card__image-wrapper"
+              className="place-card__image-wrapper near-places__image-wrapper"
             >
               <a
                 className="image-link"
@@ -780,7 +780,7 @@ Array [
             onMouseEnter={[Function]}
           >
             <div
-              className="near-places__image-wrapper place-card__image-wrapper"
+              className="place-card__image-wrapper near-places__image-wrapper"
             >
               <a
                 className="image-link"

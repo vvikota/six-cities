@@ -45,7 +45,7 @@ it(`OfferCard is correcctly render`, ()=> {
       offer={mock}
       onMouseEnter={jest.fn()}
       openDetailOffer={jest.fn()}
-      detailedOffer={true}
+      isDetailedOffer={true}
     /></MemoryRouter>).toJSON();
 
   expect(tree).toMatchSnapshot();

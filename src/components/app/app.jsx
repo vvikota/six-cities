@@ -9,12 +9,16 @@ import Favorites from "../favorites/favorites.jsx";
 import DetailedOffer from "../detailed-offer/detailed-offer.jsx";
 import withAuthorization from "../../hocs/with-authorization/with-authorization";
 import privateRoute from "../../hocs/private-route/private-route.js";
+import {
+  offerProp,
+  userInformationProp,
+  hotelCommentProp
+} from "../../interface-prop-types/interface-prop-types.js";
 
 const SignInWrapped = withAuthorization(SignIn);
 const PrivateRouteForFavorite = privateRoute(Favorites);
 
 const App = (props) => {
-
   const {
     city,
     changeCity,
@@ -28,6 +32,8 @@ const App = (props) => {
     hotelComments,
     nearOffers
   } = props;
+
+  // console.log(currentOffer);
 
   return (
     <>
@@ -58,7 +64,6 @@ const App = (props) => {
         <Route path="/offer/:id" render={() => <DetailedOffer
           currentOffer={currentOffer}
           hotelComments={hotelComments}
-          cityOffers={cityOffers}
           nearOffers={nearOffers}
           openDetailOffer={openDetailOffer}
         />}
@@ -75,135 +80,22 @@ const App = (props) => {
 };
 
 App.propTypes = {
-  cityOffers: PropTypes.arrayOf(PropTypes.shape({
-    city: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      location: PropTypes.shape({
-        latitude: PropTypes.number.isRequired,
-        longitude: PropTypes.number.isRequired,
-        zoom: PropTypes.number.isRequired,
-      }).isRequired,
-    }).isRequired,
-    previewImage: PropTypes.string.isRequired,
-    images: PropTypes.arrayOf(PropTypes.string.isRequired),
-    title: PropTypes.string.isRequired,
-    isFavorite: PropTypes.bool.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    rating: PropTypes.number.isRequired,
-    type: PropTypes.string.isRequired,
-    bedrooms: PropTypes.number.isRequired,
-    maxAdults: PropTypes.number.isRequired,
-    price: PropTypes.number.isRequired,
-    goods: PropTypes.arrayOf(PropTypes.string.isRequired),
-    host: PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
-      isPro: PropTypes.bool.isRequired,
-      avatarUrl: PropTypes.string.isRequired,
-    }).isRequired,
-    description: PropTypes.string.isRequired,
-    location: PropTypes.shape({
-      latitude: PropTypes.number.isRequired,
-      longitude: PropTypes.number.isRequired,
-      zoom: PropTypes.number.isRequired,
-    }).isRequired,
-    id: PropTypes.number.isRequired,
-  })),
+  cityOffers: PropTypes.arrayOf(offerProp).isRequired,
   city: PropTypes.string.isRequired,
   changeCity: PropTypes.func.isRequired,
   cityList: PropTypes.arrayOf(PropTypes.string.isRequired),
   isAuthorizationRequired: PropTypes.bool.isRequired,
   sendAuthorizationRequest: PropTypes.func.isRequired,
-  userInformation: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    email: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    avatarUrl: PropTypes.string.isRequired,
-    isPro: PropTypes.bool.isRequired,
-  }),
+  userInformation: userInformationProp,
   openDetailOffer: PropTypes.func.isRequired,
-  currentOffer: PropTypes.shape({
-    city: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      location: PropTypes.shape({
-        latitude: PropTypes.number.isRequired,
-        longitude: PropTypes.number.isRequired,
-        zoom: PropTypes.number.isRequired,
-      }).isRequired,
-    }).isRequired,
-    previewImage: PropTypes.string.isRequired,
-    images: PropTypes.arrayOf(PropTypes.string.isRequired),
-    title: PropTypes.string.isRequired,
-    isFavorite: PropTypes.bool.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    rating: PropTypes.number.isRequired,
-    type: PropTypes.string.isRequired,
-    bedrooms: PropTypes.number.isRequired,
-    maxAdults: PropTypes.number.isRequired,
-    price: PropTypes.number.isRequired,
-    goods: PropTypes.arrayOf(PropTypes.string.isRequired),
-    host: PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
-      isPro: PropTypes.bool.isRequired,
-      avatarUrl: PropTypes.string.isRequired,
-    }).isRequired,
-    description: PropTypes.string.isRequired,
-    location: PropTypes.shape({
-      latitude: PropTypes.number.isRequired,
-      longitude: PropTypes.number.isRequired,
-      zoom: PropTypes.number.isRequired,
-    }).isRequired,
-    id: PropTypes.number.isRequired,
-  }),
-  hotelComments: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    user: PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      isPro: PropTypes.bool.isRequired,
-      name: PropTypes.string.isRequired,
-      avatarUrl: PropTypes.string.isRequired,
-    }),
-    rating: PropTypes.number.isRequired,
-    comment: PropTypes.string.isRequired,
-    date: PropTypes.string.isRequired,
-  })),
+  currentOffer: PropTypes.oneOfType([
+    offerProp,
+    PropTypes.oneOf([`noCurrentOffer`])
+  ]),
+  hotelComments: PropTypes.arrayOf(hotelCommentProp),
   nearOffers: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.shape({
-      city: PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        location: PropTypes.shape({
-          latitude: PropTypes.number.isRequired,
-          longitude: PropTypes.number.isRequired,
-          zoom: PropTypes.number.isRequired,
-        }).isRequired,
-      }).isRequired,
-      previewImage: PropTypes.string.isRequired,
-      images: PropTypes.arrayOf(PropTypes.string.isRequired),
-      title: PropTypes.string.isRequired,
-      isFavorite: PropTypes.bool.isRequired,
-      isPremium: PropTypes.bool.isRequired,
-      rating: PropTypes.number.isRequired,
-      type: PropTypes.string.isRequired,
-      bedrooms: PropTypes.number.isRequired,
-      maxAdults: PropTypes.number.isRequired,
-      price: PropTypes.number.isRequired,
-      goods: PropTypes.arrayOf(PropTypes.string.isRequired),
-      host: PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        name: PropTypes.string.isRequired,
-        isPro: PropTypes.bool.isRequired,
-        avatarUrl: PropTypes.string.isRequired,
-      }).isRequired,
-      description: PropTypes.string.isRequired,
-      location: PropTypes.shape({
-        latitude: PropTypes.number.isRequired,
-        longitude: PropTypes.number.isRequired,
-        zoom: PropTypes.number.isRequired,
-      }).isRequired,
-      id: PropTypes.number.isRequired,
-    })),
-    PropTypes.bool.isRequired,
+    PropTypes.arrayOf(offerProp),
+    PropTypes.oneOf([`noNearOffers`])
   ])
 };
 

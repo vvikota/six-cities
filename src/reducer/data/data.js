@@ -52,6 +52,7 @@ const Operation = {
   openDetailOffer: (hotelId) => (dispatch, _getState, api) => {
     dispatch(ActionCreator.changeCurrentId(hotelId));
     return api.get(`/comments/` + hotelId)
+      // .then((response) => console.log(response.data[0]))
       .then((response) => {
         dispatch(ActionCreator.saveHotelComments(commentsDataConversion(response.data)));
       });

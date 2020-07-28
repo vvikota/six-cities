@@ -2,6 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 
+import {
+  userInformationProp
+} from "../../interface-prop-types/interface-prop-types.js";
+
 const Header = (props) => {
 
   const {userInformation, isAuthorizationRequired} = props;
@@ -42,13 +46,7 @@ const Header = (props) => {
   );
 };
 Header.propTypes = {
-  userInformation: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    email: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    avatarUrl: PropTypes.string.isRequired,
-    isPro: PropTypes.bool.isRequired,
-  }),
+  userInformation: userInformationProp,
   isAuthorizationRequired: PropTypes.bool.isRequired,
 };
 

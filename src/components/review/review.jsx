@@ -1,6 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import {
+  hotelCommentProp
+} from "../../interface-prop-types/interface-prop-types.js";
+
 const Review = (props) => {
   // eslint-disable-next-line no-console
   // console.log(props);
@@ -53,18 +57,7 @@ const Review = (props) => {
 };
 
 Review.propTypes = {
-  hotelComments: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    user: PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      isPro: PropTypes.bool.isRequired,
-      name: PropTypes.string.isRequired,
-      avatarUrl: PropTypes.string.isRequired,
-    }),
-    rating: PropTypes.number.isRequired,
-    comment: PropTypes.string.isRequired,
-    date: PropTypes.string.isRequired,
-  }))
+  hotelComments: PropTypes.arrayOf(hotelCommentProp).isRequired,
 };
 
 export default Review;

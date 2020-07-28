@@ -48,7 +48,7 @@ describe(`OfferCard`, () => {
       offer={mock}
       onMouseEnter={jest.fn()}
       openDetailOffer={clickHandler}
-      detailedOffer={true}
+      isDetailedOffer={true}
     />);
 
     const imageLink = app.find(`.image-link`);
@@ -63,7 +63,7 @@ describe(`OfferCard`, () => {
       offer={mock}
       onMouseEnter={jest.fn()}
       openDetailOffer={clickHandler}
-      detailedOffer={true}
+      isDetailedOffer={true}
     />);
 
     const titleLink = app.find(`.place-card__name-link`);

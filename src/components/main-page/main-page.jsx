@@ -6,6 +6,10 @@ import PlacesList from "../places-list/places-list.jsx";
 import Map from "../map/map.jsx";
 
 import withActiveItem from "../../hocs/with-active-item/with-active-item.js";
+import {
+  offerProp,
+  userInformationProp
+} from "../../interface-prop-types/interface-prop-types.js";
 
 const CityListWrapped = withActiveItem(CityList);
 const PlacesListWrapped = withActiveItem(PlacesList);
@@ -65,7 +69,7 @@ const MainPage = (props) => {
                 //   // eslint-disable-next-line no-console
                 //   console.log(offer);
                 // }}
-                detailedOffer={false}
+                isDetailedOffer={false}
                 openDetailOffer={openDetailOffer}
               />
             </section>
@@ -73,6 +77,7 @@ const MainPage = (props) => {
               <section className="cities__map map">
                 <Map
                   offers={cityOffers}
+                  currentOffer={`noCurrentOffer`}
                 />
               </section>
             </div>
@@ -84,51 +89,12 @@ const MainPage = (props) => {
 };
 
 MainPage.propTypes = {
-  cityOffers: PropTypes.arrayOf(PropTypes.shape({
-    city: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      location: PropTypes.shape({
-        latitude: PropTypes.number.isRequired,
-        longitude: PropTypes.number.isRequired,
-        zoom: PropTypes.number.isRequired,
-      }).isRequired,
-    }).isRequired,
-    previewImage: PropTypes.string.isRequired,
-    images: PropTypes.arrayOf(PropTypes.string.isRequired),
-    title: PropTypes.string.isRequired,
-    isFavorite: PropTypes.bool.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    rating: PropTypes.number.isRequired,
-    type: PropTypes.string.isRequired,
-    bedrooms: PropTypes.number.isRequired,
-    maxAdults: PropTypes.number.isRequired,
-    price: PropTypes.number.isRequired,
-    goods: PropTypes.arrayOf(PropTypes.string.isRequired),
-    host: PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
-      isPro: PropTypes.bool.isRequired,
-      avatarUrl: PropTypes.string.isRequired,
-    }).isRequired,
-    description: PropTypes.string.isRequired,
-    location: PropTypes.shape({
-      latitude: PropTypes.number.isRequired,
-      longitude: PropTypes.number.isRequired,
-      zoom: PropTypes.number.isRequired,
-    }).isRequired,
-    id: PropTypes.number.isRequired,
-  })),
+  cityOffers: PropTypes.arrayOf(offerProp),
   city: PropTypes.string.isRequired,
   changeCity: PropTypes.func.isRequired,
   cityList: PropTypes.arrayOf(PropTypes.string.isRequired),
   userInformation: PropTypes.oneOfType([
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      email: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      avatarUrl: PropTypes.string.isRequired,
-      isPro: PropTypes.bool.isRequired,
-    }),
+    userInformationProp,
     PropTypes.string.isRequired,
   ]),
   isAuthorizationRequired: PropTypes.bool.isRequired,

@@ -6,7 +6,7 @@ exports[`OfferCard is correcctly render 1`] = `
   onMouseEnter={[MockFunction]}
 >
   <div
-    className="near-places__image-wrapper place-card__image-wrapper"
+    className="place-card__image-wrapper near-places__image-wrapper"
   >
     <a
       className="image-link"

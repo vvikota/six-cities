@@ -113,7 +113,7 @@ it(`PlacesList is correcctly render`, ()=> {
       offers={mock}
       hoverItem={jest.fn()}
       openDetailOffer={jest.fn()}
-      detailedOffer={false}
+      isDetailedOffer={false}
     /></MemoryRouter>).toJSON();
 
   expect(tree).toMatchSnapshot();
