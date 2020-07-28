@@ -16,8 +16,8 @@ const wrapper = shallow(<MockComponentWrapped
 describe(`withAuthorization. Should change local state after call onChange`, () => {
   it(`Should return default value`, () => {
 
-    expect(wrapper.props().email).toEqual(`test@test.ru`);
-    expect(wrapper.props().password).toEqual(`pass`);
+    expect(wrapper.props().email).toEqual(``);
+    expect(wrapper.props().password).toEqual(``);
   });
 
   it(`Should change email in local state after call onChange`, () => {
@@ -26,7 +26,7 @@ describe(`withAuthorization. Should change local state after call onChange`, () 
       value: `NEWemail@email.ru`,
     }});
     expect(wrapper.props().email).toEqual(`NEWemail@email.ru`);
-    expect(wrapper.props().password).toEqual(`pass`);
+    expect(wrapper.props().password).toEqual(``);
   });
 
   it(`Should email and password in local state after call onChange`, () => {

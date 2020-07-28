@@ -1,9 +1,9 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import PlacesList from './places-list';
+import MainPage from './main-page.jsx';
 import {MemoryRouter} from "react-router-dom";
 
-const mock = [
+const dataMock = [
   {
     "city": {
       "name": `Amsterdam`,
@@ -106,15 +106,16 @@ const mock = [
   }
 ];
 
-it(`PlacesList is correcctly render`, ()=> {
-
-  const tree = renderer.create(<MemoryRouter>
-    <PlacesList
-      offers={mock}
-      hoverItem={jest.fn()}
-      openDetailOffer={jest.fn()}
-      isDetailedOffer={false}
-    /></MemoryRouter>).toJSON();
+it(`MainPage is correctly renderer`, ()=> {
+  const tree = renderer.create(<MemoryRouter><MainPage
+    cityOffers={dataMock}
+    city={`Amstrdam`}
+    changeCity={jest.fn()}
+    cityList={[]}
+    userInformation={`noAuthorized`}
+    isAuthorizationRequired={true}
+    openDetailOffer={jest.fn()}
+  /></MemoryRouter>).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

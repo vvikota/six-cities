@@ -2,6 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import leaflet from "leaflet";
 
+import {offerProp} from "../../interface-prop-types/interface-prop-types.js";
+
 class Map extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -12,11 +14,11 @@ class Map extends React.PureComponent {
   }
 
   componentDidMount() {
-    const {offers} = this.props;
+    const {offers, currentOffer} = this.props;
+    const city = currentOffer === `noCurrentOffer` ? [52.38333, 4.9] : [currentOffer.location.latitude, currentOffer.location.longitude];
 
-    const city = [52.38333, 4.9];
     this._icon = leaflet.icon({
-      iconUrl: `img/pin.svg`,
+      iconUrl: `../img/pin.svg`,
       iconSize: [30, 30]
     });
 
@@ -46,7 +48,9 @@ class Map extends React.PureComponent {
   }
 
   componentDidUpdate() {
+    // console.log(`did update`);
     const {offers} = this.props;
+    // console.log(currentOffer)
     if (offers.length > 1) {
       const city = [offers[0].city.location.latitude, offers[0].city.location.longitude];
 
@@ -64,45 +68,17 @@ class Map extends React.PureComponent {
   }
 
   render() {
-    return (<div id="map" style={{height: `90vh`}}></div>);
+    // console.log(this.props.offers);
+    return (<div id="map"></div>);
   }
 }
 
 Map.propTypes = {
-  offers: PropTypes.arrayOf(PropTypes.shape({
-    city: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      location: PropTypes.shape({
-        latitude: PropTypes.number.isRequired,
-        longitude: PropTypes.number.isRequired,
-        zoom: PropTypes.number.isRequired,
-      }).isRequired,
-    }).isRequired,
-    previewImage: PropTypes.string.isRequired,
-    images: PropTypes.arrayOf(PropTypes.string.isRequired),
-    title: PropTypes.string.isRequired,
-    isFavorite: PropTypes.bool.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    rating: PropTypes.number.isRequired,
-    type: PropTypes.string.isRequired,
-    bedrooms: PropTypes.number.isRequired,
-    maxAdults: PropTypes.number.isRequired,
-    price: PropTypes.number.isRequired,
-    goods: PropTypes.arrayOf(PropTypes.string.isRequired),
-    host: PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
-      isPro: PropTypes.bool.isRequired,
-      avatarUrl: PropTypes.string.isRequired,
-    }).isRequired,
-    description: PropTypes.string.isRequired,
-    location: PropTypes.shape({
-      latitude: PropTypes.number.isRequired,
-      longitude: PropTypes.number.isRequired,
-      zoom: PropTypes.number.isRequired,
-    }).isRequired,
-    id: PropTypes.number.isRequired,
-  })),
+  currentOffer: PropTypes.oneOfType([
+    offerProp,
+    PropTypes.oneOf([`noCurrentOffer`])
+  ]),
+  offers: PropTypes.arrayOf(offerProp).isRequired
 };
 
 export default Map;

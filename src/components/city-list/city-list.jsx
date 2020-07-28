@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 const CityList = (props) => {
 
   const {cityList, currentCity, onChangeCity, hoverItem} = props;
+  // console.log(currentCity)
 
   return <div className="cities tabs">
     <section className="locations container">

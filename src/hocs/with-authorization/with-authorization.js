@@ -7,8 +7,8 @@ const withAuthorization = (Component) => {
       super(props);
 
       this.state = {
-        email: `test@test.ru`,
-        password: `pass`,
+        email: ``,
+        password: ``,
       };
 
       this._logIn = this._logIn.bind(this);

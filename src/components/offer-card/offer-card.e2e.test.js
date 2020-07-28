@@ -46,8 +46,9 @@ describe(`OfferCard`, () => {
     const clickHandler = jest.fn();
     const app = shallow(<OfferCard
       offer={mock}
-      openCard={clickHandler}
       onMouseEnter={jest.fn()}
+      openDetailOffer={clickHandler}
+      isDetailedOffer={true}
     />);
 
     const imageLink = app.find(`.image-link`);
@@ -56,18 +57,19 @@ describe(`OfferCard`, () => {
     expect(clickHandler).toHaveBeenCalledTimes(1);
   });
 
-  it(`click on image card return correctly info`, () => {
+  it(`click on card-title correctly works`, () => {
     const clickHandler = jest.fn();
     const app = shallow(<OfferCard
       offer={mock}
       onMouseEnter={jest.fn()}
-      openCard={clickHandler}
+      openDetailOffer={clickHandler}
+      isDetailedOffer={true}
     />);
 
-    const imageLink = app.find(`.image-link`);
-    imageLink.simulate(`click`, {preventDefault: jest.fn()});
+    const titleLink = app.find(`.place-card__name-link`);
+    titleLink.simulate(`click`, {preventDefault: jest.fn()});
 
-    expect(clickHandler).toHaveBeenCalledWith(mock);
+    expect(clickHandler).toHaveBeenCalledTimes(1);
   });
 });
 
